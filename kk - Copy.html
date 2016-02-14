@@ -1,0 +1,53 @@
+<html>
+<head>
+<meta charset='utf-8'>
+<link rel="stylesheet" href="jp.css">
+<link rel="stylesheet" href="jqueryui/jquery-ui.min.css">
+<link rel="stylesheet" href="jqueryui/jquery-ui.structure.min.css">
+<link rel="stylesheet" href="jqueryui/jquery-ui.theme.min.css">
+<link rel="stylesheet" href="fontawesome/css/font-awesome.min.css">
+
+<script src='JQLib.js'></script>
+<script src='jqueryui/jquery-ui.min.js'></script>
+
+<style>
+	#dragThis {
+    width: 6em;
+    height: 6em;
+    padding: 0.5em;
+    border: 3px solid #ccc;
+    border-radius: 0 1em 1em 1em;
+    left:100px;
+    top:100px;
+}
+</style>
+</head>
+<div id="dragThis">
+    <ul>
+        <li id="posX"></li>
+        <li id="posY"></li>
+    </ul>
+</div>
+
+<script >
+	$('#dragThis').draggable(
+    {
+        drag: function(){
+            var offset = $(this).offset();
+            var xPos = offset.left;
+            var yPos = offset.top;
+            $('#posX').text('x: ' + xPos);
+            $('#posY').text('y: ' + yPos);
+        }
+    });
+</script>
+</html>
+
+
+
+
+
+
+
+
+
