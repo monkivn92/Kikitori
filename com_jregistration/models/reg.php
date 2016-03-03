@@ -271,10 +271,26 @@ class JregistrationModelReg extends JModel
 		{	
 			if($cbfname == 'cb_agreeterms' || $cbfname == 'cb_agreedatapolicy')
 			{
-				
+				$script .= " jQuery('input[name = \"$cbfname\"]').prop('checked', true); ";
 			}
-			$script .= " jQuery('input[name = \"$cbfname\"]').val('$cbfvalue'); ";
-			$script .= " jQuery('select[name = \"$cbfname\"]').val('$cbfvalue'); ";
+            elseif($cbfname == 'cb_accesspurpose') 
+            {
+                $script .= " jQuery('textarea[name = \"$cbfname\"]').val('$cbfvalue'); ";
+            }
+            elseif ($cbfname = 'cb_accesspurposelist' || $cbfname = 'cb_degrees') 
+            {
+                for($i=0; $i<count($cbfvalue);$i++)
+                {
+                    $value = str_replace("'s", "\'s", $cbfvalue[$i]);
+                    $script .= " jQuery('input[value = \"$value\"]').prop('checked', true); ";
+                }
+            }
+            else
+            {
+                $script .= " jQuery('input[name = \"$cbfname\"]').val('$cbfvalue'); ";
+                $script .= " jQuery('select[name = \"$cbfname\"]').val('$cbfvalue'); ";
+            }
+			
 	    }
 	    $script .= '</script>';
 	    echo $script;
