@@ -41,6 +41,7 @@ class JregistrationControllerReg extends JController
             
             $session->set( 'jreg_error_message', $error );         
             $this->create();
+            $model->setValueToField($user_info);
         }
         else
         {

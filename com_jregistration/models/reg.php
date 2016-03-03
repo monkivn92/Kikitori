@@ -17,49 +17,49 @@ class JregistrationModelReg extends JModel
 		$CBfields = array();
 		//$reason = 'list': show fields that aren't shown in registration page
 		// Note: check field whether is pulish or not
-		$CBfields['cb_registrantfirstname'] = $cbUser->getField( 'cb_registrantfirstname', null, 'htmledit', 'div');
-		$CBfields['cb_registrantlastname'] = $cbUser->getField( 'cb_registrantlastname', null, 'htmledit', 'div');
-		$CBfields['cb_degrees'] = $cbUser->getField( 'cb_degrees', null, 'htmledit', 'div','list');
-		$CBfields['cb_degreesother'] = $cbUser->getField( 'cb_degreesother', null, 'htmledit', 'div','list');
-		$CBfields['email'] = $cbUser->getField( "email", null, 'htmledit', 'div', 'register',0,false);
-		$CBfields['confirmemail'] = $cbUser->getField( "confirmemail", null, 'htmledit', 'div', 'register',0,false);
-		$CBfields['cb_address'] = $cbUser->getField( 'cb_address', null, 'htmledit', 'div','search');
-		$CBfields['cb_addresstwo'] = $cbUser->getField( 'cb_addresstwo', null, 'htmledit', 'div','list');
-		$CBfields['cb_addressthree'] = $cbUser->getField( 'cb_addressthree', null, 'htmledit', 'div','list');
-		$CBfields['cb_city'] = $cbUser->getField( 'cb_city', null, 'htmledit', 'div','list');
-		$CBfields['cb_state'] = $cbUser->getField( 'cb_state', null, 'htmledit', 'div','list');
-		$CBfields['cb_province'] = $cbUser->getField( 'cb_province', null, 'htmledit', 'div','list');
-		$CBfields['cb_postalcode'] = $cbUser->getField( 'cb_postalcode', null, 'htmledit', 'div','list');		
-		$CBfields['cb_country'] = $cbUser->getField( 'cb_country', null, 'htmledit', 'div','list');
-		$CBfields['cb_phone'] = $cbUser->getField( 'cb_phone', null, 'htmledit', 'div','list');
-		$CBfields['cb_secondphone'] = $cbUser->getField( 'cb_secondphone', null, 'htmledit', 'div','list');
-		$CBfields['cb_website'] = $cbUser->getField( 'cb_website', null, 'htmledit', 'div','list');
+		$CBfields['cb_registrantfirstname'] = $cbUser->getField( 'cb_registrantfirstname', null, 'htmledit', 'div','register', 0, true);
+		$CBfields['cb_registrantlastname'] = $cbUser->getField( 'cb_registrantlastname', null, 'htmledit', 'div','register', 0, true);
+		$CBfields['cb_degrees'] = $cbUser->getField( 'cb_degrees', null, 'htmledit', 'div','register', 0, true);
+		$CBfields['cb_degreesother'] = $cbUser->getField( 'cb_degreesother', null, 'htmledit', 'div','register', 0, true);
+		$CBfields['email'] = $cbUser->getField( "email", null, 'htmledit', 'div', 'register',0,true);
+		$CBfields['confirmemail'] = $cbUser->getField( "confirmemail", null, 'htmledit', 'div', 'register',0,true);
+		$CBfields['cb_address'] = $cbUser->getField( 'cb_address', null, 'htmledit', 'div', 'search',0,true);
+		$CBfields['cb_addresstwo'] = $cbUser->getField( 'cb_addresstwo', null, 'htmledit', 'div','register', 0, true);
+		$CBfields['cb_addressthree'] = $cbUser->getField( 'cb_addressthree', null, 'htmledit', 'div','register', 0, true);
+		$CBfields['cb_city'] = $cbUser->getField( 'cb_city', null, 'htmledit', 'div','register', 0, true);
+		$CBfields['cb_state'] = $cbUser->getField( 'cb_state', null, 'htmledit', 'div','register', 0, true);
+		$CBfields['cb_province'] = $cbUser->getField( 'cb_province', null, 'htmledit', 'div','register', 0, true);
+		$CBfields['cb_postalcode'] = $cbUser->getField( 'cb_postalcode', null, 'htmledit', 'div','register', 0, true);		
+		$CBfields['cb_country'] = $cbUser->getField( 'cb_country', null, 'htmledit', 'div','register', 0, true);
+		$CBfields['cb_phone'] = $cbUser->getField( 'cb_phone', null, 'htmledit', 'div','register', 0, true);
+		$CBfields['cb_secondphone'] = $cbUser->getField( 'cb_secondphone', null, 'htmledit', 'div','register', 0, true);
+		$CBfields['cb_website'] = $cbUser->getField( 'cb_website', null, 'htmledit', 'div','register', 0, true);
 		
-		$CBfields['cb_orgname'] = $cbUser->getField( 'cb_orgname', null, 'htmledit', 'div','list');
-		$CBfields['cb_orgtype'] = $cbUser->getField( 'cb_orgtype', null, 'htmledit', 'div','list');
-		$CBfields['cb_orgtypeother'] = $cbUser->getField( 'cb_orgtypeother', null, 'htmledit', 'div','list');
-		$CBfields['cb_orgdepartment'] = $cbUser->getField( 'cb_orgdepartment', null, 'htmledit', 'div','list');
-		$CBfields['cb_orgaffiliation'] = $cbUser->getField( 'cb_orgaffiliation', null, 'htmledit', 'div','list');
-		$CBfields['cb_orgspecialty'] = $cbUser->getField( 'cb_orgspecialty', null, 'htmledit', 'div','list');
-		$CBfields['cb_orgspecialtyother'] = $cbUser->getField( 'cb_orgspecialtyother', null, 'htmledit', 'div','list');
-		$CBfields['cb_orgsecondaryspecialty'] = $cbUser->getField( 'cb_orgsecondaryspecialty', null, 'htmledit', 'div','list');
-		$CBfields['cb_orgsecondaryspecialtyother'] = $cbUser->getField( 'cb_orgsecondaryspecialtyother', null, 'htmledit', 'div','list');
-		$CBfields['cb_altemail2'] = $cbUser->getField( 'cb_altemail2', null, 'htmledit', 'div','list');
+		$CBfields['cb_orgname'] = $cbUser->getField( 'cb_orgname', null, 'htmledit', 'div','register', 0, true);
+		$CBfields['cb_orgtype'] = $cbUser->getField( 'cb_orgtype', null, 'htmledit', 'div','register', 0, true);
+		$CBfields['cb_orgtypeother'] = $cbUser->getField( 'cb_orgtypeother', null, 'htmledit', 'div','register', 0, true);
+		$CBfields['cb_orgdepartment'] = $cbUser->getField( 'cb_orgdepartment', null, 'htmledit', 'div','register', 0, true);
+		$CBfields['cb_orgaffiliation'] = $cbUser->getField( 'cb_orgaffiliation', null, 'htmledit', 'div','register', 0, true);
+		$CBfields['cb_orgspecialty'] = $cbUser->getField( 'cb_orgspecialty', null, 'htmledit', 'div','register', 0, true);
+		$CBfields['cb_orgspecialtyother'] = $cbUser->getField( 'cb_orgspecialtyother', null, 'htmledit', 'div','register', 0, true);
+		$CBfields['cb_orgsecondaryspecialty'] = $cbUser->getField( 'cb_orgsecondaryspecialty', null, 'htmledit', 'div','register', 0, true);
+		$CBfields['cb_orgsecondaryspecialtyother'] = $cbUser->getField( 'cb_orgsecondaryspecialtyother', null, 'htmledit', 'div','register', 0, true);
+		$CBfields['cb_altemail2'] = $cbUser->getField( 'cb_altemail2', null, 'htmledit', 'div','register', 0, true);
 
-		$CBfields['cb_orgcontactname'] = $cbUser->getField( 'cb_orgcontactname', null, 'htmledit', 'div','list');
-		$CBfields['cb_orgcontacttitle'] = $cbUser->getField( 'cb_orgcontacttitle', null, 'htmledit', 'div','list');
-		$CBfields['cb_orgcontactemail'] = $cbUser->getField( 'cb_orgcontactemail', null, 'htmledit', 'div','list');
-		$CBfields['cb_orgcontactphone'] = $cbUser->getField( 'cb_orgcontactphone', null, 'htmledit', 'div','list');
-		$CBfields['cb_orgcontacturl'] = $cbUser->getField( 'cb_orgcontacturl', null, 'htmledit', 'div','list');
+		$CBfields['cb_orgcontactname'] = $cbUser->getField( 'cb_orgcontactname', null, 'htmledit', 'div','register', 0, true);
+		$CBfields['cb_orgcontacttitle'] = $cbUser->getField( 'cb_orgcontacttitle', null, 'htmledit', 'div','register', 0, true);
+		$CBfields['cb_orgcontactemail'] = $cbUser->getField( 'cb_orgcontactemail', null, 'htmledit', 'div','register', 0, true);
+		$CBfields['cb_orgcontactphone'] = $cbUser->getField( 'cb_orgcontactphone', null, 'htmledit', 'div','register', 0, true);
+		$CBfields['cb_orgcontacturl'] = $cbUser->getField( 'cb_orgcontacturl', null, 'htmledit', 'div','register', 0, true);
 		
-		$CBfields['cb_accesspurposelist'] = $cbUser->getField( 'cb_accesspurposelist', null, 'htmledit', 'div','list');
-		$CBfields['cb_accesspurpose'] = $cbUser->getField( 'cb_accesspurpose', null, 'htmledit', 'div','list');
+		$CBfields['cb_accesspurposelist'] = $cbUser->getField( 'cb_accesspurposelist', null, 'htmledit', 'div','register', 0, true);
+		$CBfields['cb_accesspurpose'] = $cbUser->getField( 'cb_accesspurpose', null, 'htmledit', 'div','register', 0, true);
 		
-		$CBfields['username'] = $cbUser->getField( 'username', null, 'htmledit', 'div','register');
-		$CBfields['password'] = $cbUser->getField('password', null, 'htmledit', 'div', 'register');
+		$CBfields['username'] = $cbUser->getField( 'username', null, 'htmledit', 'div','register', 0, true);
+		$CBfields['password'] = $cbUser->getField('password', null, 'htmledit', 'div','register', 0, true);
 
-		$CBfields['cb_agreeterms'] = $cbUser->getField( 'cb_agreeterms', null, 'htmledit', 'div','list');
-		$CBfields['cb_agreedatapolicy'] = $cbUser->getField( 'cb_agreedatapolicy', null, 'htmledit', 'div','list');
+		$CBfields['cb_agreeterms'] = $cbUser->getField( 'cb_agreeterms', null, 'htmledit', 'div','register', 0, true);
+		$CBfields['cb_agreedatapolicy'] = $cbUser->getField( 'cb_agreedatapolicy', null, 'htmledit', 'div','register', 0, true);
 		
 		return $CBfields;
 
@@ -271,27 +271,34 @@ class JregistrationModelReg extends JModel
 		{	
 			if($cbfname == 'cb_agreeterms' || $cbfname == 'cb_agreedatapolicy')
 			{
-				$script .= " jQuery('input[name = \"$cbfname\"]').prop('checked', true); ";
+                if($cbfvalue == 1)
+                {
+                    $script .= " jQuery('input[name = \"$cbfname\"]').prop('checked', true); ";
+                }
+				    
 			}
             elseif($cbfname == 'cb_accesspurpose') 
             {
                 $script .= " jQuery('textarea[name = \"$cbfname\"]').val('$cbfvalue'); ";
             }
-            elseif ($cbfname = 'cb_accesspurposelist' || $cbfname = 'cb_degrees') 
+            elseif ($cbfname == 'cb_accesspurposelist' || $cbfname == 'cb_degrees') 
             {
                 for($i=0; $i<count($cbfvalue);$i++)
                 {
+                    
                     $value = str_replace("'s", "\'s", $cbfvalue[$i]);
                     $script .= " jQuery('input[value = \"$value\"]').prop('checked', true); ";
+                
                 }
-            }
+            }            
             else
             {
                 $script .= " jQuery('input[name = \"$cbfname\"]').val('$cbfvalue'); ";
                 $script .= " jQuery('select[name = \"$cbfname\"]').val('$cbfvalue'); ";
-            }
+            }        
+            
 			
-	    }
+	    }//end foreach
 	    $script .= '</script>';
 	    echo $script;
 	    
