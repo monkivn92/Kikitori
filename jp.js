@@ -59,6 +59,8 @@ $(document).ready(function() {
 	save.click(function() {
 
 			saveTextarea();
+			$('.kkselected').removeClass('kkselected');
+			
 		    var textToWrite = '<html>' + $('html').html() + '</html>';
 		    var textFileAsBlob = new Blob([textToWrite], {type:'text/html'});
 		    var fileNameToSaveAs = "saved.html";
@@ -130,7 +132,7 @@ $(document).ready(function() {
 
 	addimage.click(function() {
 		cur_image++;	
-	  	mc.append(' <image src="img/'+cur_image+'.png" id="'+cur_image+'"/>');
+	  	mc.append(' <image src="image/'+cur_image+'.png" id="'+cur_image+'"/>');
 		makedraggable();	
 		maincontrolline();		
 	});
