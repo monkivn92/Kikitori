@@ -1,0 +1,24 @@
+@media print
+{
+    a[href]:after { display:none; }
+    a:link:after, a:visited:after {
+        content:" (" attr(href) ")";
+        font-size:90%;
+    }
+    #cbfr_1086,
+    .ja-header,
+    .ja-footnav,
+    .footer-copyright,
+	.cbRegistration #cbfr_cbcaptchaInput,
+	.cbRegistration #cbfr_cbcaptchaImage{
+		display:none !important;
+	}
+    body {
+        color: #000 !important;
+        line-height: 1.5;
+        margin: 1em 2em;
+        width: auto; /* Printable Page */
+    }
+    p.bodyText {font-family:georgia, times, serif;}
+
+}
