@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- generator="Joomla! 1.5 - Open Source Content Management" -->
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+	<channel>
+		<title>Joomlapolis News</title>
+		<description>Joomla social networking and Subscription Management software. Community Builder is the top rated, best supported, most complete and reliable community system there is for Joomla!</description>
+		<link>http://www.joomlapolis.com:80/news</link>
+		<lastBuildDate>Thu, 07 Apr 2016 14:32:34 +0000</lastBuildDate>
+		<generator>Joomla! 1.5 - Open Source Content Management</generator>
+		<language>en-gb</language>
+		<item>
+			<title>A website story - part 1</title>
+			<link>http://www.joomlapolis.com:80/news/18545-a-website-story-part-1</link>
+			<guid>http://www.joomlapolis.com:80/news/18545-a-website-story-part-1</guid>
+			<description><![CDATA[<p><img style="margin-right: 15px; margin-bottom: 5px; float: left;" src="http://www.joomlapolis.com:80/images/stories/vertical-logo-dark-background-en.png" alt="vertical-logo-dark-background-en" width="331" height="275" />So you have an idea and you want to build a website.</p>
+<p>You discovered <a href="http://www.joomla.org" target="_blank">Joomla</a> and you are very happy that you can quickly create something nice with almost zero knowledge of HTML, Javascript, CSS, mySQL and other technical jargon.</p>
+<p>After playing around, reading <a href="https://docs.joomla.org/Main_Page" target="_blank">available documentation</a>, asking for help on the <a href="http://forum.joomla.org/" target="_blank">Joomla forums</a> and experimenting, you manage to create your site content and organize it in Joomla categories and articles. You have mastered the Joomla page concept with the creation of menus and have your site navigation just like you want it.</p>
+<p>You have also placed some cool modules on your pages to add more spice to your content layouts.</p>
+<p>So now you take two steps back and start thinking about the <strong>next steps</strong>.</p>
+<p>All the <strong>great content is in place</strong> and basically anyone can see it, but ... <strong>you have no idea who is actually looking at what</strong>.</p>
+<p>Well, you could use some analytics tools to get some information about your visitors, but <strong>you want more than some anonymous reports</strong> based on IP addresses.</p>
+<p>You want to <strong>engadge your audience</strong> and <strong>interact with your website readers</strong>. You want to find out who they are, what they like and dislike about your site, what they would want to see next. You want to address your content reader <strong>community</strong> at a more personal level.</p>
+<p style="text-align: center;"><a href="http://extensions.joomla.org/extensions/extension/clients-a-communities/communities/community-builder" target="_blank"><img src="http://www.joomlapolis.com:80/images/stories/cblogo-horz-color-1200x500p.png" alt="cblogo-horz-color-1200x500p" width="500" height="208" /></a></p>
+<p>After some research on the <strong>Joomla forums</strong> and the <strong>Joomla Extensions Directory</strong>, you discover the <a href="http://extensions.joomla.org/extensions/extension/clients-a-communities/communities/community-builder" target="_blank">Community Builder listing</a> page and check out the great reviews.</p>
+<p>You are getting really excited about the possibilities. You download the latest <a href="http://www.joomlapolis.com:80/index.php?option=com_content&amp;view=article&amp;id=12&amp;Itemid=2">Community Builder release</a> and <a href="https://www.youtube.com/watch?v=iAAYGJjkFuU&amp;list=PLp0puRITgC7PuyzPsMUECDI46VE7IFSAX&amp;index=1" target="_blank">install it</a> (video) on your Joomla site. You go through the <a href="http://www.joomlapolis.com:80/index.php?option=com_content&amp;view=category&amp;id=129&amp;Itemid=197">Getting Started</a> articles and grab the <a href="http://www.joomlapolis.com:80/component/docman/doc_details/801-cb-20-primer-book-105">CB Primer Book</a> pdf and start reading. While reading the book, you discover more <a href="https://www.youtube.com/playlist?list=PLp0puRITgC7PuyzPsMUECDI46VE7IFSAX" target="_blank">cool video tutorials</a> and spend some time watching and learning.</p>
+<p><strong>All of a sudden you realize that all of this is still free!</strong></p>
+<p>You create your new website <a href="http://www.joomlapolis.com:80/#">CB registration form</a> filled with extra fields that will help you learn more about your readers. First and last name fields, <a href="https://www.youtube.com/watch?v=1GvEsawIGKE&amp;list=PLp0puRITgC7PuyzPsMUECDI46VE7IFSAX&amp;index=17" target="_blank">a birthday field</a> (video), <a href="https://www.youtube.com/watch?v=C6_Vl01uUFk&amp;list=PLp0puRITgC7PuyzPsMUECDI46VE7IFSAX&amp;index=7" target="_blank">gender selector</a> (video), interest multiple choice field, country location text field are extremely easy to add. You can even mark individual fields as required. And of course you have email contact information for all your registered users. Your now <strong>named-users</strong> can <strong>login to your website</strong> and <strong>see all the information they gave</strong> during the registration process on their own <strong>CB user profile</strong> page. You can even ask for more information about your users on their profile pages and let them <a href="https://www.youtube.com/watch?v=6beb-6YUf_A&amp;list=PLp0puRITgC7PuyzPsMUECDI46VE7IFSAX&amp;index=9" target="_blank">upload their photo</a> (video) or even a <a href="https://www.youtube.com/watch?v=VUOCwpDwv6c&amp;list=PLp0puRITgC7PuyzPsMUECDI46VE7IFSAX&amp;index=18" target="_blank">CV file</a> (video).</p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" src="http://www.joomlapolis.com:80/images/stories/userprofile.gif" alt="userprofile" width="500" height="362" /></p>
+<p>You can easily configure things so your users are activated <strong>only if they confirm their email address</strong> by clicking on a <a href="https://www.youtube.com/watch?v=z8HabZ14Yng&amp;list=PLp0puRITgC7PuyzPsMUECDI46VE7IFSAX&amp;index=3" target="_blank">confirmation link</a> (video) they get from your website.</p>
+<p><strong>Wow, you say - this is really cool!</strong></p>
+<p>You start thinking about your Joomla content and go back and update some of it so it is only available to logged in users. This gives people an <strong>incentive to register</strong>.</p>
+<p>What other incentives could you give?</p>
+<p>You go back to your CB Primer Book and discover the <strong>CB User list</strong> concept and start thinking. Why not make a nice <strong>list of already signed-up registered users</strong> and use it as a motivation incentive? So you create your first <a href="https://www.youtube.com/watch?v=y4adNTkNpGI&amp;list=PLp0puRITgC7PuyzPsMUECDI46VE7IFSAX&amp;index=4" target="_blank">CB User list</a> and make a new Joomla menu to it and make it public so your anonymous readers can see the list. But you are still <strong>keeping the CB User Profile pages private</strong> and only viewable to logged in users.</p>
+<p><a href="https://www.youtube.com/watch?v=y4adNTkNpGI&amp;list=PLp0puRITgC7PuyzPsMUECDI46VE7IFSAX&amp;index=4" target="_blank"><img style="display: block; margin-left: auto; margin-right: auto;" src="http://www.joomlapolis.com:80/images/stories/userlist.gif" alt="userlist" width="500" height="418" /></a>Your website is now starting to l<strong>ook and feel much more engadging and interesting to your users</strong> and your brain is already thinking of ways to make things even more appealing.</p>
+<p>(end of part 1 - to be continued)</p>
+<p><a href="http://www.joomlapolis.com:80/forum/6-news-and-publicity/233361-a-website-story-part-1">Discuss this on our forums</a>.</p>]]></description>
+			<author>nant@joomlapolis.com (Nick A.)</author>
+			<category>News</category>
+			<pubDate>Sun, 03 Apr 2016 13:35:19 +0000</pubDate>
+		</item>
+		<item>
+			<title>Joomla 3.5 and Community Builder 2.0.14 Released</title>
+			<link>http://www.joomlapolis.com:80/news/18543-joomla-35-and-community-builder-2014-released</link>
+			<guid>http://www.joomlapolis.com:80/news/18543-joomla-35-and-community-builder-2014-released</guid>
+			<description><![CDATA[<p style="text-align: center;"><img src="http://www.joomlapolis.com:80/images/jpnewsletter/jpn201603/j35cb2014c.gif" alt="j35cb2014c" width="502" height="220" /></p>
+<p style="text-align: center;">Both <strong>PHP7 ready</strong> - <a href="https://www.joomla.org/announcements/release-news/5654-joomla-3-5-is-here.html" target="_blank">Joomla 3.5</a> and <a href="http://www.joomlapolis.com:80/index.php?option=com_content&amp;view=article&amp;id=12&amp;Itemid=2">Community Builder 2.0.14</a> are here!</p>
+<p><strong>Joomla 3.5 is now available</strong> with <strong>34 new features</strong> and <strong>many bug fixes</strong>. But there are also some backwards incompatibilities that could influence upgrades and some third party extensions.</p>
+<p><strong>Community Builder 2.0.14</strong> has also been released with new features and bug fixes. CB 2.0.14 <strong>is highly recomended for Joomla 3.5</strong> as it addresses a "Failed to start session" error on logout introduced with Joomla 3.5.0.</p>
+<h3>About Joomla 3.5</h3>
+<p>The <strong>main new features</strong> of <a href="https://www.joomla.org/3/" target="_blank">Joomla 3.5</a> are:</p>
+<ul>
+<li><strong>Drag and Drop images</strong> in TinyMCE editor<br />No need to select and upload images in new editor. Just drag and drop an image from your computer to your editor window.</li>
+<li><strong>PHP 7 support</strong><br />Joomla will now work in PHP 7 environments which may lead to <a href="https://www.zend.com/en/resources/php-7">major performance improvements</a> (up to <strong>double speed</strong> and <strong>half memory usage</strong>), but a backwards compatibility break had to be <a href="https://github.com/joomla/joomla-cms/pull/6600" target="_blank">introduced</a> to support PHP7.&nbsp; We believe that this known B/C break will not affect the vast majority of extensions (CB is not affected).</li>
+<li><strong>Email notifications</strong> when new Joomla release is available<br />This new feature will send website admins an email notification/reminder when a new release is available.</li>
+<li><strong>Editor Buttons added to the Toolbar</strong><br />You no longer need to scroll down the page to find the “readmore” or “insert image” buttons.&nbsp;Editor extension buttons that used to be placed below the text area can now be found in the toolbar where they belong.</li>
+<li><strong>Easily Insert Modules in Articles</strong><br />This lets you easily add a module into an article with a button directly on the editor toolbar.</li>
+<li><strong>Item counts</strong> in relevant Joomla administrative pages<br />This new feature makes is easy to quickly see how many published/unpublished/trashed/archived articles each Joomla category. Similar functionality is also available in Contact, Banner and Newsfeed management pages.</li>
+<li><strong>User Status admininstrative module improvements</strong><br />The Joomla backend pages have a fixed footer strip with some useful info and links about your website. You now have more control on what is displayed.</li>
+<li><strong>Download system/environment info</strong> for support cases<br />Help support teams to help you by including your website system information using this new functionality.</li>
+<li><strong>User CSS file</strong> for Protostar template<br />No more hacking needed to add your extra css code in Joomla's Protostar template. You can now add your user.css file and it will be loaded.</li>
+<li><strong>Statistics gathering</strong> for Joomla usage<br />Joomla 3.5's new statistics collection plug-in gathers the system environment in use. The raw data collected is anonymised before transmission and access to the compiled data is <a href="https://developer.joomla.org/about/stats.html" target="_blank">publicly available</a>.</li>
+</ul>
+<p>In addition to these features Joomla 3.5 has also <strong>fixes over 650 bugs</strong>.</p>
+<p>So the $64K question ... what to do .. upgrade or wait?</p>
+<p>As there are no reported high or medium level security issues, there is no security related need to rush and upgrade.</p>
+<p>Some may choose to wait a few days (or maybe even for next Joomla 3.5.1) and others may choose to upgrade to Joomla 3.5.&nbsp; But<strong> before upgrading</strong> your live sites you should follow the following <strong>3-step guidelines</strong>:</p>
+<ol>
+<li>Check all thrid-party extensions you have installed on your website and check for Joomla 3.5 compatibility reassurance. If needed install new releases when available.</li>
+<li>Clone your website and perform that upgrade to Joomla 3.5 on the cloned environment and test everything before you updrage your live sites.</li>
+<li>Always backup your live site before you upgrade, just in case something goes wrong and you need to revert things.</li>
+</ol>
+<h3>About Community Builder 2.0.14</h3>
+<p><a href="http://www.joomlapolis.com:80/index.php?option=com_content&amp;view=article&amp;id=12&amp;Itemid=2">Community Builder 2.0.14</a> is here with <strong>3 new features</strong> and <strong>13 bug fixes</strong>. It also addresses a Joomla 3.5 backwards compatibility issue that caused an error during frontend logout.</p>
+<p>The full <strong>CB 2.0.14 changelog</strong> is available in the <a href="http://www.joomlapolis.com:80/forum/6-news-and-publicity/233232-joomla-35-and-community-builder-2014-released">forum discussion</a>. CB 2.0.14 can be easily installed over any existing CB 2.0+ environment and will continue to work on Joomla 3.4.8 environments (in addition to the just released Joomla 3.5).</p>
+<p><strong>Please note that CB 2.0.14 continues to work just fine an older PHP versions (PHP 5.3.3 and greater)</strong>.</p>
+<p><a href="http://www.joomlapolis.com:80/forum/6-news-and-publicity/233232-joomla-35-and-community-builder-2014-released">Discuss this article on our forums</a>.</p>]]></description>
+			<author>nant@joomlapolis.com (Nick A.)</author>
+			<category>News</category>
+			<pubDate>Tue, 22 Mar 2016 12:51:51 +0000</pubDate>
+		</item>
+		<item>
+			<title>CBSubs 4.0.2 released with 9 new feautues and 28 bug fixes</title>
+			<link>http://www.joomlapolis.com:80/news/18542-cbsubs-402-released-with-9-new-feautues-and-28-bug-fixes</link>
+			<guid>http://www.joomlapolis.com:80/news/18542-cbsubs-402-released-with-9-new-feautues-and-28-bug-fixes</guid>
+			<description><![CDATA[<p>&nbsp;<a href="http://www.joomlapolis.com:80/index.php?option=com_content&amp;view=article&amp;id=40&amp;Itemid=4"><img style="display: block; margin-left: auto; margin-right: auto;" src="http://www.joomlapolis.com:80/images/jpnewsletter/jpn201603/cbsubs402_580.gif" alt="cbsubs402 580" width="550" height="197" /></a></p>
+<p style="text-align: center;"><a href="http://www.joomlapolis.com:80/index.php?option=com_content&amp;view=article&amp;id=40&amp;Itemid=4">CBSubs GPL Paid Subscriptions Membership 4.0.2</a> has been released !</p>
+<p>CBSubs is the <strong>most powerful paid subscriptions membership</strong> solution for Joomla allowing you to <strong>make money from your Joomla content</strong> by requiring a subscription for content access. With <strong>fantastic built-in integrations</strong> for Joomla ACL, Community Builder (field updates and protection), GroupJive, AcyMailing, and <strong>powerful reminder mailer features</strong> and <strong>smart promotions</strong> (with coupons or automatic) -- <strong>CBSubs is a mind blower</strong>.</p>
+<p>You can <a href="http://www.joomlapolis.com:80/index.php?option=com_docman&amp;task=doc_details&amp;gid=828">download</a> and study the <strong>FREE CBSubs Manual</strong> that has many use case examples to just begin to realize how powerful and versitile this solution is.</p>
+<p>This new CBSubs release has <strong>9 new features</strong> and <strong>28 bug fixes</strong> and is <strong>now PHP 7 ready</strong> - see forum discussion for detailed list.</p>
+<p>Existing CBSubs installations can upgrade to version 4.0.2 (CB 2.0.13 or better is required) by simply installing over.</p>
+<p><a href="http://www.joomlapolis.com:80/forum/6-news-and-publicity/233191-cbsubs-402-released-with-9-new-feautues-and-28-bug-fixes">Discuss this article on our forums</a>.</p>]]></description>
+			<author>nant@joomlapolis.com (Nick A.)</author>
+			<category>News</category>
+			<pubDate>Thu, 17 Mar 2016 18:16:44 +0000</pubDate>
+		</item>
+		<item>
+			<title>20 social networks - 2.31 bilion users - waiting for you to install the new CB Connect 7.0 stable on your website !</title>
+			<link>http://www.joomlapolis.com:80/news/18540-20-social-networks-231-bilion-users-waiting-for-you-to-install-the-new-cb-connect-70-stable-on-your-website-</link>
+			<guid>http://www.joomlapolis.com:80/news/18540-20-social-networks-231-bilion-users-waiting-for-you-to-install-the-new-cb-connect-70-stable-on-your-website-</guid>
+			<description><![CDATA[<p><a href="http://www.joomlapolis.com:80/index.php?option=com_docman&amp;task=doc_details&amp;gid=819"><img style="margin-right: 10px; margin-bottom: 5px; float: left;" src="http://www.joomlapolis.com:80/images/jpnewsletter/jpn201603/cbconnect_small_3.png" alt="cbconnect small 3" width="194" height="187" /></a>According to <a href="http://www.joomlapolis.com:80/forum/6-news-and-publicity/233099-20-social-networks-231-bilion-users-waiting-for-you-to-install-the-new-cb-connect-70-stable-on-your-website">latest internet stats</a>, there are <strong>2.31 billion users</strong> with active social media accounts.</p>
+<p>And the just released<strong> CB Connect 7.0</strong> (stable) with its awesome list of <a href="http://www.joomlapolis.com:80/#">20 supported networks and features</a> helps you bring them over to your own website by making it super easy for them to join. <strong>No hassle sign-up</strong> and <strong>no new password setup</strong>, is a great combination to <strong>attract new users to your website</strong> and save user data (with social network's user permissions) to your local user profiles.</p>
+<p>The numbers speak for themselves - there is no other add-on for Joomla (or any other CMS as far as we know) that supports so many social networks.</p>
+<p><a href="http://www.joomlapolis.com:80/index.php?option=com_docman&amp;task=doc_details&amp;gid=819">Download CB Connect 7.0</a> </p>
+<p><a href="http://www.joomlapolis.com:80/forum/6-news-and-publicity/233099-20-social-networks-231-bilion-users-waiting-for-you-to-install-the-new-cb-connect-70-stable-on-your-website">Discuss this on our forums</a>.</p>]]></description>
+			<author>nant@joomlapolis.com (Nick A.)</author>
+			<category>News</category>
+			<pubDate>Tue, 08 Mar 2016 19:39:10 +0000</pubDate>
+		</item>
+		<item>
+			<title>CB Connect 7.0 RC1 supports 20 social networks!</title>
+			<link>http://www.joomlapolis.com:80/news/18539-cb-connect-70-rc1-supports-20-social-networks</link>
+			<guid>http://www.joomlapolis.com:80/news/18539-cb-connect-70-rc1-supports-20-social-networks</guid>
+			<description><![CDATA[<p><img style="display: block; margin-left: auto; margin-right: auto;" src="http://www.joomlapolis.com:80/images/jpnewsletter/jpn201603/cbconnect70rc1_580.gif" alt="cbconnect70rc1 580" width="550" height="200" /></p>
+<p style="text-align: center;">CB Connect 7.0 RC1 is available for <a href="http://www.joomlapolis.com:80/index.php?option=com_docman&amp;task=doc_details&amp;gid=815">download</a> by all <a href="http://www.joomlapolis.com:80/support/membership">paid members</a>.</p>
+<p>This release should have been tagged stable, but our <strong>high-quality process</strong> mandates a release candidate phase.</p>
+<p>CB Connect now <strong>supports 20 !!! social network providers</strong> letting their users join your website using their favorite social network credentials.</p>
+<p>This is a <strong>win-win situation</strong> with huge benefits for everyone. <strong>Website owners</strong> open the door for <strong>millions of social networking users</strong> to join their CB Connect powered website and users can <strong>quickly get on board</strong> without the need to fill-out new forms remember new password.</p>
+<p>Here is the full <strong>awesome</strong> list:</p>
+<ol>
+<li>Facebook</li>
+<li>Twitter</li>
+<li>Google</li>
+<li>Linkedin</li>
+<li>Windows Live</li>
+<li>Instagram</li>
+<li>Foursquare</li>
+<li>GitHub</li>
+<li>VKontakte</li>
+<li>Steam</li>
+<li>Reddit</li>
+<li>Twitch</li>
+<li>Stack Exchange</li>
+<li>Pinterest</li>
+<li>Amazon</li>
+<li>Yahoo</li>
+<li>Paypal</li>
+<li>Discus</li>
+<li>WordPress</li>
+<li>Meetup</li>
+</ol>
+<p>In addition to the many supported networks, CB Connect can be also configured to:</p>
+<ul>
+<li>work in <strong>Single sign on mode</strong> letting users register and login with one click<br />-- for <strong>quick and simple website joining</strong></li>
+<li><strong>prefil the registration form with data</strong> taken automatically from the social network and letting the user fill in the rest<br />-- <strong>saves time for sign-ups</strong> and lets users override data</li>
+<li><strong>override approval workflows</strong> (on a per social network provider basis) for new users and images brought in from social network (avatar or canvas)<br />-- <strong>no need to waste time</strong> with trusted network data</li>
+<li><strong>link existing user accounts</strong> on your website with social network<br />-- <strong>make it easy for your existing users to single click login</strong></li>
+<li><strong>synchronize CB fields</strong> with social network available data during registration, login or linking<br />-- <strong>grab existing data and display on user profiles</strong> on your website</li>
+<li><strong>first redirect and redirect</strong> users based on their social network during login<br />-- <strong>give your social network friends special treatment</strong></li>
+</ul>
+<p>As you can see this very powerful add-on is designed to help you boost your website sign-ups by reaching out to millions of social networking website users.</p>
+<p><a href="http://www.joomlapolis.com:80/forum/6-news-and-publicity/233029-cb-connect-70-rc1-supports-20-social-networks">Discuss this on our forums</a>.</p>]]></description>
+			<author>nant@joomlapolis.com (Nick A.)</author>
+			<category>News</category>
+			<pubDate>Tue, 01 Mar 2016 13:24:08 +0000</pubDate>
+		</item>
+		<item>
+			<title>CB Connect 7.0 beta 5 - help us test!</title>
+			<link>http://www.joomlapolis.com:80/news/18538-cb-connect-70-beta-5-help-us-test</link>
+			<guid>http://www.joomlapolis.com:80/news/18538-cb-connect-70-beta-5-help-us-test</guid>
+			<description><![CDATA[<p style="text-align: center;"><img src="http://www.joomlapolis.com:80/images/jpnewsletter/jpn201602/cbconnectb5_580.gif" alt="cbconnectb5 580" width="550" height="194" /></p>
+<p style="text-align: center;">CB Connect 7.0 beta 5 is available for <a href="http://www.joomlapolis.com:80/index.php?option=com_docman&amp;task=doc_details&amp;gid=814">download</a> and testing by all <a href="http://www.joomlapolis.com:80/index.php?option=com_content&amp;view=article&amp;id=18216&amp;Itemid=135">paid members</a>.</p>
+<p>If you have been following this <a href="http://www.joomlapolis.com:80/forum/6-news-and-publicity/229508-cb-connect-700-beta-1-released?start=24">add-on's progress</a> you are probably aware that it was delayed because of its dependency on a third-party API library.</p>
+<p>Well, we finally decided to drop this dependency and move forward using our own code.</p>
+<p>As Kyle already commented this new beta curently supports authentication from the following <strong>10 social newtwork providers</strong>:</p>
+<ol>
+<li>Facebook</li>
+<li>Twitter</li>
+<li>Google</li>
+<li>Linkedin</li>
+<li>Windows Live</li>
+<li>Instagram</li>
+<li>Foursquare</li>
+<li>GitHub</li>
+<li>VKontakte</li>
+<li>Steam</li>
+</ol>
+<p>There are also plans to add more in upcoming CB Connect 7.0 RC release.</p>
+<p>As we are currently in rapid development mode we would like as many people to as possible to download and test this new release and report issues in the forum discussion below.</p>
+<p>This way we will quickly reach a stable release.</p>
+<p><a href="http://www.joomlapolis.com:80/forum/6-news-and-publicity/232874-cb-connect-700-beta-5-released">Join the discussion on our forums</a>.</p>]]></description>
+			<author>nant@joomlapolis.com (Nick A.)</author>
+			<category>News</category>
+			<pubDate>Tue, 23 Feb 2016 00:00:00 +0000</pubDate>
+		</item>
+		<item>
+			<title>CB Code Field 1.0 Released!</title>
+			<link>http://www.joomlapolis.com:80/news/18536-cb-code-field-10-released</link>
+			<guid>http://www.joomlapolis.com:80/news/18536-cb-code-field-10-released</guid>
+			<description><![CDATA[<p style="text-align: center;">&nbsp;<img src="http://www.joomlapolis.com:80/images/stories/tutorials/code/codedaysold2.png" alt="codedaysold2" width="550" height="248" /></p>
+<p style="text-align: center;"><strong>CB Code Field 1.0.2</strong> has been released for CB 2.0.13+<br />Professional+ members can <a href="http://www.joomlapolis.com:80/index.php?option=com_docman&amp;task=doc_details&amp;gid=810">download</a></p>
+<p>By popular community demand, the CB Team has just released the new CB Code Field add-on that lets you execute PHP code as a CB field!</p>
+<p>With this new release you can also create code fields that <strong>dynamically auto-refresh</strong> when other CB fields change.</p>
+<p>Here is a brand new <a href="http://www.joomlapolis.com:80/index.php?option=com_content&amp;view=article&amp;id=18534:calculating-years-months-days-from-birthday-field-using-cb-code-field&amp;catid=107:use-cases&amp;Itemid=129">Age Calculation Tutorial</a> that will help you understand this new functionality.</p>
+<p>The CB Code Field add-on lets you create as many CB fields as you want that provide output based on PHP code you provide.</p>
+<p>Once installed and published you will see 5 new field types available when you create new CB fields:</p>
+<ul>
+<li>Code</li>
+<li>Code&nbsp;Check Box (Multiple)</li>
+<li>Code&nbsp;Drop Down (Multi-select)</li>
+<li>Code&nbsp;Drop Down (Single Select)</li>
+<li>Code&nbsp;Radio Buttons</li>
+</ul>
+<p><a href="http://www.joomlapolis.com:80/forum/6-news-and-publicity/232789-cb-code-field-10-released">Discuss this on our forums</a>.</p>]]></description>
+			<author>nant@joomlapolis.com (Nick A.)</author>
+			<category>News</category>
+			<pubDate>Tue, 09 Feb 2016 22:29:42 +0000</pubDate>
+		</item>
+		<item>
+			<title>CB Query Field 5.0 released!</title>
+			<link>http://www.joomlapolis.com:80/news/18535-cb-query-field-50-released</link>
+			<guid>http://www.joomlapolis.com:80/news/18535-cb-query-field-50-released</guid>
+			<description><![CDATA[<p style="text-align: center;">&nbsp;<img src="http://www.joomlapolis.com:80/images/stories/tutorials/cbquery/usastatecityzip.jpg" alt="usastatecityzip" width="463" height="199" /></p>
+<p style="text-align: center;"><strong>CB Query Field 5.0.2</strong> has been released for CB 2.0.13+<br />Professional+ members can <a href="http://www.joomlapolis.com:80/index.php?option=com_docman&amp;task=doc_details&amp;gid=811">download</a></p>
+<p>With this new release you are now able to create query fields that <strong>dynamically auto-refresh</strong> when other CB fields change (think of chained fields like country, state, city combinations).</p>
+<p>Here is a brand new <a href="http://www.joomlapolis.com:80/index.php?option=com_content&amp;view=article&amp;id=18533:configuring-dynamic-usa-state-city-zip-fields-with-cb-query-field-plugin&amp;catid=107:use-cases&amp;Itemid=129">USA State, City, Zip code tutorial</a> that will help you understand this new functionality.</p>
+<p>The CB Query Field add-on lets you create as many CB fields as you want that take their options from a database query.</p>
+<p>Once installed and published you will see 4 new field types available when you create new CB fields:</p>
+<ul>
+<li>Query</li>
+<li>Query Check Box (Multiple)</li>
+<li>Query Drop Down (Multi-select)</li>
+<li>Query Drop Down (Single Select)</li>
+<li>Query Radio Buttons</li>
+</ul>
+<p>We also have some cool <a href="https://www.youtube.com/playlist?list=PLp0puRITgC7MM9iP9FooKB1qk8f5MLWVp" target="_blank">CB Query field video tutorials</a> that you can watch.</p>
+<p>&nbsp;</p>
+<p><a href="http://www.joomlapolis.com:80/forum/6-news-and-publicity/232787-cb-query-field-50-released">Discuss this on our forums</a>.</p>]]></description>
+			<author>nant@joomlapolis.com (Nick A.)</author>
+			<category>News</category>
+			<pubDate>Tue, 09 Feb 2016 22:06:07 +0000</pubDate>
+		</item>
+		<item>
+			<title>CB 2.0.13 ready for Joomla 3.5 and PHP 7.0</title>
+			<link>http://www.joomlapolis.com:80/news/18532-cb-2013-ready-for-joomla-35-and-php-70</link>
+			<guid>http://www.joomlapolis.com:80/news/18532-cb-2013-ready-for-joomla-35-and-php-70</guid>
+			<description><![CDATA[<p style="text-align: center;"><img src="http://www.joomlapolis.com:80/images/jpnewsletter/jpn201602/php7canvas.gif" alt="php7canvas" width="550" height="199" />&nbsp;</p>
+<p style="text-align: center;"><a href="http://www.joomlapolis.com:80/community-builder">Community Builder 2.0.13</a> is here and is ready for upcoming Joomla 3.5<br /><a href="http://www.joomlapolis.com:80/index.php?option=com_docman&amp;task=doc_details&amp;gid=804&amp;Itemid=105">Download it now</a> - it's <strong>free</strong> and <strong>super stable</strong></p>
+<p><strong>Community Builder 2.0.13</strong> is a maintenance release that fixes <strong>21 bugs</strong> and adds <strong>6 new features</strong> (PHP 7 compatibility, Bootstrap and Fontawesome updates - see forum discussion for full changelog) paving the way for the upcoming Joomla 3.5 release.</p>
+<p>CB 2.0+ websites can be upgraded to latest CB 2.0.13 <strong>using the built-in Joomla upgrader</strong> or with a <strong>simple install over</strong> (precautionary backup always recommended) as all previous settings are kept.</p>
+<p>The <a href="http://www.joomlapolis.com:80/component/docman/doc_details/753-cb-20-primer-book-101">CB Primer Book</a> is valid and the <a href="http://www.joomlapolis.com:80/cb-20-addon-status">CB 2.0 Add-on compatibility</a> chart has been updated.</p>
+<p>CB 2.0.13 now supports PHP 5.3.3 to PHP 7. Please note that Joomla 3.5 will be needed for PHP 7 support, as Joomla 3.4 is not PHP 7 compatible.</p>
+<p><a href="http://www.joomlapolis.com:80/forum/6-news-and-publicity/232699-cb-2013-ready-for-joomla-35-and-php-70">Discuss this on our forums</a> !</p>]]></description>
+			<author>nant@joomlapolis.com (Nick A.)</author>
+			<category>News</category>
+			<pubDate>Tue, 02 Feb 2016 19:00:32 +0000</pubDate>
+		</item>
+		<item>
+			<title>Profile Update Logger 2.1.2 Released</title>
+			<link>http://www.joomlapolis.com:80/news/18530-profile-update-logger-212-released</link>
+			<guid>http://www.joomlapolis.com:80/news/18530-profile-update-logger-212-released</guid>
+			<description><![CDATA[<p style="text-align: center;"><img src="http://www.joomlapolis.com:80/images/jpnewsletter/jpn201601/pul212.gif" alt="pul212" width="557" height="161" /></p>
+<p style="text-align: center;"><strong>Profile Update Logger 2.1.2</strong> has been released for CB 2.0.12+</p>
+<p>The <a href="http://www.joomlapolis.com:80/cb-20-addon-status">CB 2.0.12+ compatible</a> Profile Update Logger add-on lets your authorized users quickly view changes made to user profile fields. It keeps track of when changes were made, old and new values and also which user made each change. The add-on can also be configured to send notification emails on each change.</p>
+<p>Professional members can <a href="http://www.joomlapolis.com:80/index.php?option=com_docman&amp;task=doc_details&amp;gid=803">download Profile Update Logger 2.1.2</a> and just install it using the CB Plugin Management installer.</p>
+<p><a href="http://www.joomlapolis.com:80/news/18530-profile-update-logger-212-released">Discuss this on our forums</a>.</p>]]></description>
+			<author>nant@joomlapolis.com (Nick A.)</author>
+			<category>News</category>
+			<pubDate>Mon, 18 Jan 2016 10:45:28 +0000</pubDate>
+		</item>
+	</channel>
+</rss>
