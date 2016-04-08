@@ -1,0 +1,47 @@
+<?xml version = "1.0" encoding="utf-8"?>
+<extension type = "component" version="2.5" method = "upgrade">
+    <name>Benh An</name>
+    <author>Pham Van Vuong</author>
+	<creationDate>April 2016</creationDate>
+	<copyright>vuongpv@nextgsolutions.com</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<authorEmail>pvvuong0503@gmail.com</authorEmail>
+	<authorUrl>pvvuong0503@gmail.com</authorUrl>
+    <description>
+        Benh an online
+    </description>   
+
+    <files folder="site">
+        <folder>controllers</folder>
+        <folder>models</folder>
+        <folder>img</folder>
+        <folder>asset</folder>        
+        <folder>views</folder>
+        <folder>language</folder>
+        <filename>index.html</filename>
+        <filename>benhan.php</filename>
+        <filename>benhan.xml</filename>
+    </files>
+
+    <languages folder="language/en-GB">
+            <language tag="en-GB">en-GB.com_benhan.ini</language>
+            <language tag="en-GB">en-GB.com_benhan.sys.ini</language>
+    </languages>
+
+    <administration>      
+        <files folder="admin">    
+            <folder>controllers</folder>
+            <folder>tables</folder>
+            <folder>img</folder>        
+            <folder>views</folder>
+            <folder>models</folder>
+            <filename>index.html</filename>               
+            <filename>benhan.php</filename>
+       
+        </files>
+        <menu 
+            img="components/com_benhan/img/jreg.png"
+            link="administrator/index.php?option=com_benhan&task=view"
+            >Benh An</menu>     
+    </administration>   
+</extension>
