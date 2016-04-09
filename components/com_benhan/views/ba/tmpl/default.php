@@ -5,8 +5,8 @@ $user		= JFactory::getUser();
 $doc = JFactory::getDocument();
 
 $doc->addStyleSheet('/components/com_comprofiler/plugin/templates/default/template.css');
-$doc->addStyleSheet('/components/com_jregistration/asset/benhan.css');
-$doc->addScript('/components/com_jregistration/asset/benhan.js');
+$doc->addStyleSheet('/components/com_benhan/asset/benhan.css');
+$doc->addScript('/components/com_benhan/asset/benhan.js');
 
 
 ?>
@@ -18,12 +18,12 @@ overlib_pagedefaults(WIDTH,250,VAUTO,RIGHT,AUTOSTATUSCAP, CSSCLASS,TEXTFONTCLASS
 --></script>
 
 <h4 class="jreg_error_status" style="color:red;"><?php echo $this->error_message; ?></h4>
-<form action='<?php echo JRoute::_("index.php?option=com_banhan&view=ba&task=save")?>' method="post" id="cbcheckedadminForm" name="adminForm" enctype="multipart/form-data" class="cb_form" autocomplete="off">
-	<h2 class="jreg_header">Chỗ này sau này sẽ là tên bệnh nhân</h2>
+<form action='<?php echo JRoute::_("index.php?option=com_banhan&view=ba")?>' method="post" id="cbcheckedadminForm" name="adminForm" enctype="multipart/form-data" class="cb_form" autocomplete="off">
+	<h2 class="jreg_header"><?php echo $this->userInfo->name;?></h2>
 
 	<blockquote class="rounded">
 		
-		<h3 class="legend-title"><?php echo $this->baform->title;?></h3>	
+		<h3 class="legend-title"><?php echo $this->pageInfo->title;?></h3>	
 		<hr>
 		<?php 
 			foreach ($this->CBf as $field) 
@@ -35,11 +35,26 @@ overlib_pagedefaults(WIDTH,250,VAUTO,RIGHT,AUTOSTATUSCAP, CSSCLASS,TEXTFONTCLASS
 		?>
 	</blockquote>
 
+	<?php 
+		if($this->cur_page !== 1 && $this->cur_page <= $this->total)
+		{
+			echo '<input type="submit" value="Back" name="ba_back" class="button btn btn-primary">&nbsp;';
+		}
+		if($this->cur_page < $this->total)
+		{
+			echo '<input type="submit" value="Next" name="ba_next" class="button btn btn-primary">&nbsp;';
+		}
+	?>
 	
-	<input type="submit" value="Submit" id="jreg_submit_bt" class="button btn btn-primary">
-	<input type="hidden" name="task" value="save"/>
+	
+	
+	
+	<input type="submit" value="Save" name="ba_save" class="button btn btn-warning">
+	
     <input type="hidden" name="option" value="<?php echo $option;?>"/>    
     <input type="hidden" name="controller" value="<?php echo $controller;?>" />
+    <input type="hidden" name="cur_page" value="<?php echo $this->cur_page ?>" />
+
     <?php echo JHTML::_( 'form.token' ); ?>
 
 </form>

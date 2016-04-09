@@ -77,17 +77,19 @@ class BenhanControllerForm extends JController
         
         $model = $this->getModel( 'form' );
         $list = $model->saveorder();     
-        $view  = $this->getView( 'form','html' );      
-        $view->showForm(null);
+        $mainframe = JFactory::getApplication();
+        $link = JRoute::_('index.php?option=com_benhan&task=showRecords');   
+        $mainframe->redirect( $link );
 
     }
     function orderup()
     {
         
         $model = $this->getModel( 'form' );
-        $list = $model->orderup();  
-        $view  = $this->getView( 'form','html' );      
-        $view->showForm(null);
+        $list = $model->orderup();          
+        $mainframe = JFactory::getApplication();
+        $link = JRoute::_('index.php?option=com_benhan&task=showRecords');   
+        $mainframe->redirect( $link );
 
     }
     function  orderdown()
@@ -95,9 +97,9 @@ class BenhanControllerForm extends JController
         
         $model = $this->getModel( 'form' );
         $list = $model->orderdown();  
-        $view  = $this->getView( 'form','html' );      
-        $view->showForm(null);   
-
+        $mainframe = JFactory::getApplication();
+        $link = JRoute::_('index.php?option=com_benhan&task=showRecords');   
+        $mainframe->redirect( $link );
     }
    
     function remove()

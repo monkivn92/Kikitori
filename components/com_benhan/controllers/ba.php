@@ -13,13 +13,47 @@ class BenhanControllerBa extends JController
 
     function create()
     {
-        
-        $view = &$this->getView('ba','html');
-        $model = & $this->getModel('ba');       
-        $view->setModel($model, true);
-        $view->showForm(null);
-    }
+        if( $_POST['ba_save'] )
+        {
+            $this->save();
+            
+        }
+        else
+        {
+            $userid = JRequest::getInt('userid');
+            $user = JFactory::getUser();
+            $view = &$this->getView('ba','html');
+            $model = & $this->getModel('ba');       
+            $view->setModel($model, true);
 
+            if(!$userid) 
+            { 
+                $this_user = $user->id;
+            }
+            else
+            {
+                if($userid==$user->id)
+                {
+                    $this_user = $user->id;
+                }
+                else
+                {
+                    if(!$model->isAdmin($user->id))
+                    {
+                        die('You are not authorized !');
+                    }                    
+                    else
+                    {
+                        $this_user = $userid;
+                    }
+                        
+                }
+            }
+            $view->showForm(null);
+        }
+        
+    }
+    
     function save()
     {        
         global $_CB_framework, $_CB_database, $ueConfig, $_POST, $_PLUGINS;

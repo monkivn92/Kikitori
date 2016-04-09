@@ -8,43 +8,112 @@ class BenhanModelBa extends JModel
 		parent::__construct();
 	}	
 
-    function getBAForm($formid)
+    function isAdmin($userid)
     {
-              
-        $db = JFactory::getDbo();
-        $formid = JRequest::getInt('baformid');
-
-        $sql = "SELECT * FROM #__com_benhan_form WHERE published=1 AND id=$formid";
-        $db->setQuery($sql);
-        $formfield = $db->loadObject();       
-        return $formfield;
+        $db = JFactory::getDbo();     
+        $sql = "SELECT group_id FROM #__user_usergroup_map WHERE user_id=$userid";
+        $db->setQuery();
+        $r = $db->loadResult();
+        if($r == 7 || $r == 8)
+            return true;
+        else
+            return false;
 
     }
+    function getUserInfo()
+    {
+        $userid = JRequest::getInt('userid');
+        $user = JFactory::getUser();
 
-	function getCBfield($formid)
+        if(!$userid) 
+        { 
+            $this_user = $user->id;
+        }
+        else
+        {
+            if($userid==$user->id)
+            {
+                $this_user = $user->id;
+            }
+            else
+            {
+                if(!isAdmin($user->id))
+                {
+                    die('You are not authorized !');
+                }                    
+                else
+                {
+                    $this_user = $userid;
+                }
+                    
+            }
+        }
+
+        global $_CB_framework,$_CB_database, $ueConfig, $_PLUGINS;
+        $cbUser =& CBuser::getInstance( $userid );
+        return $cbUser;
+    }
+
+	function getCBfield()
 	{
         global $_CB_framework,$_CB_database, $ueConfig, $_PLUGINS;   
         $db = JFactory::getDbo();         
         $cbUser =& CBuser::getInstance( null );
-        $CBfields = array();     
-        $formid = JRequest::getInt('baformid');  
-        $baform = $this->getBAForm($formid);
+        $CBfields = array();    
+        $return = new \stdClass(); 
+        $userid = JRequest::getInt('userid');
+        $user = JFactory::getUser();
 
-        $sql ="SELECT name FROM #__comprofiler_fields WHERE fieldid IN($baform->fields)";
+        if(!$userid) 
+        { 
+            $this_user = $user->id;
+        }
+
+        $sql = 'SELECT COUNT(*) FROM #__com_benhan_form';
+        $db->setQuery($sql);
+        $total = $db->loadResult();       
+        
+        $db = JFactory::getDbo();
+        $cur_page = JRequest::getInt('cur_page');
+        if(!$cur_page)
+        {
+            $ordering = 1;
+        }
+        else
+        {
+            if( $_POST['ba_back'] )
+            {
+                $ordering = $cur_page-1;
+            }
+            if( $_POST['ba_next'] )
+            {
+                $ordering = $cur_page+1;
+            }
+        }
+
+        //get Fields in Form
+        $sql = "SELECT * FROM #__com_benhan_form WHERE published=1 AND ordering=$ordering";        
+        $db->setQuery($sql);
+        $formfield = $db->loadObject();   
+
+        $sql ="SELECT name FROM #__comprofiler_fields WHERE fieldid IN($formfield->fields)";
 
         $db->setQuery($sql);
         $names = $db->loadResultArray();
-        
+      
         foreach ($names as $name) 
         {
             $CBfields[$name] = $cbUser->getField( $name, null, 'htmledit', 'div','register', 0, true);
         }		
-		
-		return $CBfields;
+		$return->page_info = $formfield;
+        $return->CBfields = $CBfields;
+        $return->total = $total;
+        $return->cur_page = $ordering;
+		return $return;
 
 	}
      
-    function getRegFormData()
+    function getFormData()
     {
         $user_info = new \stdClass();        
         $jreg_user_info = array();   

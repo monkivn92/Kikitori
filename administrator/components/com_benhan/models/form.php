@@ -154,7 +154,7 @@ class BenhanModelForm extends JModel
 		{
 			JError::raiseError(500, $db->getErrorMsg() );
 		}		
-		
+	
 	}
 	function orderdown()
 	{
