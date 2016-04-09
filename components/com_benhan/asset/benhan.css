@@ -12,7 +12,7 @@ div[id ^= "cbfr"]
 	margin: 20px 0px;
 }
 
-div[id ^= "cbfr"] label
+div[id ^= "cbfr"]>label
 {
 	font-weight: bold;
 }

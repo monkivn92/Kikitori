@@ -13,99 +13,41 @@ class BenhanControllerBa extends JController
 
     function create()
     {
-        if( $_POST['ba_save'] )
-        {
-            $this->save();
-            
+        
+        $userid = JRequest::getInt('userid');
+        $user = JFactory::getUser();
+        $view = &$this->getView('ba','html');
+        $model = & $this->getModel('ba');       
+        $view->setModel($model, true);
+
+        if(!$userid) 
+        { 
+            $this_user = $user->id;
         }
         else
         {
-            $userid = JRequest::getInt('userid');
-            $user = JFactory::getUser();
-            $view = &$this->getView('ba','html');
-            $model = & $this->getModel('ba');       
-            $view->setModel($model, true);
-
-            if(!$userid) 
-            { 
+            if($userid==$user->id)
+            {
                 $this_user = $user->id;
             }
             else
             {
-                if($userid==$user->id)
+                if(!$model->isAdmin($user->id))
                 {
-                    $this_user = $user->id;
-                }
+                    die('You are not authorized !');
+                }                    
                 else
                 {
-                    if(!$model->isAdmin($user->id))
-                    {
-                        die('You are not authorized !');
-                    }                    
-                    else
-                    {
-                        $this_user = $userid;
-                    }
-                        
+                    $this_user = $userid;
                 }
+                    
             }
-            $view->showForm(null);
         }
+        $view->showForm(null);
+       
         
-    }
+    }    
     
-    function save()
-    {        
-        global $_CB_framework, $_CB_database, $ueConfig, $_POST, $_PLUGINS;
-        $session = JFactory::getSession();
-        $app = JFactory::getApplication();
-        $model =  $this->getModel('reg');
-
-        $user_info = $model->getRegFormData();    
-        $error = $model->jRegValidator($user_info);     
-
-        if($error || $_PLUGINS->is_errors())
-        {    
-            if($_PLUGINS->is_errors())
-            {
-                $error .= ("<p>".$_PLUGINS->getErrorMSG()."</p>");   
-            }
-            
-            $session->set( 'jreg_error_message', $error );         
-            $this->create();
-            $model->setValueToField($user_info);
-        }
-        else
-        {
-            
-            $saved = $model->addUser($user_info); //saved = userid if add user successfully.
-            $session->clear( 'jreg_error_message');
-
-            if($saved)
-            {
-                
-                $model->sendMailtoAdmin($user_info,$saved);
-                /// Log new user in user's pro5
-                cbimport( 'cb.authentication' ); 
-                $cbAuthenticate     =   new CBAuthentication();                             
-                $messagesToUser     =   array('Thank for your registeringms!');
-                $alertmessages      =   array('Thank for your registeringalert!');
-                $redirect_url       =   'index.php?option=com_jregistration&view=edit&task=detail';
-                $resultError       =   $cbAuthenticate->login( $user_info->username, false, 0, 1, $redirect_url, $messagesToUser, $alertmessages, 0 );
-                $app->enqueueMessage('Registration Completed!','Message');
-                $app->redirect(JRoute::_($redirect_url, false));
-            }
-            else
-            {
-                $app->enqueueMessage('Registration failed!','error');  
-                $app->redirect(JRoute::_('index.php?option=com_jregistration&view=reg', false));
-                $model->setValueToField($user_info);
-            }
-            
-        }     
-   
-    }
-
     function checkUsername()
     {
         $db = JFactory::getDbo();

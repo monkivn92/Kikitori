@@ -58,7 +58,7 @@ class BenhanModelBa extends JModel
 	{
         global $_CB_framework,$_CB_database, $ueConfig, $_PLUGINS;   
         $db = JFactory::getDbo();         
-        $cbUser =& CBuser::getInstance( null );
+       
         $CBfields = array();    
         $return = new \stdClass(); 
         $userid = JRequest::getInt('userid');
@@ -68,6 +68,7 @@ class BenhanModelBa extends JModel
         { 
             $this_user = $user->id;
         }
+        $cbUser =& CBuser::getInstance( $this_user );
 
         $sql = 'SELECT COUNT(*) FROM #__com_benhan_form';
         $db->setQuery($sql);
@@ -85,19 +86,62 @@ class BenhanModelBa extends JModel
             {
                 $ordering = $cur_page-1;
             }
-            if( $_POST['ba_next'] )
+            if( $_POST['ba_next'])
             {
-                $ordering = $cur_page+1;
+                $ordering = $cur_page+1;                
             }
-        }
 
-        //get Fields in Form
+            //Save changes
+            $sql = "SELECT * FROM #__com_benhan_form WHERE published=1 AND ordering=$cur_page";        
+            $db->setQuery($sql);
+            $fs = $db->loadObject();  
+
+            $sql ="SELECT name FROM #__comprofiler_fields WHERE fieldid IN($fs->fields)";
+            $db->setQuery($sql);
+            $ns = $db->loadResultArray();
+            $set = '';
+            $len = count($ns);
+            for($i=0; $i< $len; $i++)
+            {
+                $var = $ns[$i];
+                $val = JRequest::getVar($var);
+                if(is_array($val))
+                {
+                    $val = implode('|*|', $val);
+                }
+                $val = $db->quote($val);
+                if($i != $len-1)
+                {
+                    $set .= (" $var=$val, ");
+                }
+                else
+                {
+                     $set .= (" $var=$val ");
+                }
+            }  
+            $sql = "UPDATE #__comprofiler SET $set WHERE user_id=$this_user";
+            $db->setQuery($sql);
+            $db->query();
+
+        }        
+        
+        if($_POST['ba_save'])
+        {
+            $app = JFactory::getApplication();
+            $msg = 'Saved';
+            $link = JUri::base();
+            $app->enqueueMessage($msg,'Message');
+            $app->redirect(JRoute::_($link, false));
+        }
+        //get Fields in Form to display next/previous page
         $sql = "SELECT * FROM #__com_benhan_form WHERE published=1 AND ordering=$ordering";        
         $db->setQuery($sql);
         $formfield = $db->loadObject();   
 
-        $sql ="SELECT name FROM #__comprofiler_fields WHERE fieldid IN($formfield->fields)";
-
+        $sql ="SELECT name FROM #__comprofiler_fields 
+                WHERE fieldid IN($formfield->fields)
+                ORDER BY FIELD(fieldid,$formfield->fields)";//http://stackoverflow.com/questions/8178530/mysql-in-operator-result-set-order
+        
         $db->setQuery($sql);
         $names = $db->loadResultArray();
       
@@ -111,60 +155,8 @@ class BenhanModelBa extends JModel
         $return->cur_page = $ordering;
 		return $return;
 
-	}
-     
-    function getFormData()
-    {
-        $user_info = new \stdClass();        
-        $jreg_user_info = array();   
-        
-        $user_info->cb_registrantfirstname = JRequest::getCmd('cb_registrantfirstname');     
-        $user_info->cb_registrantlastname = JRequest::getCmd('cb_registrantlastname');   
-        $user_info->cb_degrees = JRequest::getVar('cb_degrees');   
-        $user_info->cb_degreesother = JRequest::getVar('cb_degreesother');   
-        $user_info->email = JRequest::getVar('email');   
-        $user_info->confirmemail = JRequest::getVar('confirmemail');   
-        $user_info->cb_address = JRequest::getVar('cb_address');   
-        $user_info->cb_addresstwo = JRequest::getVar('cb_addresstwo');                    
-        $user_info->cb_addressthree = JRequest::getVar('cb_addressthree');     
-        $user_info->cb_city = JRequest::getVar('cb_city'); 
-        $user_info->cb_state = JRequest::getVar('cb_state'); 
-        $user_info->cb_province = JRequest::getVar('cb_province');     
-        $user_info->cb_postalcode = JRequest::getVar('cb_postalcode'); 
-        $user_info->cb_country = JRequest::getVar('cb_country'); 
-        $user_info->cb_phone = JRequest::getVar('cb_phone');        
-        $user_info->cb_secondphone = JRequest::getVar('cb_secondphone');        
-        $user_info->cb_website = JRequest::getVar('cb_website');        
-        
-        $user_info->cb_orgname = JRequest::getVar('cb_orgname');        
-        $user_info->cb_orgtype = JRequest::getVar('cb_orgtype');        
-        $user_info->cb_orgtypeother = JRequest::getVar('cb_orgtypeother');        
-        $user_info->cb_orgdepartment = JRequest::getVar('cb_orgdepartment');        
-        $user_info->cb_orgaffiliation = JRequest::getVar('cb_orgaffiliation');        
-        $user_info->cb_orgspecialty = JRequest::getVar('cb_orgspecialty');        
-        $user_info->cb_orgspecialtyother = JRequest::getVar('cb_orgspecialtyother');        
-        $user_info->cb_orgsecondaryspecialty = JRequest::getVar('cb_orgsecondaryspecialty');        
-        $user_info->cb_orgsecondaryspecialtyother = JRequest::getVar('cb_orgsecondaryspecialtyother');        
-        $user_info->cb_altemail2 = JRequest::getVar('cb_altemail2');        
-
-        $user_info->cb_orgcontactname = JRequest::getVar('cb_orgcontactname');        
-        $user_info->cb_orgcontacttitle = JRequest::getVar('cb_orgcontacttitle');        
-        $user_info->cb_orgcontactemail = JRequest::getVar('cb_orgcontactemail');        
-        $user_info->cb_orgcontactphone = JRequest::getVar('cb_orgcontactphone');        
-        $user_info->cb_orgcontacturl = JRequest::getVar('cb_orgcontacturl');        
-        
-        $user_info->cb_accesspurposelist = JRequest::getVar('cb_accesspurposelist');        
-        $user_info->cb_accesspurpose = JRequest::getVar('cb_accesspurpose');        
-
-        $user_info->username = JRequest::getVar('username');        
-        $user_info->password = JRequest::getVar('password');        
-        $user_info->password__verify = JRequest::getVar('password__verify');   
-
-        $user_info->cb_agreeterms = JRequest::getVar('cb_agreeterms');        
-        $user_info->cb_agreedatapolicy = JRequest::getVar('cb_agreedatapolicy');        
-
-        return $user_info;
-    }
+	}    
+    
 
     function jRegValidator($user_info)
     {
@@ -304,181 +296,7 @@ class BenhanModelBa extends JModel
 
         return $error;    
     }
-
-    function setValueToField($user_info)
-	{
-		$doc = JFactory::getDocument();		
-        $db = JFactory::getDbo();
-		$script = '<script>';
-
-		foreach ($user_info as $cbfname => $cbfvalue) 
-		{	
-            
-			if($cbfname == 'cb_agreeterms' || $cbfname == 'cb_agreedatapolicy')
-			{
-                if($cbfvalue == 1)
-                {
-                    $script .= " jQuery('input[name = \"$cbfname\"]').prop('checked', true); ";
-                }
-				    
-			}
-            elseif($cbfname == 'cb_accesspurpose') 
-            {
-                $cbfvalue = str_replace("'", "\'", $cbfvalue);
-                $script .= " jQuery('textarea[name = \"$cbfname\"]').val('$cbfvalue'); ";
-            }
-            elseif ($cbfname == 'cb_accesspurposelist' || $cbfname == 'cb_degrees') 
-            {
-                for($i=0; $i<count($cbfvalue);$i++)
-                {
-                    
-                    $value = str_replace("'", "\'", $cbfvalue[$i]);
-                    $script .= " jQuery('input[value = \"$value\"]').prop('checked', true); ";
-                
-                }
-            }            
-            else
-            {
-                $cbfvalue = str_replace("'", "\'", $cbfvalue);
-                $script .= " jQuery('input[name = \"$cbfname\"]').val('$cbfvalue'); ";
-                $script .= " jQuery('select[name = \"$cbfname\"]').val('$cbfvalue'); ";
-            }        
-            
-			
-	    }//end foreach
-	    $script .= '</script>';
-	    echo $script;
-        return $script;
-	    
-	}
    
-    function addUser($user_info)
-    {
-        $db = JFactory::getDbo();
-
-        $name = $db->quote($user_info->cb_registrantfirstname.' '.$user_info->cb_registrantlastname);
-        $username = $db->quote($user_info->username);
-        $email = $db->quote($user_info->email);
-        $password = $db->quote(md5($user_info->password));
-        $registerDate = $db->quote(date( 'Y-m-d H:i:s'));
-        $params = '""';
-        $uid = null;
-
-        $sql = 'INSERT INTO #__users (name, username, email, password, block, sendEmail,registerDate,params)'
-                .' VALUES ('
-                            .$name.','
-                            .$username.','
-                            .$email.','
-                            .$password.','
-                            .'0,'
-                            .'0,'
-                            .$registerDate.','
-                            .$params.
-                          ')';
-        
-        $db->setQuery($sql);
-        $r =  $db->execute();
-       
-        if($r)
-        {
-            $sql = 'SELECT id FROM #__users WHERE username='.$username;
-            $db->setQuery($sql);
-            $uid = $db->loadResult();            
-        }
-        else
-        {
-            return false;            
-        }
-
-        if($uid)
-        {
-
-            // Save user to comprofiler
-            $degrees = implode('|*|', $user_info->cb_degrees);
-            $accesspurpose = implode('|*|', $user_info->cb_accesspurposelist);           
-
-            $cb_registrantfirstname = $db->quote($user_info->cb_registrantfirstname); 
-            $cb_registrantlastname = $db->quote($user_info->cb_registrantlastname); 
-            $cb_degrees = $db->quote($degrees);/////////////////////// 
-            $cb_degreesother = $db->quote($user_info->cb_degreesother); 
-            
-            $cb_address = $db->quote($user_info->cb_address );
-            $cb_addresstwo = $db->quote($user_info->cb_addresstwo);         
-            $cb_addressthree = $db->quote($user_info->cb_addressthree);
-            $cb_city = $db->quote($user_info->cb_city);
-            $cb_state = $db->quote($user_info->cb_state );
-            $cb_province = $db->quote($user_info->cb_province);
-            $cb_postalcode = $db->quote($user_info->cb_postalcode);
-            $cb_country = $db->quote($user_info->cb_country );
-            $cb_phone = $db->quote($user_info->cb_phone); 
-            $cb_secondphone = $db->quote($user_info->cb_secondphone);
-            $cb_website = $db->quote($user_info->cb_website); 
-            
-            $cb_orgname = $db->quote($user_info->cb_orgname) ;   
-            $cb_orgtype = $db->quote($user_info->cb_orgtype );   
-            $cb_orgtypeother = $db->quote($user_info->cb_orgtypeother);  
-            $cb_orgdepartment = $db->quote($user_info->cb_orgdepartment) ;      
-            $cb_orgaffiliation = $db->quote($user_info->cb_orgaffiliation);       
-            $cb_orgspecialty = $db->quote($user_info->cb_orgspecialty) ;   
-            $cb_orgspecialtyother = $db->quote($user_info->cb_orgspecialtyother) ;      
-            $cb_orgsecondaryspecialty = $db->quote($user_info->cb_orgsecondaryspecialty);       
-            $cb_orgsecondaryspecialtyother = $db->quote($user_info->cb_orgsecondaryspecialtyother);
-            $cb_altemail2 = $db->quote($user_info->cb_altemail2 );
-            $cb_orgcontactname = $db->quote($user_info->cb_orgcontactname);       
-            $cb_orgcontacttitle = $db->quote($user_info->cb_orgcontacttitle);        
-            $cb_orgcontactemail = $db->quote($user_info->cb_orgcontactemail);        
-            $cb_orgcontactphone = $db->quote($user_info->cb_orgcontactphone) ;       
-            $cb_orgcontacturl = $db->quote($user_info->cb_orgcontacturl);      
-            
-            $cb_accesspurposelist = $db->quote($accesspurpose) ;/////////////////////
-            $cb_accesspurpose = $db->quote($user_info->cb_accesspurpose );             
-                 
-            $cb_agreeterms = $db->quote($user_info->cb_agreeterms);
-            $cb_agreedatapolicy = $db->quote($user_info->cb_agreedatapolicy) ;
-            $profiletype = 'researcher-profile';
-            $jconnectcode = 24;
-            $cb_profiletype = $db->quote($profiletype);
-            $cb_jconnectcode = $db->quote($jconnectcode);
-
-            include_once( JPATH_ADMINISTRATOR . '/components/com_comprofiler/comprofiler.class.php' );              
-            $registeripaddr = $db->quote(cbGetIPlist()); 
-
-            // add new user to group user
-            $sql = 'INSERT INTO #__user_usergroup_map(user_id, group_id)'
-                    .' VALUES ("'.$uid.'","2"),("'.$uid.'","16")';       
-            $db->setQuery($sql);
-            $r_group = $db->execute();                    
-         
-            // add user to CB
-            $fields = 'id,user_id,firstname,lastname,approved, confirmed, registeripaddr, 
-                    cb_degrees,cb_degreesother,cb_address,cb_addresstwo,cb_addressthree,cb_city,
-                    cb_state,                    
-                    cb_province,cb_postalcode,cb_country,cb_phone,cb_secondphone,cb_website,
-                    cb_orgname,cb_orgtype,cb_orgtypeother,cb_orgdepartment,cb_orgaffiliation,
-                    cb_orgspecialty,cb_orgspecialtyother,cb_orgsecondaryspecialty,
-                    cb_orgsecondaryspecialtyother,cb_altemail2,cb_orgcontactname,
-                    cb_orgcontacttitle,cb_orgcontactemail,cb_orgcontactphone,
-                    cb_orgcontacturl,cb_accesspurposelist,cb_accesspurpose,
-                    cb_agreeterms,cb_agreedatapolicy,cb_profiletype,cb_jconnectcode';
-
-            $values = "$uid, $uid, $cb_registrantfirstname, $cb_registrantlastname, 1, 1, $registeripaddr,
-                       $cb_degrees, $cb_degreesother, $cb_address, $cb_addresstwo, $cb_addressthree, $cb_city,
-                        $cb_state,                    
-                        $cb_province, $cb_postalcode, $cb_country, $cb_phone, $cb_secondphone, $cb_website,
-                        $cb_orgname, $cb_orgtype, $cb_orgtypeother, $cb_orgdepartment, $cb_orgaffiliation,
-                        $cb_orgspecialty, $cb_orgspecialtyother, $cb_orgsecondaryspecialty,
-                        $cb_orgsecondaryspecialtyother, $cb_altemail2, $cb_orgcontactname,
-                        $cb_orgcontacttitle, $cb_orgcontactemail, $cb_orgcontactphone,
-                        $cb_orgcontacturl, $cb_accesspurposelist, $cb_accesspurpose,
-                        $cb_agreeterms, $cb_agreedatapolicy,$cb_profiletype,$cb_jconnectcode";
-
-            $sql = "INSERT INTO #__comprofiler($fields) VALUES($values)";   
-            $db->setQuery($sql);
-            $r_com = $db->execute();            
-        }
-        return $uid;
-    }
-
     function getAdminMail()
     {
         
