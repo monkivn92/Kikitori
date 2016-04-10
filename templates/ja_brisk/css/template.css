@@ -1019,7 +1019,7 @@ label.invalid {
   color: #1ba1e2;
 }
 .t3-mainnav {
-  float: right;
+  float: left;
   height: 28px;
   margin-right: 20px;
   padding-top: 10px;

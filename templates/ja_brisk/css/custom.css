@@ -1,1 +1,72 @@
 @import "../fonts/roboto/stylesheet.css";
+.wrap.ja-masshead
+{
+	background-color: #fff;
+}
+.wrap.ja-slideshow
+{
+	height: 400px;
+}
+.logo-text a
+{
+	font-weight: bold;
+	color: #22313F;
+	margin-left: 10px;
+	margin-top: 20px;
+	font-size: 40px;
+}
+
+.logo-text a:hover
+{
+	color: #19B5FE;
+	text-decoration: none;
+
+}
+.t3-mainnav .navbar .nav > li > a
+{
+	font-size: 14px;
+}
+#home-page .span4{
+	width: 30%;
+}
+#home-page .span8{
+	width: 60%;
+}
+#home-page
+{
+	padding: 30px;
+	margin-top:10px;	
+}
+#home-page .row
+{
+	margin-bottom: 30px;
+}
+#home-page .home-img em
+{
+	padding:10px;
+	text-align: center;
+	font-size: 250px;	
+}
+#home-page .home-img em#img1
+{
+	color:#26A65B;
+}
+#home-page .home-img em#img1:hover
+{
+	color:#D2527F;
+}
+#home-page .home-img em#img2
+{
+	color:#89C4F4;
+}
+#home-page .home-img em#img2:hover
+{
+	color:#D2527F;
+}
+#home-page .home-text
+{
+	text-align: justify;
+	text-transform: none;
+	color:#000;
+	font-size: 14px;
+}

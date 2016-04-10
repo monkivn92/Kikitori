@@ -20,7 +20,7 @@ $logoimgsm = ($logotype == 'image' && $this->params->get('enable_logoimage_sm', 
     <div class="row">
 
         <!-- LOGO -->
-        <div class="ja-logo span2">
+        <div class="ja-logo span12">
           <div class="logo-<?php echo $logotype, ($logoimgsm ? ' logo-control' : '') ?>">
             <a href="<?php echo JURI::base(true) ?>" title="<?php echo strip_tags($sitename) ?>">
               <?php if($logotype == 'image'): ?>
@@ -34,9 +34,9 @@ $logoimgsm = ($logotype == 'image' && $this->params->get('enable_logoimage_sm', 
             <small class="site-slogan"><?php echo $slogan ?></small>
           </div>
         </div>
-        <!-- //LOGO -->
-
-        <div class="ja-mainnav span8">
+      </div>  <!-- //LOGO -->
+      <div class="row">
+        <div class="ja-mainnav span12">
         <!-- MAIN NAVIGATION -->
           <div id="t3-mainnav" class="t3-mainnav">
             <div class="navbar">
@@ -60,8 +60,9 @@ $logoimgsm = ($logotype == 'image' && $this->params->get('enable_logoimage_sm', 
           </div>
         <!-- //MAIN NAVIGATION -->
         </div>
-
-        <div class="span2">
+    </div>
+    <div class="row">
+        <div class="span12">
 
         <?php if ($this->countModules('head-search')) : ?>
 		<div class="ja-search<?php $this->_c('head-search')?>">
@@ -85,5 +86,6 @@ $logoimgsm = ($logotype == 'image' && $this->params->get('enable_logoimage_sm', 
 
     </div>
   </div>
+</div>
 </header>
 <!-- //HEADER -->
