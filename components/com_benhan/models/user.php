@@ -12,11 +12,16 @@ class BenhanModelUser extends JModel
     {
         $db = JFactory::getDbo();     
         $sql = "SELECT group_id FROM #__user_usergroup_map WHERE user_id=$userid";
-        $db->setQuery();
+        $db->setQuery($sql);
         $r = $db->loadResult();
+      
         if($r == 7 || $r == 8)
+        {
             return true;
+        }
+            
         else
+
             return false;
 
     }
@@ -25,19 +30,21 @@ class BenhanModelUser extends JModel
         $userid = JRequest::getInt('userid');
         $user = JFactory::getUser();
         $this_user = 0;
+        
         if(!$userid) 
         { 
             $this_user = $user->id;
         }
         else
         {
-            if($userid==$user->id)
+            if($userid == $user->id)
             {
                 $this_user = $user->id;
+
             }
             else
             {
-                if(!isAdmin($user->id))
+                if(!$this->isAdmin($user->id))
                 {
                     die('You are not authorized !');
                 }                    
@@ -48,7 +55,7 @@ class BenhanModelUser extends JModel
                     
             }
         }
-
+        
         global $_CB_framework,$_CB_database, $ueConfig, $_PLUGINS;
         $cbUser =& CBuser::getInstance( $this_user );
         return $cbUser;
@@ -294,6 +301,36 @@ class BenhanModelUser extends JModel
         $script .= '</script>';  
 
         echo $script;
+    }
+    function searchUser()
+    {
+        $db = JFactory::getDbo();
+        $name = JRequest::getVar('value');
+        $where='';
+        if(trim($name)=='')
+        {
+            $where ='1=1';
+        }
+        else
+        {
+            $where = "name LIKE '%$name%'";
+        }
+
+        $sql = "SELECT id,name FROM #__users AS u WHERE $where";
+       
+        $db->setQuery($sql);
+        $names = $db->loadObjectList(); 
+        
+        $return='';
+        foreach ($names as $n) 
+        {
+                $link = '/component/benhan/?view=user&task=showprofile&userid='.$n->id;
+                $return .= '<p>';
+                $return .= "<a href='$link' target='_blank'>$n->name</a>";
+                $return .= '</p>';
+        }  
+
+        return $return; 
     }
 
 }//end class

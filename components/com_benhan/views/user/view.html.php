@@ -31,6 +31,26 @@ class BenhanViewUser extends JView
 		$this->assignRef( 'userInfo', $userInfo );		
 		parent::display('edit');
 	}
+	function showFormSearch($message)
+	{
+		
+		parent::display('search');
+	}
+	function showProfile($message)
+	{
+
+		$userInfo = $this->get('UserInfo');  
+
+       	$db = JFactory::getDbo();
+       	$sql = "SELECT name FROM #__users WHERE id=".$userInfo->_cbuser->id;    
+
+        $db->setQuery($sql);
+        $name = $db->loadResult(); 			
+		$this->assignRef( 'userInfo', $userInfo );
+		$this->assignRef( 'name', $name );
+
+		parent::display('profile');
+	}
 
 }
 

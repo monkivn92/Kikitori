@@ -81,6 +81,29 @@ class BenhanControllerUser extends JController
         }
       
     }
+    function search()
+    {
+          
+        $view = &$this->getView('user','html');
+        $view->showFormSearch($msg);
+    }
+    function searchuser()
+    {
+        $app = JFactory::getApplication(); 
+        $model = & $this->getModel('user');  
+        $r = $model->searchUser();
+        echo $r;
+        $app->close();
+    }
+    function showprofile()
+    {
+        
+        $view = &$this->getView('user','html');
+        $model = & $this->getModel('user');       
+        $view->setModel($model, true);
+        $view->showProfile(null);
+        
+    }
     function checkusername()
     {
         $db = JFactory::getDbo();
@@ -127,6 +150,7 @@ class BenhanControllerUser extends JController
         }
         $app->close();
     }
+
 
 }
 

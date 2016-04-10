@@ -12,7 +12,7 @@ class BenhanModelBa extends JModel
     {
         $db = JFactory::getDbo();     
         $sql = "SELECT group_id FROM #__user_usergroup_map WHERE user_id=$userid";
-        $db->setQuery();
+        $db->setQuery($sql);
         $r = $db->loadResult();
         if($r == 7 || $r == 8)
             return true;
@@ -37,7 +37,7 @@ class BenhanModelBa extends JModel
             }
             else
             {
-                if(!isAdmin($user->id))
+                if(!$this->isAdmin($user->id))
                 {
                     die('You are not authorized !');
                 }                    
@@ -124,9 +124,9 @@ class BenhanModelBa extends JModel
         {
             $app = JFactory::getApplication();
             $msg = 'Saved';
-            $link = JUri::base();
+            $link = '/component/benhan/?view=user&task=showprofile&userid='.$this_user;
             $app->enqueueMessage($msg,'Message');
-            $app->redirect(JRoute::_($link, false));
+            $app->redirect($link);
         }
         //get Fields in Form to display next/previous page
         $sql = "SELECT * FROM #__com_benhan_form WHERE published=1 AND ordering=$ordering";        

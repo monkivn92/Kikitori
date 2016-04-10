@@ -6,7 +6,7 @@ $doc = JFactory::getDocument();
 
 $doc->addStyleSheet('/components/com_comprofiler/plugin/templates/default/template.css');
 $doc->addStyleSheet('/components/com_benhan/asset/benhan.css');
-$doc->addStyleSheet('/components/com_benhan/asset/jquery.min.js');
+$doc->addScript('/components/com_benhan/asset/jquery.min.js');
 $doc->addScript('/components/com_benhan/asset/benhan.js');
 
 

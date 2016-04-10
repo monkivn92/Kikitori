@@ -2,6 +2,11 @@ jQuery(document).ready(function(){
 	var username = jQuery('input[name="username"]');
 	var email = jQuery('input[name="email"]');
 	var form = jQuery('#cbcheckedadminForm');
+
+	var search = jQuery('#patient_search');
+	var search_r = jQuery('#search_result');
+	var search_kw = jQuery('#search_keyword');
+
 	var warning = jQuery('.cb_result_warning');
 	var error = jQuery('.cb_result_error');
 	username.blur(function(){
@@ -43,5 +48,21 @@ jQuery(document).ready(function(){
 			return true;
 		}
 	});
+
+	search.submit(function(){
+		
+		jQuery.ajax({
+			   url: "/component/benhan/?view=user&task=searchuser",
+			   data: {
+			      value: search_kw.val()
+			   }, 
+	      success: function(data) {
+	      	search_r.empty();
+	        search_r.html(data);
+	      }		
+		});
+		return false;
+	});
+
 
 });
