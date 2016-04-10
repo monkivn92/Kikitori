@@ -27,7 +27,11 @@ class plgSystemBeforerender extends JPlugin
 	{
 		$doc = JFactory::getDocument();
 		$doc->addStyleSheet('/extra/FontAwesome/css/font-awesome.min.css');
+		//$doc->addStyleSheet('extra/bootstrap/css/bootstrap.min.css');
+		//$doc->addStyleSheet('extra/bootstrap/css/bootstrap-theme.min.css');
 		
+		//$doc->addScript('extra/jquery-1.12.3.min.js');
+		//$doc->addScript('extra/bootstrap/js/bootstrap.min.js');
 	}
 
 	
