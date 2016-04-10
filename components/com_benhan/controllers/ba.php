@@ -47,6 +47,14 @@ class BenhanControllerBa extends JController
        
         
     }    
+
+    function adduser()
+    {
+        $view = &$this->getView('user','html');
+        $model = & $this->getModel('user');       
+        $view->setModel($model, true);
+        $view->showForm(null);
+    }
     
     function checkUsername()
     {

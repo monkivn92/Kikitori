@@ -15,5 +15,31 @@ div[id ^= "cbfr"]
 div[id ^= "cbfr"]>label
 {
 	font-weight: bold;
+	display: block;
+	float:left;
+	width: 250px;
+	height: auto;
+	margin-right: 10px;
 }
+div[id ^= "cbfr"]> .cb_field{
+	display: block;
+	float:left;
+}
+div[id ^= "cbfr"] input.required{
+	border-color: #35ace6;
+}
+.cb_result_error,.cb_result_ok{
+	display: block;
+	margin-left: 10px;
+	font-weight: bold;
+}
+.cb_result_error
+{
+	color:red;
+}
+.cb_result_ok{
+	color:green;
+}
+
+
 

@@ -24,7 +24,7 @@ class BenhanModelBa extends JModel
     {
         $userid = JRequest::getInt('userid');
         $user = JFactory::getUser();
-
+        $this_user = 0;
         if(!$userid) 
         { 
             $this_user = $user->id;
@@ -50,7 +50,7 @@ class BenhanModelBa extends JModel
         }
 
         global $_CB_framework,$_CB_database, $ueConfig, $_PLUGINS;
-        $cbUser =& CBuser::getInstance( $userid );
+        $cbUser =& CBuser::getInstance( $this_user );
         return $cbUser;
     }
 
@@ -61,14 +61,9 @@ class BenhanModelBa extends JModel
        
         $CBfields = array();    
         $return = new \stdClass(); 
-        $userid = JRequest::getInt('userid');
-        $user = JFactory::getUser();
-
-        if(!$userid) 
-        { 
-            $this_user = $user->id;
-        }
-        $cbUser =& CBuser::getInstance( $this_user );
+      
+        $cbUser = $this->getUserInfo();
+        $this_user = $cbUser->_cbuser->id;
 
         $sql = 'SELECT COUNT(*) FROM #__com_benhan_form';
         $db->setQuery($sql);

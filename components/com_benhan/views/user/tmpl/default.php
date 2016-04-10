@@ -6,6 +6,7 @@ $doc = JFactory::getDocument();
 
 $doc->addStyleSheet('/components/com_comprofiler/plugin/templates/default/template.css');
 $doc->addStyleSheet('/components/com_benhan/asset/benhan.css');
+$doc->addScript('/components/com_benhan/asset/jquery.min.js');
 $doc->addScript('/components/com_benhan/asset/benhan.js');
 
 
@@ -17,14 +18,10 @@ $doc->addScript('/components/com_benhan/asset/benhan.js');
 overlib_pagedefaults(WIDTH,250,VAUTO,RIGHT,AUTOSTATUSCAP, CSSCLASS,TEXTFONTCLASS,'cb-tips-font',FGCLASS,'cb-tips-fg',BGCLASS,'cb-tips-bg',CAPTIONFONTCLASS,'cb-tips-capfont', CLOSEFONTCLASS, 'cb-tips-closefont');
 --></script>
 
-<h4 class="jreg_error_status" style="color:red;"><?php echo $this->error_message; ?></h4>
-<form action='<?php echo JRoute::_("index.php?option=com_benhan&view=ba")?>' method="post" id="cbcheckedadminForm" name="adminForm" enctype="multipart/form-data" class="cb_form" autocomplete="off">
-	<h2 class="jreg_header"><?php echo $this->userInfo->_user->name;?></h2>
-
-	<blockquote class="rounded">
-		
-		<h3 class="legend-title"><?php echo $this->pageInfo->title;?></h3>	
-		<hr>
+<h4 class="jreg_error_status" style="color:red;"><?php echo $this->message; ?></h4>
+<form action='<?php echo JRoute::_("index.php?option=com_benhan&view=user")?>' method="post" id="cbcheckedadminForm" name="adminForm" enctype="multipart/form-data" class="cb_form" autocomplete="off">
+	<h2>Add New Patient Page</h2>
+	<blockquote class="rounded">		
 		<?php 
 			foreach ($this->CBf as $field) 
 			{
@@ -34,27 +31,10 @@ overlib_pagedefaults(WIDTH,250,VAUTO,RIGHT,AUTOSTATUSCAP, CSSCLASS,TEXTFONTCLASS
 			}
 		?>
 	</blockquote>
-
-	<?php 
-		if($this->cur_page !== 1 && $this->cur_page <= $this->total)
-		{
-			echo '<input type="submit" value="Back" name="ba_back" class="button btn btn-primary">&nbsp;';
-		}
-		if($this->cur_page < $this->total)
-		{
-			echo '<input type="submit" value="Next" name="ba_next" class="button btn btn-primary">&nbsp;';
-		}
-	?>
-	
-	
-	
-	
-	<input type="submit" value="Save" name="ba_save" class="button btn btn-warning">
-	
+	<input type="submit" value="Register" name="ba_save" class="button btn btn-primary">
+	<input type="hidden" name="task" value="saveuser"/> 
     <input type="hidden" name="option" value="<?php echo $option;?>"/>    
     <input type="hidden" name="controller" value="<?php echo $controller;?>" />
-    <input type="hidden" name="cur_page" value="<?php echo $this->cur_page ?>" />
-
     <?php echo JHTML::_( 'form.token' ); ?>
 
 </form>
@@ -208,7 +188,7 @@ jQuery.validator.addMethod("remotejhtml", function(value, element, param) {
 				data[element.name] = value;
 				$.ajax($.extend(true, {
 					type: 'POST',
-					url:  '/index.php?option=com_benhan&view=ba&task=checkUsername',
+					url:  '/index.php?option=com_benhan&view=user&task=checkUsername',
 					mode: "abort",
 					port: "validate" + element.name,
 					dataType: "html",	/* """json", */

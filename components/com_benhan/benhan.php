@@ -37,7 +37,7 @@ cbimport( 'cb.validator' );
 $cbjavascript	=	ob_get_contents();
 ob_end_clean();
 $_CB_framework->outputCbJQuery( $cbjavascript, array( 'metadata', 'validate' ) );	
-	
+cbValidator::loadValidation();	
 //CB API END
 
 
