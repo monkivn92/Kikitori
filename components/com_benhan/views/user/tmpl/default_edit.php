@@ -1,7 +1,7 @@
 <?php defined('_JEXEC') or die('Restricted access'); 
 $option = JRequest::getVar('option');
 $controller = JRequest::getVar('controller');
-$user		= JFactory::getUser();
+$userid	= JRequest::getInt('userid');
 $doc = JFactory::getDocument();
 
 $doc->addStyleSheet('/components/com_comprofiler/plugin/templates/default/template.css');
@@ -41,6 +41,7 @@ overlib_pagedefaults(WIDTH,250,VAUTO,RIGHT,AUTOSTATUSCAP, CSSCLASS,TEXTFONTCLASS
 	<input type="hidden" name="task" value="updateuser"/> 
     <input type="hidden" name="option" value="<?php echo $option;?>"/>    
     <input type="hidden" name="controller" value="<?php echo $controller;?>" />
+    <input type="hidden" name="userid" value="<?php echo $userid;?>" />
     <?php echo JHTML::_( 'form.token' ); ?>
 
 </form>

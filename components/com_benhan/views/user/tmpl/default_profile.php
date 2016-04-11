@@ -21,5 +21,12 @@ $doc->addScript('/components/com_benhan/asset/benhan.js');
 		?>
 		
 	</p>
+	<p>
+		<?php
+			$link = "/component/benhan/?view=user&task=edituser&userid=".$this->userInfo->_cbuser->id;
+			echo "<a href='$link'>Edit Profile</a>";
+		?>
+		
+	</p>
 	
 </blockquote>

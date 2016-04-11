@@ -65,11 +65,9 @@ class BenhanModelUser extends JModel
     {
         global $_CB_framework,$_CB_database, $ueConfig, $_PLUGINS;   
         $db = JFactory::getDbo();         
-       
+        $cbUser =& CBuser::getInstance( null );
         $CBfields = array();    
-        $return = new \stdClass();        
-
-        $cbUser = $this->getUserInfo();
+        $return = new \stdClass(); 
         $this_user = $cbUser->_cbuser->id;
 
         $sql = 'SELECT name FROM #__comprofiler_fields
@@ -121,7 +119,7 @@ class BenhanModelUser extends JModel
     function saveuser()
     {
         $db = JFactory::getDbo();
-
+        $app = JFactory::getApplication();
         $name = '';
         $username = '';
         $email = '';
@@ -201,18 +199,23 @@ class BenhanModelUser extends JModel
         }
         if($r_com&&$r_group&&$r_u)
         {
-            return $uid;
+            $msg = 'Add a new patient successfully. You can add medical report for this patient.';
+            $app->enqueueMessage($msg,'Message');
+            $app->redirect("/component/benhan/?view=user&task=showprofile&userid=$uid", false);
         }
         else
         {
-            return false;
+            $msg = 'Add patient failed. Something wrong have occured.';
+            $view->setModel($model, true);
+            $view->showForm($msg);
+            $model = $model->setValueToField(); 
         }
     }
     function updateuser()
     {
         $db = JFactory::getDbo();
         $set = array();         
-               
+        $app = JFactory::getApplication();      
         if(JRequest::getVar('name') != '') 
         { 
             
@@ -272,11 +275,16 @@ class BenhanModelUser extends JModel
         }
         if($r_com&&$r_u)
         {
-            return true;
+           
+            $msg = 'Update  patient successfully.';
+            $app->enqueueMessage($msg,'Message');
+            $app->redirect('/component/benhan/?view=user&task=edituser&userid='.$this_user, false);
         }
         else
         {
-            return false;
+            $msg = 'Update patient failed. Something wrong have occured.';
+            $app->enqueueMessage($msg,'error');
+            $app->redirect('/component/benhan/?view=user&task=edituser&userid='.$this_user, false);
         }
     }
 

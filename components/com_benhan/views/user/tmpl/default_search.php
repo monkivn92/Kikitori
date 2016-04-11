@@ -15,9 +15,9 @@ $doc->addScript('/components/com_benhan/asset/benhan.js');
 <form action="" id="patient_search">
 	<p>
 		<label for="patient_search">Patien Name:</label>
-		<input type="text" id="search_keyword">
+		<input type="text" id="search_keyword"/>
 	</p>
-	<input type="submit" value"Search">
+	<input type="submit" value="Search" class="btn btn-primary" />
 	
 </form>
 <blockquote class="rounded" id="search_result">

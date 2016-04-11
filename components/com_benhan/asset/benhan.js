@@ -12,7 +12,7 @@ jQuery(document).ready(function(){
 	username.blur(function(){
 		username.next('.cb_result_error').remove();
 		jQuery.ajax({
-			   url: "/component/benhan/?view=user&task=checkusername",
+			   url: "index.php?option=com_benhan&view=user&task=checkusername",
 			   data: {
 			      value: username.val()
 			   }, 
@@ -25,7 +25,7 @@ jQuery(document).ready(function(){
 	email.blur(function(){
 		email.next('.cb_result_error').remove();
 		jQuery.ajax({
-			   url: "/component/benhan/?view=user&task=checkemail",
+			   url: "index.php?option=com_benhan&view=user&task=checkemail",
 			   data: {
 			      value: email.val()
 			   }, 
@@ -52,7 +52,7 @@ jQuery(document).ready(function(){
 	search.submit(function(){
 		
 		jQuery.ajax({
-			   url: "/component/benhan/?view=user&task=searchuser",
+			   url: "index.php?option=com_benhan&view=user&task=searchuser",
 			   data: {
 			      value: search_kw.val()
 			   }, 

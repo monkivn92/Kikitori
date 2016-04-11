@@ -1,7 +1,7 @@
 <?php defined('_JEXEC') or die('Restricted access'); 
 $option = JRequest::getVar('option');
 $controller = JRequest::getVar('controller');
-$user		= JFactory::getUser();
+$userid	= JRequest::getInt('userid');
 $doc = JFactory::getDocument();
 
 $doc->addStyleSheet('/components/com_comprofiler/plugin/templates/default/template.css');
@@ -19,7 +19,7 @@ overlib_pagedefaults(WIDTH,250,VAUTO,RIGHT,AUTOSTATUSCAP, CSSCLASS,TEXTFONTCLASS
 --></script>
 
 <h4 class="jreg_error_status" style="color:red;"><?php echo $this->error_message; ?></h4>
-<form action='<?php echo JRoute::_("index.php?option=com_benhan&view=ba")?>' method="post" id="cbcheckedadminForm" name="adminForm" enctype="multipart/form-data" class="cb_form" autocomplete="off">
+<form action='<?php echo JRoute::_("index.php?option=com_benhan&view=ba&userid=$userid")?>' method="post" id="cbcheckedadminForm" name="adminForm" enctype="multipart/form-data" class="cb_form" autocomplete="off">
 	<h2 class="jreg_header"><?php echo $this->userInfo->_user->name;?></h2>
 
 	<blockquote class="rounded">
@@ -55,6 +55,7 @@ overlib_pagedefaults(WIDTH,250,VAUTO,RIGHT,AUTOSTATUSCAP, CSSCLASS,TEXTFONTCLASS
     <input type="hidden" name="option" value="<?php echo $option;?>"/>    
     <input type="hidden" name="controller" value="<?php echo $controller;?>" />
     <input type="hidden" name="cur_page" value="<?php echo $this->cur_page ?>" />
+    <input type="hidden" name="userid" value="<?php echo $userid ?>" />
 
     <?php echo JHTML::_( 'form.token' ); ?>
 

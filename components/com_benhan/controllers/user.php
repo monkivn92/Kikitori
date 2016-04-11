@@ -43,42 +43,14 @@ class BenhanControllerUser extends JController
     {
         $app = JFactory::getApplication();      
         $model = & $this->getModel('user');     
-        $result = $model->updateuser();
-        if($result)
-        {
-            $msg = 'Update  patient successfully.';
-            $app->enqueueMessage($msg,'Message');
-            $app->redirect('/component/benhan/?view=user&task=edituser', false);
-        }
-        else
-        {
-            $msg = 'Update patient failed. Something wrong have occured.';
-            $app->enqueueMessage($msg,'error');
-            $app->redirect(JRoute::_('/component/benhan/?view=user&task=edituser'), false);             
-        }
-        
+        $result = $model->updateuser();      
     }
     function saveuser()
     {
         $app = JFactory::getApplication();        
         $model = & $this->getModel('user');  
         $view = &$this->getView('user','html');
-        $result = $model->saveuser(); 
-        if(!$result)
-        {
-            $msg = 'Add a new patient successfully. You can add cases history for this patient.';
-            $app->enqueueMessage($msg,'Message');
-            $app->redirect(JUri::base(), false);
-        }
-        else
-        {
-            $msg = 'Add patient failed. Something wrong have occured.';
-            $view->setModel($model, true);
-            $view->showForm($msg);
-            $model = $model->setValueToField();  
-            
-            
-        }
+        $result = $model->saveuser();     
       
     }
     function search()

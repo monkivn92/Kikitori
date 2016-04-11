@@ -92,6 +92,7 @@ class BenhanModelBa extends JModel
             $fs = $db->loadObject();  
 
             $sql ="SELECT name FROM #__comprofiler_fields WHERE fieldid IN($fs->fields)";
+
             $db->setQuery($sql);
             $ns = $db->loadResultArray();
             $set = '';
@@ -114,7 +115,7 @@ class BenhanModelBa extends JModel
                      $set .= (" $var=$val ");
                 }
             }  
-            $sql = "UPDATE #__comprofiler SET $set WHERE user_id=$this_user";
+            $sql = "UPDATE #__comprofiler SET $set WHERE user_id=$this_user";            
             $db->setQuery($sql);
             $db->query();
 
@@ -153,144 +154,7 @@ class BenhanModelBa extends JModel
 	}    
     
 
-    function jRegValidator($user_info)
-    {
-        $error ='';
-        global $_CB_database;
 
-        //check username if it has already existed     
-        $_CB_database->query('SELECT id FROM #__users WHERE username="'.$user_info->username.'"');
-        $r_user = $_CB_database->loadResult();
-
-        if($r_user)
-        {
-            $error .= "<p>The username has already existed.</p>";              
-        }
-
-        //*********check fields' format*****\\
-        //Contact Information
-        if(!$user_info->cb_registrantfirstname)
-        {
-        
-            $error .= '<p>Firstname is required.</p>';
-        }
-
-        if(!$user_info->cb_registrantlastname)
-        {
-        
-            $error .= '<p>Lastname is required.</p>';
-        }       
-
-        if($user_info->email)
-        {
-            preg_match('/^[a-z][a-z0-9_\.]{2,32}@[a-z0-9\-]{3,}(\.[a-z]{2,4}){1,2}$/', $user_info->email, $email_matches);
-            if(!$email_matches)
-            {
-                $error .= '<p>Please enter a valid Email.</p>';
-            }
-            if($user_info->email != $user_info->confirmemail)
-            {
-                $error .= '<p>Please enter the same email again</p>';
-            }
-        }
-        else
-        {
-            $error .= '<p>Email is required.</p>';
-        }
-
-        if($user_info->cb_altemail2)
-        {
-            preg_match('/^[a-z][a-z0-9_\.]{2,32}@[a-z0-9\-]{3,}(\.[a-z]{2,4}){1,2}$/', $user_info->email, $email_matches);
-            if(!$email_matches)
-            {
-                $error .= '<p>Please enter a valid Professional email address.</p>';
-            }           
-        }        
-
-        if(!$user_info->cb_city)
-        {
-        	$error .= '<p>City is required.</p>';
-        }
-
-        if(!$user_info->cb_postalcode)
-        {
-        	$error .= '<p>Postal/Zip Code is required.</p>';
-        }
-
-        if(!$user_info->cb_country)
-        {
-        	$error .= '<p>Country is required.</p>';
-        }
-        //Institutional/Organizational/Industry Contact Person
-        if(!$user_info->cb_orgname)
-        {
-        	$error .= '<p>Institution/Organization Name is required.</p>';
-        }
-
-        if(!$user_info->cb_orgtype)
-        {
-        	$error .= '<p>Institution/Organization Type is required.</p>';
-        }
-
-         if(!$user_info->cb_orgaffiliation)
-        {
-        	$error .= '<p>Professional/Organizational/Industry Affiliation is required.</p>';
-        }
-
-         if(!$user_info->cb_orgspecialty)
-        {
-        	$error .= '<p>Research Area/Specialty is required.</p>';
-        }
-        //Name of Institution or Organization
-    	if(!$user_info->cb_orgcontactname)
-        {
-        	$error .= '<p>Organization Contact Name is required.</p>';
-        }
-
-        if(!$user_info->cb_orgcontacttitle)
-        {
-        	$error .= '<p>Organization Contact Title is required.</p>';
-        }
-
-        if(!$user_info->cb_orgcontactemail)
-        {
-        	$error .= '<p>Organization Contact Email is required.</p>';
-        }
-
-        if(!$user_info->cb_orgcontactphone)
-        {
-        	$error .= '<p>Organization Contact Phone is required.</p>';
-        }
-        //Choose your DS-Connect Username and Password
-        if($user_info->password)
-        {
-            preg_match('/^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%])[0-9A-Za-z!@#$%]{8,}$/', $user_info->password, $password_matches);
-            if(!$password_matches)
-            {
-                $error .= '<p>Please enter a valid password.  No spaces, at least 8 characters and contain at least 1 lower-case letter, 1 upper-case letter, 1 number, and 1 symbol character.</p>';
-            }
-            if($user_info->password != $user_info->password__verify)
-            {
-                $error .= '<p>Please enter the same password again.</p>';
-            }
-        }
-        else
-        {
-            $error .= '<p>Password is required.</p>';
-        }
-        //Terms of Use
-        if($user_info->cb_agreeterms != 1)
-        {
-            $error .= "<p>You must agree to the Terms & Conditions and the Privacy Policy.</p>";             
-        }
-
-        if($user_info->cb_agreedatapolicy != 1)
-        {
-            $error .= "<p>You must agree to the Data Access and Publication Policy.</p>";             
-        }
-
-        return $error;    
-    }
    
     function getAdminMail()
     {
