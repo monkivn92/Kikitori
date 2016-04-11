@@ -206,9 +206,11 @@ class BenhanModelUser extends JModel
         else
         {
             $msg = 'Add patient failed. Something wrong have occured.';
+            $view = &$this->getView('user','html');
+            $model = & $this->getModel('user');       
             $view->setModel($model, true);
             $view->showForm($msg);
-            $model = $model->setValueToField(); 
+            $model->setValueToField(); 
         }
     }
     function updateuser()

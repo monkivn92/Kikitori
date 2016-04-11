@@ -9,7 +9,7 @@ class BenhanViewUser extends JView
 
     function showForm($message)
 	{
-		
+	
 		//get CBfield
         $CBf = $this->get('CBfield');        
    		$userInfo = $this->get('UserInfo');       
