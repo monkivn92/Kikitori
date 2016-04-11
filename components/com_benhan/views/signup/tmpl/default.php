@@ -21,6 +21,7 @@ overlib_pagedefaults(WIDTH,250,VAUTO,RIGHT,AUTOSTATUSCAP, CSSCLASS,TEXTFONTCLASS
 <form action='<?php echo JRoute::_("index.php?option=com_benhan&view=signup")?>' method="post" id="cbcheckedadminForm" name="adminForm" enctype="multipart/form-data" class="cb_form" autocomplete="off">
 	<h2>Add New Patient Page</h2>
 	<blockquote class="rounded">		
+		
 		<?php 
 			foreach ($this->CBf as $field) 
 			{
@@ -28,7 +29,18 @@ overlib_pagedefaults(WIDTH,250,VAUTO,RIGHT,AUTOSTATUSCAP, CSSCLASS,TEXTFONTCLASS
 				echo $field;
 				echo '</p>';
 			}
+
+
+			JPluginHelper::importPlugin('captcha');
+			$dispatcher = JDispatcher::getInstance();
+			$dispatcher->trigger('onInit','dynamic_recaptcha_1');
+
+
 		?>
+			<div id="captcha_wrap">				
+			
+			<div id="dynamic_recaptcha_1"></div>
+			</div>
 	</blockquote>
 	<input type="submit" value="Register" name="ba_save" class="button btn btn-primary">
 	<input type="hidden" name="task" value="saveuser"/> 
