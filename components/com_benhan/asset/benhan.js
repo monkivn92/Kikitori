@@ -1,57 +1,14 @@
-jQuery(document).ready(function(){
-	var username = jQuery('input[name="username"]');
-	var email = jQuery('input[name="email"]');
-	var form = jQuery('#cbcheckedadminForm');
+jQuery(document).ready(function($){
 
-	var search = jQuery('#patient_search');
-	var search_r = jQuery('#search_result');
-	var search_kw = jQuery('#search_keyword');
+	var form = $('#cbcheckedadminForm');
 
-	var warning = jQuery('.cb_result_warning');
-	var error = jQuery('.cb_result_error');
-	username.blur(function(){
-		username.next('.cb_result_error').remove();
-		jQuery.ajax({
-			   url: "index.php?option=com_benhan&view=user&task=checkusername",
-			   data: {
-			      value: username.val()
-			   }, 
-	      success: function(data) {
-	        username.after(data);
-	      }		
-		});
-	});
-
-	email.blur(function(){
-		email.next('.cb_result_error').remove();
-		jQuery.ajax({
-			   url: "index.php?option=com_benhan&view=user&task=checkemail",
-			   data: {
-			      value: email.val()
-			   }, 
-	      success: function(data) {
-	        email.after(data);
-	      }		
-		});
-	});
-
-	form.submit(function(){
-		var warning = jQuery('.cb_result_warning');
-		var error = jQuery('.cb_result_error');
-		if(warning.length || error.length)
-		{
-			form.after('<span class="cb_result_error">Some fields need to refill.</span>');
-			return false;			
-		}
-		else
-		{
-			return true;
-		}
-	});
+	var search = $('#patient_search');
+	var search_r = $('#search_result');
+	var search_kw = $('#search_keyword');
 
 	search.submit(function(){
 		
-		jQuery.ajax({
+		$.ajax({
 			   url: "index.php?option=com_benhan&view=user&task=searchuser",
 			   data: {
 			      value: search_kw.val()
@@ -62,6 +19,28 @@ jQuery(document).ready(function(){
 	      }		
 		});
 		return false;
+	});
+
+	$("#upload_avatar").on("click", function() {
+
+	    var file_data = $("#avatar_input").prop("files")[0];   
+	    var form_data = new FormData();                  
+	    form_data.append('file', file_data);
+	                               
+	    $.ajax({
+	                url: 'index.php?option=com_benhan&view=user&task=saveavatar', // point to server-side PHP script 
+	                dataType: 'text',  // what to expect back from the PHP script, if anything
+	                cache: false,
+	                contentType: false,
+	                processData: false,
+	                data: form_data,                         
+	                type: 'post',
+	                success: function(res)
+	                {
+	                    $('#profile-avatar').empty(); 
+	                    $('#profile-avatar').append(res);
+	                }
+	     });
 	});
 
 

@@ -40,6 +40,9 @@ div[id ^= "cbfr"] input.required{
 .cb_result_ok{
 	color:green;
 }
+#profile hr{
+	border-color: #aaa;
+}
 
 
 

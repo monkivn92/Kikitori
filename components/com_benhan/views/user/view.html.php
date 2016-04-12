@@ -40,6 +40,7 @@ class BenhanViewUser extends JView
 	{
 
 		$userInfo = $this->get('UserInfo');  
+		$avatar = $this->get('Avatar');  
 
        	$db = JFactory::getDbo();
        	$sql = "SELECT name FROM #__users WHERE id=".$userInfo->_cbuser->id;    
@@ -48,6 +49,7 @@ class BenhanViewUser extends JView
         $name = $db->loadResult(); 			
 		$this->assignRef( 'userInfo', $userInfo );
 		$this->assignRef( 'name', $name );
+		$this->assignRef( 'avatar', $avatar );
 
 		parent::display('profile');
 	}

@@ -25,6 +25,39 @@ class BenhanModelUser extends JModel
             return false;
 
     }
+    function getUserID()
+    {
+        $userid = JRequest::getInt('userid');
+        $user = JFactory::getUser();
+        $this_user = 0;
+        
+        if(!$userid) 
+        { 
+            $this_user = $user->id;
+        }
+        else
+        {
+            if($userid == $user->id)
+            {
+                $this_user = $user->id;
+
+            }
+            else
+            {
+                if(!$this->isAdmin($user->id))
+                {
+                    die('You are not authorized !');
+                }                    
+                else
+                {
+                    $this_user = $userid;
+                }
+                    
+            }
+        }
+        return $this_user;
+
+    }
     function getUserInfo()
     {
         $userid = JRequest::getInt('userid');
@@ -59,6 +92,23 @@ class BenhanModelUser extends JModel
         global $_CB_framework,$_CB_database, $ueConfig, $_PLUGINS;
         $cbUser =& CBuser::getInstance( $this_user );
         return $cbUser;
+    }
+    function getFormData()
+    {
+        $user_info = new \stdClass();
+        $db = JFactory::getDbo();
+        $sql = 'SELECT name FROM #__comprofiler_fields
+                WHERE published=1 AND registration=1 ORDER BY ordering';
+        $db->setQuery($sql);
+        $fields = $db->loadResultArray();
+
+        foreach ($fields as $value)
+        {
+            $user_info->$value = JRequest::getVar($value);
+        }
+
+        return $user_info;
+
     }
 
     function getCBfield()
@@ -116,6 +166,7 @@ class BenhanModelUser extends JModel
         return $CBfields;
 
     }
+
     function saveuser()
     {
         $db = JFactory::getDbo();
@@ -128,30 +179,20 @@ class BenhanModelUser extends JModel
         $params = '""';
         $uid = null;
 
-        $sql = 'SELECT name FROM #__comprofiler_fields
-                WHERE published=1 AND registration=1 ORDER BY ordering';
-        $db->setQuery($sql);
-        $names = $db->loadResultArray();  
-        $user_info = new \stdClass();
-        foreach ($names as $n) 
-        {
-            $user_info->$n = JRequest::getVar($n);
-        }
+        $user_info = $this->getFormData();
 
         $name = $db->quote($user_info->name);
-        $username = $db->quote($user_info->username);
+       
         $email = $db->quote($user_info->email);
-        $password = $db->quote(md5($user_info->password));
+      
         $registerDate = $db->quote(date( 'Y-m-d H:i:s'));
         $params = '""';
         $uid = null;
 
-        $sql = 'INSERT INTO #__users (name, username, email, password, block, sendEmail,registerDate,params)'
+        $sql = 'INSERT INTO #__users (name, email, block, sendEmail,registerDate,params)'
                 .' VALUES ('
-                            .$name.','
-                            .$username.','
-                            .$email.','
-                            .$password.','
+                            .$name.','                           
+                            .$email.','                           
                             .'0,'
                             .'0,'
                             .$registerDate.','
@@ -176,24 +217,33 @@ class BenhanModelUser extends JModel
             // add new user to comprofiler
             $id = $uid;
             $user_id = $uid;
-            $cb_so_nghien_cuu = $db->quote(JRequest::getVar('cb_so_nghien_cuu') );
-            $cb_so_benh_an_vao_vien = $db->quote(JRequest::getVar('cb_so_benh_an_vao_vien') );
-            $cb_ma_luu_tru = $db->quote(JRequest::getVar('cb_ma_luu_tru') );
-            $cb_tuoi = $db->quote(JRequest::getVar('cb_tuoi') );
-            $cb_gioi_tinh = $db->quote(JRequest::getVar('cb_gioi_tinh') );
-            $cb_nghe_nghiep = $db->quote(JRequest::getVar('cb_nghe_nghiep') );
-            $cb_dia_chi = $db->quote(JRequest::getVar('cb_dia_chi') );
-            $cb_so_dien_thoai = $db->quote(JRequest::getVar('cb_so_dien_thoai') );       
+            $values = array();
+            $fields = array();
+               
             include_once( JPATH_ADMINISTRATOR . '/components/com_comprofiler/comprofiler.class.php' );              
             $registeripaddr = $db->quote(cbGetIPlist()); 
             //$degrees = implode('|*|', $user_info->cb_degrees);
 
-            $fields = ' id,user_id,cb_so_nghien_cuu,cb_so_benh_an_vao_vien,cb_ma_luu_tru,cb_tuoi,
-                       cb_gioi_tinh,cb_nghe_nghiep,cb_dia_chi,cb_so_dien_thoai,registeripaddr ';
-            $values = " $id,$user_id,$cb_so_nghien_cuu,$cb_so_benh_an_vao_vien,$cb_ma_luu_tru,$cb_tuoi,
-                       $cb_gioi_tinh,$cb_nghe_nghiep,$cb_dia_chi,$cb_so_dien_thoai,$registeripaddr ";
+            foreach ($user_info as $key => $value) 
+            {
+                if($key !== 'email'&& $key !== 'name')
+                {
+                    $fields[] = $key;
+                    $values[] = $db->quote($value);
+                }
+                
+            }
+            $fields[] = 'id';
+            $fields[] = 'user_id';
+            $fields[] = 'registeripaddr';
+            $values[] = $id;
+            $values[] = $user_id;
+            $values[] = $db->quote($registeripaddr);
+            $f = implode(',', $fields);
+            $v = implode(',', $values);
 
-            $sql = "INSERT INTO #__comprofiler($fields) VALUES($values)";   
+
+            $sql = "INSERT INTO #__comprofiler($f) VALUES($v)";   
             $db->setQuery($sql);
             $r_com = $db->execute();
         }
@@ -230,12 +280,7 @@ class BenhanModelUser extends JModel
             
             $set[] =  'email='.$db->quote(JRequest::getVar('email'));
         }
-
-        if(JRequest::getVar('password') != '') 
-        { 
-            
-            $set[] =  'password='.$db->quote(md5(JRequest::getVar('password')));
-        }
+        
         $s = implode(',', $set);        
       
         $cbUser = $this->getUserInfo();
@@ -260,12 +305,16 @@ class BenhanModelUser extends JModel
             $set = '';
             foreach ($names as $n) 
             {
-                $val = JRequest::getVar($n);
-                
-                if( trim($val) != '' && strpos($n, 'cb_') !== false )
+                if($n !== 'email'&& $n !== 'name')
                 {
-                    $set[] = $n.'='.$db->quote($val);
+                    $val = JRequest::getVar($n);
+                
+                    if( trim($val) != '' && strpos($n, 'cb_') !== false )
+                    {
+                        $set[] = $n.'='.$db->quote($val);
+                    }
                 }
+                
             }
              
             $set = implode(',', $set) ;            
@@ -341,6 +390,65 @@ class BenhanModelUser extends JModel
         }  
 
         return $return; 
+    }
+    function getAvatar()
+    {
+        $uid = $this->getUserID();
+        $ava_time = array();
+        if ( $dir = opendir("patient/$uid") ) 
+        {
+
+            while (false !== ( $item = readdir($dir) ) ) 
+            {
+
+                if ($item != "." && $item != "..") 
+                {
+                    if(strpos($item, 'avatar') !== false)
+                    {
+                        preg_match('/(?<=avatar_).+?(?=\.)/', $item, $m);
+                        $ava_time[] = (int)$m[0];
+                    }
+                }
+            }
+
+            closedir($handle);
+        }
+        if(count($ava_time)>0)
+        {
+            $max = max($ava_time);
+            return "patient/$uid/avatar_".$max.'.png';
+        }
+        else
+        {
+            return false;
+        }
+        
+    }
+    function saveAvatar()
+    {
+        $app = JFactory::getApplication();
+        $uid = $this->getUserID();
+
+        if( !is_dir("patient/$uid") )
+        {
+            mkdir("patient/$uid");
+        }
+        $path_parts = pathinfo($_FILES["file"]["name"]);
+        $extension = $path_parts['extension'];
+        $filepath = "patient/$uid/avatar_".time().'.png';
+
+        if( 0 < $_FILES['file']['error'] ) 
+        {
+            echo 'Error: ' . $_FILES['file']['error'] . '<br>';
+        }
+        else 
+        {
+            move_uploaded_file($_FILES['file']['tmp_name'], $filepath);
+        }
+
+        $img = "<img src='/$filepath' class='pro5-avatar'/>";
+        echo $img;
+        $app->close();
     }
 
 }//end class
