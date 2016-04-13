@@ -14,12 +14,20 @@ $doc->addScript('/components/com_benhan/asset/benhan.js');
 <h2>Search Patient</h2>
 <form action="" id="patient_search">
 	<p>
-		<label for="patient_search">Patien Name:</label>
-		<input type="text" id="search_keyword"/>
+		<label for="search_name">Patien Name:</label>
+		<input type="text" id="search_name"/>
+	</p>
+	<p>
+		<label for="search_mrid">Patien's Medical Report ID:</label>
+		<input type="text" id="search_mrid"/>
 	</p>
 	<input type="submit" value="Search" class="btn btn-primary" />
 	
 </form>
-<blockquote class="rounded" id="search_result">
+<div id="loading" style="display:none">
+		<img src="/components/com_benhan/img/hourglass.svg" alt="">
+		Loading...
+</div>
+<div id="search_result">
 	
-</blockquote>
+</div>

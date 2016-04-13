@@ -43,6 +43,10 @@ div[id ^= "cbfr"] input.required{
 #profile hr{
 	border-color: #aaa;
 }
-
+#patient_search label
+{
+	display: block;
+	width: 200px;
+}
 
 

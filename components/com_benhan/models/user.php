@@ -364,19 +364,39 @@ class BenhanModelUser extends JModel
     function searchUser()
     {
         $db = JFactory::getDbo();
-        $name = JRequest::getVar('value');
+        $name = JRequest::getVar('name');
+        $mrid = JRequest::getVar('mrid');
+        $fs = ['name'=>$name,'cb_so_benh_an_vao_vien'=>$mrid];
         $where='';
-        if(trim($name)=='')
+
+        if(trim($name)=='' && trim($mrid)=='' )
         {
-            $where ='1=1';
+            $where =' 1=1 ';
         }
         else
         {
-            $where = "name LIKE '%$name%'";
+            $logic = '';
+            $cnt = count($fs);
+            $key = array_keys($fs);
+            for($i=0; $i<$cnt; $i++)
+            {
+                $k = $key[$i];
+                $v = $fs[$k];
+
+                if( trim($v) !== '' )
+                {
+                    $where .= ( $logic . " $k LIKE '%$v%' ");
+                    $logic = ' AND ';
+                }
+                
+            }            
+            
         }
 
-        $sql = "SELECT id,name FROM #__users AS u WHERE $where";
-       
+        $sql = "SELECT u.id,u.name, c.cb_so_benh_an_vao_vien 
+                FROM #__users AS u, #__comprofiler AS c 
+                WHERE u.id=c.user_id AND $where";
+        //die($sql);
         $db->setQuery($sql);
         $names = $db->loadObjectList(); 
         
@@ -384,9 +404,14 @@ class BenhanModelUser extends JModel
         foreach ($names as $n) 
         {
                 $link = '/component/benhan/?view=user&task=showprofile&userid='.$n->id;
+                $return .= '<blockquote>';
                 $return .= '<p>';
                 $return .= "<a href='$link' target='_blank'>$n->name</a>";
                 $return .= '</p>';
+                $return .= '<p>';
+                $return .= "Số bệnh án: $n->cb_so_benh_an_vao_vien";
+                $return .= '</p>';
+                $return .= '</blockquote>';
         }  
 
         return $return; 

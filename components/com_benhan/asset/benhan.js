@@ -4,21 +4,29 @@ jQuery(document).ready(function($){
 
 	var search = $('#patient_search');
 	var search_r = $('#search_result');
-	var search_kw = $('#search_keyword');
+	var search_name = $('#search_name');
+	var search_mrid = $('#search_mrid');
+	var name_val = search_name.val() ? search_name.val() : '';
+	var mrid_val = search_mrid.val() ? search_mrid.val() : '';
 
-	search.submit(function(){
-		
+	search.submit(function(e){
+
+		$('#loading').show();
 		$.ajax({
 			   url: "index.php?option=com_benhan&view=user&task=searchuser",
-			   data: {
-			      value: search_kw.val()
+			   data: 
+			   {
+			      	name:search_name.val(),
+			      	mrid:search_mrid.val()
 			   }, 
 	      success: function(data) {
+	      	$('#loading').hide();
 	      	search_r.empty();
 	        search_r.html(data);
+	        
 	      }		
 		});
-		return false;
+		e.preventDefault();
 	});
 
 	$("#upload_avatar").on("click", function() {
