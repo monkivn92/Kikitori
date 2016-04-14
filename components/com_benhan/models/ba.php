@@ -140,10 +140,17 @@ class BenhanModelBa extends JModel
         
         $db->setQuery($sql);
         $names = $db->loadResultArray();
-      
+
         foreach ($names as $name) 
         {
-            $CBfields[$name] = $cbUser->getField( $name, null, 'htmledit', 'div','register', 0, true);
+            $data = '{"userid":' . $this_user . ',"label":"' . $name . '"}';
+            $html = '';
+            $html .= '<div class="wrap_field">';    
+            $html .= "<img data='$data' class='addnote' style='cursor:pointer' src='/components/com_benhan/img/plus_red.png' title='Add note for this field'>";        
+            $html .= $cbUser->getField( $name, null, 'htmledit', 'div','register', 0, true);
+           
+            $html .= '</div>';
+            $CBfields[$name] = $html;
         }		
 		$return->page_info = $formfield;
         $return->CBfields = $CBfields;

@@ -7,10 +7,20 @@ $doc = JFactory::getDocument();
 $doc->addStyleSheet('/components/com_comprofiler/plugin/templates/default/template.css');
 $doc->addStyleSheet('/components/com_benhan/asset/benhan.css');
 $doc->addScript('/components/com_benhan/asset/jquery.min.js');
+$doc->addScript('/components/com_benhan/asset/modal.js');
 $doc->addScript('/components/com_benhan/asset/benhan.js');
 
 
 ?>
+<script>
+	jQuery(document).ready(function($){
+		SqueezeBox.initialize({
+			size: {x:300, y:300}
+		});
+		SqueezeBox.assign($$('.wrap_field img.addnote'));
+		SqueezeBox.open('google.com',{handler:'iframe'});			
+});
+</script>
 
 <script type="text/javascript" src="/components/com_comprofiler/js/overlib_all_mini.js">
 </script>

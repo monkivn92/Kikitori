@@ -129,6 +129,13 @@ class BenhanControllerUser extends JController
         $result = $model->saveAvatar();     
       
     }
+    function saveattachment()
+    {
+               
+        $model = & $this->getModel('user');        
+        $result = $model->saveAttachment();     
+      
+    }
 
 
 }

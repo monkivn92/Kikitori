@@ -41,6 +41,7 @@ class BenhanViewUser extends JView
 
 		$userInfo = $this->get('UserInfo');  
 		$avatar = $this->get('Avatar');  
+		$attachment = $this->get('Attachment');  
 
        	$db = JFactory::getDbo();
        	$sql = "SELECT name FROM #__users WHERE id=".$userInfo->_cbuser->id;    
@@ -50,6 +51,7 @@ class BenhanViewUser extends JView
 		$this->assignRef( 'userInfo', $userInfo );
 		$this->assignRef( 'name', $name );
 		$this->assignRef( 'avatar', $avatar );
+		$this->assignRef( 'attachment', $attachment );
 
 		parent::display('profile');
 	}

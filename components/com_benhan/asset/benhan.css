@@ -1,13 +1,14 @@
 blockquote.rounded{
 	border: 1px solid #ccc;
 	border-radius: 5px;	
+	overflow: hidden;
 }
 blockquote.rounded:hover {   
     box-shadow: 0px 0px 5px #174E85;
     transition: all 0.5s ;
 }
 
-div[id ^= "cbfr"]
+.wrap_field
 {
 	margin: 20px 0px;
 }
@@ -48,5 +49,11 @@ div[id ^= "cbfr"] input.required{
 	display: block;
 	width: 200px;
 }
-
-
+.default_hide
+{
+	display: none;
+}
+#attachment_upload_area,
+#attachment-items{
+	margin: 20px;
+}

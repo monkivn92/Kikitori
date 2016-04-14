@@ -399,7 +399,7 @@ class BenhanModelUser extends JModel
         //die($sql);
         $db->setQuery($sql);
         $names = $db->loadObjectList(); 
-        
+        if(!$names) { return '<p><b>No results found.</b></p>';}
         $return='';
         foreach ($names as $n) 
         {
@@ -471,9 +471,77 @@ class BenhanModelUser extends JModel
             move_uploaded_file($_FILES['file']['tmp_name'], $filepath);
         }
 
-        $img = "<img src='/$filepath' class='pro5-avatar'/>";
+        $img = "<img src='/$filepath' class='pro5-avatar' style='height:100px'/>";
         echo $img;
         $app->close();
+    }
+    function saveAttachment()
+    {
+        $app = JFactory::getApplication();
+        $uid = $this->getUserID();
+
+        if( !is_dir("patient/$uid") )
+        {
+            mkdir("patient/$uid");
+        }
+       
+        $filepath = "patient/$uid/".$_FILES["file"]["name"];
+
+        if( 0 < $_FILES['file']['error'] ) 
+        {
+            echo 'Error: ' . $_FILES['file']['error'] . '<br>';
+        }
+        else 
+        {
+            move_uploaded_file($_FILES['file']['tmp_name'], $filepath);
+            $items = $this->getAttachment();
+            echo $items;
+        }        
+        
+        $app->close();
+    }
+    function getAttachment()
+    {
+        $uid = $this->getUserID();
+        $attach = '';
+        if ( $dir = opendir("patient/$uid") ) 
+        {
+
+            while (false !== ( $item = readdir($dir) ) ) 
+            {
+                if($item !== '.' && $item !== '..' )
+                {
+                    if(strpos($item, '.png')!==false ||
+                        strpos($item, '.jpg')!==false ||
+                        strpos($item, '.JPG')!==false ||
+                        strpos($item, '.PNG')!==false 
+                       )
+                    {
+                        $exif = exif_read_data("patient/$uid/$item");
+                   
+                        $taken_date = $exif['DateTimeOriginal'];
+                        $attach .= "<p><a href='/patient/$uid/$item' download>$item</a>(Date Taken: $taken_date)</p>";
+                    }
+                    else
+                    {
+                        $attach .= "<p><a href='/patient/$uid/$item' download>$item</a></p>";
+                    }
+                    
+                }
+                
+            }
+
+            closedir($handle);
+        }
+        if(trim($attach)=='')
+        {
+            return 'Have no items';
+        }
+        else
+        {
+            return $attach;
+        }
+        
     }
 
 }//end class
