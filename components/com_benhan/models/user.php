@@ -484,19 +484,25 @@ class BenhanModelUser extends JModel
         {
             mkdir("patient/$uid");
         }
-       
-        $filepath = "patient/$uid/".$_FILES["file"]["name"];
+        $cnt = 0;
+        $cnt = count($_FILES["attach"]["name"]);
+        if($cnt == 0){die('No files chosen');}
+        for($i=0; $i<$cnt; $i++)
+        {
+            $filepath = "patient/$uid/".$_FILES["attach"]["name"]["$i"];
 
-        if( 0 < $_FILES['file']['error'] ) 
-        {
-            echo 'Error: ' . $_FILES['file']['error'] . '<br>';
+            if( 0 < $_FILES['attach']['error']["$i"] ) 
+            {
+                die('Error: ' . $_FILES['attach']['error']["$i"] . '<br>');
+            }
+            else 
+            {
+                move_uploaded_file($_FILES['attach']['tmp_name']["$i"], $filepath);
+                
+            }  
         }
-        else 
-        {
-            move_uploaded_file($_FILES['file']['tmp_name'], $filepath);
-            $items = $this->getAttachment();
-            echo $items;
-        }        
+        $items = $this->getAttachment();
+        echo $items;     
         
         $app->close();
     }
@@ -520,7 +526,7 @@ class BenhanModelUser extends JModel
                         $exif = exif_read_data("patient/$uid/$item");
                    
                         $taken_date = $exif['DateTimeOriginal'];
-                        $attach .= "<p><a href='/patient/$uid/$item' download>$item</a>(Date Taken: $taken_date)</p>";
+                        $attach .= "<p><a class='jmodal' rel=\"{handler:'iframe',size:{x:650,y:450}}\" href='/patient/$uid/$item' >$item</a>(Date Taken: $taken_date)</p>";
                     }
                     else
                     {

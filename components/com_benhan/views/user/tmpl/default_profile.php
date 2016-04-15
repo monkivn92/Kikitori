@@ -8,7 +8,7 @@ $doc->addStyleSheet('/components/com_comprofiler/plugin/templates/default/templa
 $doc->addStyleSheet('/components/com_benhan/asset/benhan.css');
 $doc->addScript('/components/com_benhan/asset/jquery.min.js');
 $doc->addScript('/components/com_benhan/asset/benhan.js');
-
+JHTML::_('behavior.modal','a.jmodal');
 ?>
 
 
@@ -37,7 +37,7 @@ $doc->addScript('/components/com_benhan/asset/benhan.js');
 		<p id="show_attachment" class="btn btn-primary"><a style="color:#FFF" href="">Show attachment</a></p>
 		
 		<p id="attachment_upload_area" class="default_hide" >
-			<input id="attach_input" type="file" name="avatar" />
+			<input id="attach_input" type="file" name="attach[]" multiple="multiple" />
 			<button id="upload_attach">Upload</button>
 		</p>
 
@@ -72,7 +72,8 @@ jQuery(document).ready(function($){
 
 	$("#upload_avatar").on("click", function() {
 
-	    var file_data = $("#avatar_input").prop("files")[0];   
+	    var file_data = $("#avatar_input").prop("files")[0];  
+
 	    var form_data = new FormData();                  
 	    form_data.append('file', file_data);
 	                               
@@ -112,10 +113,13 @@ jQuery(document).ready(function($){
 	});
 	$("#upload_attach").on("click", function() {
 
-	    var file_data = $("#attach_input").prop("files")[0];   
+	    var file_data = $("#attach_input").prop("files");	    
 	    var form_data = new FormData();                  
-	    form_data.append('file', file_data);
-	                               
+	    //form_data.append('attach', file_data);
+	    $.each(file_data, function(i, file) {
+		    form_data.append('attach[]', file);
+		});
+	                            
 	    $.ajax({
 	                url: '<?php echo 'index.php?option=com_benhan&view=user&task=saveattachment&userid='.$this->userInfo->_cbuser->id ?>', // point to server-side PHP script 
 	                dataType: 'text',  // what to expect back from the PHP script, if anything
@@ -126,8 +130,10 @@ jQuery(document).ready(function($){
 	                type: 'post',
 	                success: function(res)
 	                {
-	                    $('#attachment-items').empty(); 
-	                    $('#attachment-items').append(res);
+	                    
+	                    $('#attachment-items').empty(); 	                   
+	                    $('#attachment-items').append(res);	                    
+	                   
 	                }
 	     });
 	});
