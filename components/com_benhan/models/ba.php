@@ -159,7 +159,55 @@ class BenhanModelBa extends JModel
 		return $return;
 
 	}    
-    
+    function takeNote()
+    {
+        $app = JFactory::getApplication();
+        $db = JFactory::getDbo();
+
+        $uid = JRequest::getInt('u');
+        $field = JRequest::getVar('f');
+        $quote_f = $db->quote($field);
+        $sql = "SELECT text FROM #__ba_note WHERE user_id=$uid AND field_name=$quote_f";
+        $db->setQuery($sql);
+        $fval = $db->loadResult();
+
+        $sql = "SELECT title FROM #__comprofiler_fields WHERE name=$quote_f";
+        $db->setQuery($sql);
+        $fname = $db->loadResult();
+
+        $html ='';
+        $html .= "<form action='/components/com_benhan/?view=ba&task=savenote&u=$uid&f=$field'>";
+        $html .= "<h4>$fname</h4>";
+        $html .= "<textarea name='text' cols='100'rows='10'>$fval</textarea>";
+        $html .= "<p><input type='submit' name='submit_note' value='Save' class='btn btn-primary'  /></p>";
+        $html .= '</form>';
+        return $html;
+    }
+    function saveNote()
+    {
+        $app = JFactory::getApplication();
+        $db = JFactory::getDbo();
+
+        $uid = JRequest::getInt('u');
+        $field = $db->quote(JRequest::getVar('f'));
+        $text = $db->quote(JRequest::getVar('text'));
+
+        $sql = "SELECT id FROM #__ba_note WHERE user_id=$uid AND field_name=$field";
+        $db->setQuery($sql);
+        $id = $db->loadResult();
+
+        if($id)
+        {
+            $sql = "UPDATE #__ba_note SET text=$text WHERE  user_id=$uid AND field_name=$field";
+        }
+        else
+        {
+            $sql = "INSERT INTO #__ba_note(user_id,field_name,text) VALUES ($uid,$field,$text)";
+        }
+        $db->setQuery($sql);
+        $db->query();
+       
+    }
 
 
    

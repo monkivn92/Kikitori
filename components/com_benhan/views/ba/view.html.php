@@ -28,6 +28,19 @@ class BenhanViewBa extends JView
 		parent::display();
 
 	}
+	function showFormNote($message)
+	{
+		
+		$model      = $this->getModel();
+        $form = $model->takeNote();  
+   		
+		
+		$this->assignRef( 'message', $message );			
+		$this->assignRef( 'form', $form );	
+			
+		parent::display('note');
+
+	}
 
 }
 

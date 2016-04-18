@@ -55,7 +55,18 @@ class BenhanControllerBa extends JController
         $view->setModel($model, true);
         $view->showForm(null);
     }
-    
+    function takenote()
+    {
+        $view = &$this->getView('ba','html');
+        $model = $this->getModel('ba');       
+        $view->setModel($model, true);
+        $view->showFormNote(null);
+    }
+    function savenote()
+    {
+        $model = $this->getModel('ba');     
+        $model->saveNote();
+    }
     function checkUsername()
     {
         $db = JFactory::getDbo();
