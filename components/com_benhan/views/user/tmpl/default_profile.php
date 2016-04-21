@@ -34,14 +34,14 @@ JHTML::_('behavior.modal','a.jmodal');
 	<div id="pro5-attachment">
 		<h3>Attachments</h3>
 		<p id="upload_attachment" class="btn btn-primary"><a style="color:#FFF" href="">Upload attachment</a></p>
-		<p id="show_attachment" class="btn btn-primary"><a style="color:#FFF" href="">Show attachment</a></p>
+		<p id="show_attachment" class="btn btn-primary"><a style="color:#FFF" href="">Show/Hide attachment</a></p>
 		
 		<p id="attachment_upload_area" class="default_hide" >
 			<input id="attach_input" type="file" name="attach[]" multiple="multiple" />
 			<button id="upload_attach">Upload</button>
 		</p>
 
-		<blockquote id="attachment-items" class="default_hide">
+		<blockquote id="attachment-items">
 			<?php
 				echo $this->attachment;
 			?>
@@ -131,8 +131,9 @@ jQuery(document).ready(function($){
 	                success: function(res)
 	                {
 	                    
-	                    $('#attachment-items').empty(); 	                   
-	                    $('#attachment-items').append(res);	                    
+	                    //$('#attachment-items').empty(); 	                   
+	                    //$('#attachment-items').append(res);	         
+	                    location.reload();           
 	                   
 	                }
 	     });

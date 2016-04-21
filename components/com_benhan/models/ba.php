@@ -143,10 +143,14 @@ class BenhanModelBa extends JModel
 
         foreach ($names as $name) 
         {
-            $data = '{"userid":' . $this_user . ',"label":"' . $name . '"}';
+            
+            $rel = '{handler: "iframe", size:{x:350,y:350}}';
+            $link = "index.php?option=com_benhan&view=ba&task=takenote&u=$this_user&f=$name&tmpl=component";
             $html = '';
             $html .= '<div class="wrap_field">';    
-            $html .= "<img data='$data' class='addnote' style='cursor:pointer' src='/components/com_benhan/img/plus_red.png' title='Add note for this field'>";        
+            $html .= "<a class='addnote' rel='$rel' href='$link'>"; 
+            $html .= "<img src='/components/com_benhan/img/note.ico' title='Add note for this field'>"; 
+            $html .= "</a>";       
             $html .= $cbUser->getField( $name, null, 'htmledit', 'div','register', 0, true);
            
             $html .= '</div>';
@@ -175,12 +179,39 @@ class BenhanModelBa extends JModel
         $db->setQuery($sql);
         $fname = $db->loadResult();
 
+       
         $html ='';
+        $html .='<div style="width:100%; height:100%;" id="form_note">';
         $html .= "<form action='/components/com_benhan/?view=ba&task=savenote&u=$uid&f=$field'>";
         $html .= "<h4>$fname</h4>";
-        $html .= "<textarea name='text' cols='100'rows='10'>$fval</textarea>";
-        $html .= "<p><input type='submit' name='submit_note' value='Save' class='btn btn-primary'  /></p>";
+        $html .= "<textarea id='form_note_text' style='width:100%; height:100%;'>$fval</textarea>";
+        $html .= "<p><input type='submit' id='btn_addnote' value='Save' class='btn btn-primary'  /></p>";
         $html .= '</form>';
+        $html .= '</div>';
+        $html .= "<script>
+                    jQuery(document).ready(function($){
+
+                        $('#btn_addnote').click(function(e){
+
+                           $.ajax({
+                                   url: 'index.php?option=com_benhan&view=ba&task=savenote&u=$uid&f=$field',
+                                   dataType: 'text', 
+                                   data: 
+                                   {
+                                        text: $('#form_note_text').val()
+                                   }, 
+                                  success: function(data) {
+                                    $('#form_note').empty();
+                                    $('#form_note').append(data);                                    
+                                  }     
+                            });
+                            e.preventDefault();                            
+                        });
+                                    
+                    });
+                </script>";
+        //phai co index.php
+
         return $html;
     }
     function saveNote()
@@ -204,9 +235,19 @@ class BenhanModelBa extends JModel
         {
             $sql = "INSERT INTO #__ba_note(user_id,field_name,text) VALUES ($uid,$field,$text)";
         }
+
         $db->setQuery($sql);
-        $db->query();
-       
+        $r = $db->loadResult();
+
+        if(!$r)
+        {
+            echo 'Save successfully.';
+        }
+        else
+        {
+            echo 'Save failed';
+        }
+       $app->close();
     }
 
 

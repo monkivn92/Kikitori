@@ -8,25 +8,11 @@ $doc->addStyleSheet('/components/com_comprofiler/plugin/templates/default/templa
 $doc->addStyleSheet('/components/com_benhan/asset/benhan.css');
 $doc->addScript('/components/com_benhan/asset/jquery.min.js');
 $doc->addScript('/components/com_benhan/asset/benhan.js');
-JHTML::_( 'behavior.modal' );
+JHTML::_( 'behavior.modal','a.addnote');
 
 
 ?>
-<script>
-	jQuery(document).ready(function($){
-		$('.wrap_field img.addnote').click(function(){
 
-			var option = {size:{x:200, y:200}};
-			SqueezeBox.initialize(option);
-			SqueezeBox.assign($$('.wrap_field img.addnote'));
-			var json = $(this).attr('data');
-			var data =  $.parseJSON(json);
-			var link = 'index.php?option=com_benhan&view=ba&task=takenote&tmpl=component&u=' + data.userid + '&f=' + data.label;
-			SqueezeBox.open(link,{handler:'iframe'});
-		});
-					
-});
-</script>
 
 <script type="text/javascript" src="/components/com_comprofiler/js/overlib_all_mini.js">
 </script>

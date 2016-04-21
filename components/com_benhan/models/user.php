@@ -526,7 +526,7 @@ class BenhanModelUser extends JModel
                         $exif = exif_read_data("patient/$uid/$item");
                    
                         $taken_date = $exif['DateTimeOriginal'];
-                        $attach .= "<p><a class='jmodal' rel=\"{handler:'iframe',size:{x:400,y:400}}\" href='/patient/$uid/$item' >$item</a>(Date Taken: $taken_date)</p>";
+                        $attach .= "<p><a class='jmodal' rel=\"{size:{x:400,y:400}}\" href='/patient/$uid/$item' >$item</a>(Date Taken: $taken_date)</p>";
                     }
                     else
                     {
