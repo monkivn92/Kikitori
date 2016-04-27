@@ -55,8 +55,9 @@ class BenhanControllerUser extends JController
     }
     function search()
     {
-          
-        $view = &$this->getView('user','html');
+        $model = & $this->getModel('user'); 
+        $view = &$this->getView('user','html');      
+        $view->setModel($model, true);        
         $view->showFormSearch($msg);
     }
     function searchuser()

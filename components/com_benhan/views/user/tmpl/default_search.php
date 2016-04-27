@@ -11,26 +11,42 @@ $doc->addScript('/components/com_benhan/asset/benhan.js');
 
 ?>
 
-<h2>Search Patient</h2>
-<form action="" id="patient_search">
-	<p>
-		<label for="search_name">Patien Name:</label>
-		<input type="text" id="search_name"/>
-	</p>
-	<p>
-		<label for="search_mrid">Patien's Medical Report ID:</label>
-		<input type="text" id="search_mrid"/>
-	</p>
-	<input type="submit" value="Search" class="btn btn-primary" />
-	
-</form>
-<div id="loading" style="display:none">
+
+<div class="row">
+	<div class="span6">
+		<h2>Search Patient</h2>
+		<form action="" id="patient_search">
+			<p>
+				<label for="search_name">Patien Name:</label>
+				<input type="text" id="search_name"/>
+			</p>
+			<p>
+				<label for="search_mrid">Patien's Medical Report ID:</label>
+				<input type="text" id="search_mrid"/>
+			</p>
+			<input type="submit" value="Search" class="btn btn-primary" />
+			
+		</form>
+
+		<div id="loading" style="display:none">
 		<img src="/components/com_benhan/img/hourglass.svg" alt="">
 		Loading...
+		</div>
+		<div id="search_result">
+			
+		</div>
+	</div>
+	<div class="span6">
+		<div id="recent-add">
+			<h4>Recently Added Patients</h4>
+			<?php
+				echo $this->UserRecentlyAdd;
+			?>
+		</div>
+	</div>
 </div>
-<div id="search_result">
-	
-</div>
+
+
 
 <script>
 jQuery(document).ready(function($){

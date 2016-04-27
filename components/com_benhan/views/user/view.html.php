@@ -33,7 +33,9 @@ class BenhanViewUser extends JView
 	}
 	function showFormSearch($message)
 	{
-		
+		//get CBfield
+        $UserRecentlyAdd = $this->get('UserRecentlyAdd'); 
+        $this->assignRef( 'UserRecentlyAdd', $UserRecentlyAdd );	  
 		parent::display('search');
 	}
 	function showProfile($message)

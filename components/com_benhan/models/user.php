@@ -416,6 +416,33 @@ class BenhanModelUser extends JModel
 
         return $return; 
     }
+    function getUserRecentlyAdd()
+    {
+        $db = JFactory::getDbo();
+        $sql = "SELECT u.id,u.name, c.cb_so_benh_an_vao_vien 
+                FROM #__users AS u, #__comprofiler AS c 
+                WHERE u.id=c.user_id ORDER BY registerDate DESC LIMIT 3";
+        //die($sql);
+        $db->setQuery($sql);
+        $names = $db->loadObjectList(); 
+        if(!$names) { return '<p><b>No results found.</b></p>';}
+        $return='';
+        foreach ($names as $n) 
+        {
+                $link = '/component/benhan/?view=user&task=showprofile&userid='.$n->id;
+                $return .= '<blockquote>';
+                $return .= '<p>';
+                $return .= "<a href='$link' target='_blank'>$n->name</a>";
+                $return .= '</p>';
+                $return .= '<p>';
+                $return .= "Số bệnh án: $n->cb_so_benh_an_vao_vien";
+                $return .= '</p>';
+                $return .= '</blockquote>';
+        }  
+
+        return $return; 
+    }
+
     function getAvatar()
     {
         $uid = $this->getUserID();
@@ -445,7 +472,7 @@ class BenhanModelUser extends JModel
         }
         else
         {
-            return false;
+            return 'components/com_benhan/img/no_avatar.png';
         }
         
     }

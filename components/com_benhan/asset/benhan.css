@@ -58,3 +58,8 @@ div[id ^= "cbfr"] input.required{
 #attachment-items{
 	margin: 20px;
 }
+#recent-add{
+	padding: 10px;
+	border: 1px solid #aaa;
+	border-radius: 3px;
+}

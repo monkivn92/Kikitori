@@ -144,8 +144,8 @@ class BenhanModelBa extends JModel
         foreach ($names as $name) 
         {
             
-            $rel = '{handler: "iframe", size:{x:350,y:350}}';
-            $link = "index.php?option=com_benhan&view=ba&task=takenote&u=$this_user&f=$name&tmpl=component";
+            $rel = '{handler: "iframe", size:{x:250,y:250}}';
+            $link = JUri::base()."/index.php?option=com_benhan&view=ba&task=takenote&u=$this_user&f=$name&tmpl=component";
             $html = '';
             $html .= '<div class="wrap_field">';    
             $html .= "<a class='addnote' rel='$rel' href='$link'>"; 
