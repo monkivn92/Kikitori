@@ -22,7 +22,7 @@ overlib_pagedefaults(WIDTH,250,VAUTO,RIGHT,AUTOSTATUSCAP, CSSCLASS,TEXTFONTCLASS
 
 <h4 class="jreg_error_status" style="color:red;"><?php echo $this->error_message; ?></h4>
 <form action='<?php echo JRoute::_("index.php?option=com_benhan&view=ba&userid=$userid")?>' method="post" id="cbcheckedadminForm" name="adminForm" enctype="multipart/form-data" class="cb_form" autocomplete="off">
-	<h2 class="jreg_header"><?php echo $this->userInfo->_user->name;?></h2>
+	<h1 class="jreg_header" style="color:#1ba1e2"><?php echo $this->userInfo->_cbuser->name;?></h1>
 
 	<blockquote class="rounded">
 		
@@ -63,7 +63,46 @@ overlib_pagedefaults(WIDTH,250,VAUTO,RIGHT,AUTOSTATUSCAP, CSSCLASS,TEXTFONTCLASS
 
 </form>
 
+<div id="status_box">
+	<p style="color:#1ba1e2"><?php echo $this->userInfo->_cbuser->name;?></p>
+	<p style="color:#CF000F"><?php echo $this->pageInfo->title;?></p>
+</div>
+
 
 <script>
+	jQuery(document).ready(function($){
 
+		if( $('#cbfr_201').length )
+		{
+
+			kyThuatPhauThuat($('#cbfr_201 option:selected').val());
+			
+			$('#cbfr_201').change(function(){
+				kyThuatPhauThuat($('#cbfr_201 option:selected').val());				
+			});
+
+		} 
+
+		function kyThuatPhauThuat(val)
+		{
+			if(val == '')
+			{
+				$('#cbfr_122,#cbfr_123,#cbfr_124,#cbfr_125,#cbfr_126,#cbfr_127,#cbfr_128,#cbfr_129,#cbfr_130,#cbfr_131,#cbfr_132,#cbfr_133,#cbfr_202,#cbfr_203,#cbfr_204,#cbfr_205,#cbfr_206,#cbfr_207,#cbfr_208,#cbfr_209').parent().hide();
+			}
+
+			if( val == 3 )
+			{
+				$('#cbfr_122,#cbfr_123,#cbfr_124,#cbfr_125,#cbfr_126,#cbfr_127,#cbfr_128,#cbfr_129,#cbfr_130,#cbfr_131,#cbfr_132,#cbfr_133').parent().show();
+				$('#cbfr_202,#cbfr_203,#cbfr_204,#cbfr_205,#cbfr_206,#cbfr_207,#cbfr_208,#cbfr_209').parent().hide();
+			}
+
+			if( val == 1 ||   val == 2 )
+			{
+				$('#cbfr_122,#cbfr_123,#cbfr_124,#cbfr_125,#cbfr_126,#cbfr_127,#cbfr_128,#cbfr_129,#cbfr_130,#cbfr_131,#cbfr_132,#cbfr_133').parent().hide();
+				$('#cbfr_202,#cbfr_203,#cbfr_204,#cbfr_205,#cbfr_206,#cbfr_207,#cbfr_208,#cbfr_209').parent().show();
+			}
+		}
+
+
+	});
 </script>

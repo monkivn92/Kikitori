@@ -24,6 +24,16 @@ $doc->addScript('/components/com_benhan/asset/benhan.js');
 				<label for="search_mrid">Patien's Medical Report ID:</label>
 				<input type="text" id="search_mrid"/>
 			</p>
+			<p>
+				<label for="search_ktphth">Kỹ thuật phẫu thuật:</label>
+				<select name="cb_iv_ppdtr_kt_phau_thuat" id="search_ktphth" class="form-control">
+					<option value=""></option>
+					<option value="1" id="cbf228">1 bó Isometric</option>
+					<option value="2" id="cbf229">1 bó tăng cường</option>
+					<option value="3" id="cbf230">2 bó</option>
+				</select>
+			</p>
+
 			<input type="submit" value="Search" class="btn btn-primary" />
 			
 		</form>
@@ -57,8 +67,11 @@ jQuery(document).ready(function($){
 	var search_r = $('#search_result');
 	var search_name = $('#search_name');
 	var search_mrid = $('#search_mrid');
+	var search_ktphth = $('#search_ktphth option:selected');
 	var name_val = search_name.val() ? search_name.val() : '';
 	var mrid_val = search_mrid.val() ? search_mrid.val() : '';
+	var ktphth_val = search_ktphth.val() ? search_ktphth.val() : '';
+
 
 	search.submit(function(e){
 
@@ -68,7 +81,8 @@ jQuery(document).ready(function($){
 			   data: 
 			   {
 			      	name:search_name.val(),
-			      	mrid:search_mrid.val()
+			      	mrid:search_mrid.val(),
+			      	ktphth:$('#search_ktphth option:selected').val()
 			   }, 
 	      success: function(data) {
 	      	$('#loading').hide();

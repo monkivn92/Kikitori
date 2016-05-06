@@ -18,31 +18,7 @@ class BenhanControllerBa extends JController
         $user = JFactory::getUser();
         $view = &$this->getView('ba','html');
         $model = & $this->getModel('ba');       
-        $view->setModel($model, true);
-
-        if(!$userid) 
-        { 
-            $this_user = $user->id;
-        }
-        else
-        {
-            if($userid==$user->id)
-            {
-                $this_user = $user->id;
-            }
-            else
-            {
-                if(!$model->isAdmin($user->id))
-                {
-                    die('You are not authorized !');
-                }                    
-                else
-                {
-                    $this_user = $userid;
-                }
-                    
-            }
-        }
+        $view->setModel($model, true);        
         $view->showForm(null);
        
         

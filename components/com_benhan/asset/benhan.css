@@ -63,3 +63,20 @@ div[id ^= "cbfr"] input.required{
 	border: 1px solid #aaa;
 	border-radius: 3px;
 }
+.cbFieldIcons{
+	display: none;
+}
+#status_box{
+	
+	position: absolute;
+	position: fixed;
+	left:0px;
+	bottom: 0px;
+	padding:5px;
+	margin-left:10px;
+	border: 1px solid #000;
+	border-radius: 3px;
+	width: auto;
+	background-color: #ddd;
+
+}

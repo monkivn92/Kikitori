@@ -38,8 +38,31 @@ overlib_pagedefaults(WIDTH,250,VAUTO,RIGHT,AUTOSTATUSCAP, CSSCLASS,TEXTFONTCLASS
     <?php echo JHTML::_( 'form.token' ); ?>
 
 </form>
+<script>
+jQuery(document).ready(function(){
 
+	jQuery('#cbcheckedadminForm').submit(function(){
 
+		var canSubmit = true;
+
+		jQuery('input.required').each(function(idx,val){
+			
+			if(jQuery(val).val() === '')	
+			{
+				canSubmit = false;
+			}
+
+		});
+		
+		if(canSubmit)
+		{
+			jQuery('input[name="ba_save"]').prop('disabled',true);
+		}
+
+	});	
+});
+
+</script>
 <script>
 
 cbjQuery( document ).ready( function( $ ) {

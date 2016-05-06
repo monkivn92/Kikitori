@@ -251,7 +251,7 @@ class BenhanModelUser extends JModel
         {
             $msg = 'Add a new patient successfully. You can add medical report for this patient.';
             $app->enqueueMessage($msg,'Message');
-            $app->redirect("/component/benhan/?view=user&task=showprofile&userid=$uid", false);
+            $app->redirect("/component/benhan/?view=ba&userid=$uid", false);
         }
         else
         {
@@ -366,10 +366,11 @@ class BenhanModelUser extends JModel
         $db = JFactory::getDbo();
         $name = JRequest::getVar('name');
         $mrid = JRequest::getVar('mrid');
-        $fs = ['name'=>$name,'cb_so_benh_an_vao_vien'=>$mrid];
+        $ktphth = JRequest::getVar('ktphth');
+        $fs = ['name'=>$name,'cb_so_benh_an_vao_vien'=>$mrid, 'cb_iv_ppdtr_kt_phau_thuat'=>$ktphth];
         $where='';
 
-        if(trim($name)=='' && trim($mrid)=='' )
+        if(trim($name)=='' && trim($mrid)=='' && trim($ktphth)=='' )
         {
             $where =' 1=1 ';
         }
