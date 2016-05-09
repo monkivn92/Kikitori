@@ -100,7 +100,7 @@
 	$(document).ready(function(){
 		lightBox();
 		$('#loadmore').click(function(e){			
-			var idx = $('img').last().attr('img-idx');
+			var idx = $('#img-container img').last().attr('img-idx');
 
 			$.ajax({
 						url: "/loadmore.php",
@@ -114,7 +114,7 @@
 
 					      	$('#img-container').append(data);	
 					      	lightBox();
-					      	var all_img = $('img');
+					      	var all_img = $('#img-container img');
 
 					      	var	len_img = all_img.length;
 					  
@@ -139,7 +139,7 @@
 		function lightBox()
 		{	
 
-			$('img').click(function(){
+			$('#img-container img').click(function(){
 
 				$('#lb-overlay').show();
 				$('#lb-content').show();
