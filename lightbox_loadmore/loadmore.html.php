@@ -145,13 +145,15 @@
 				$('#lb-content').show();
 				var lbcontent = $('#lb-content'),
 					dh = $(document).height(),
-					dw = $(document).width();
-		
+					dw = $(document).width(),
+					lbh = dh*0.8,
+					lbw = dw*0.8;			
+			
 				var temp_img = document.createElement('img');
 				temp_img.src = $(this).attr('src');
 				$(temp_img).css({'max-height':lbh-5,'max-width':lbw-5});
 
-				lbcontent.empty().append(temp_img);
+				lbcontent.empty().append( temp_img);
 
 				var lb_img = $('#lb-content img'),
 					lb_img_w = lb_img.width(),
