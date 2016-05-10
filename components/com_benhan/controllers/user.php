@@ -137,6 +137,15 @@ class BenhanControllerUser extends JController
         $result = $model->saveAttachment();     
       
     }
+    function getimgajax()
+    {
+        $app = JFactory::getApplication();      
+        $model = $this->getModel('user');        
+        $result = $model->getImgAjax();
+        echo $result;
+        $app->close();  
+      
+    }
 
 
 }

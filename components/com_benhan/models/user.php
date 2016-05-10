@@ -543,23 +543,9 @@ class BenhanModelUser extends JModel
 
             while (false !== ( $item = readdir($dir) ) ) 
             {
-                if($item !== '.' && $item !== '..' )
-                {
-                    if(strpos($item, '.png')!==false ||
-                        strpos($item, '.jpg')!==false ||
-                        strpos($item, '.JPG')!==false ||
-                        strpos($item, '.PNG')!==false 
-                       )
-                    {
-                        $exif = exif_read_data("patient/$uid/$item");
-                   
-                        $taken_date = $exif['DateTimeOriginal'];
-                        $attach .= "<p><a class='jmodal' rel=\"{size:{x:400,y:400}}\" href='/patient/$uid/$item' >$item</a>(Date Taken: $taken_date)</p>";
-                    }
-                    else
-                    {
-                        $attach .= "<p><a href='/patient/$uid/$item' download>$item</a></p>";
-                    }
+                if($item !== '.' && $item !== '..' && is_file("patient/$uid/$item"))
+                {                                       
+                    $attach .= "<p><a href='/patient/$uid/$item' download>$item</a></p>";                  
                     
                 }
                 
@@ -576,6 +562,134 @@ class BenhanModelUser extends JModel
             return $attach;
         }
         
+    }
+
+    function getImgGallery()
+    {
+        $session = JFactory::getSession();
+        $session->clear('img_ga_data');
+        $uid = $this->getUserID();
+        $offset = 3;
+        $attach = '';   
+        $ss_arr = array();
+        if ( $dir = opendir("patient/$uid") ) 
+        {
+
+            while (false !== ( $item = readdir($dir) ) ) 
+            {
+                if($item !== '.' && $item !== '..' && is_file("patient/$uid/$item"))
+                {
+                    if(strpos($item, '.png')!==false ||
+                        strpos($item, '.jpg')!==false ||
+                        strpos($item, '.JPG')!==false ||
+                        strpos($item, '.PNG')!==false 
+                    )
+                    {
+                        $ss_arr[] =  $item;                        
+                    }
+
+                }
+                
+            }
+
+            closedir($handle);
+        }
+
+        if(count($ss_arr)<= 0)
+        {
+            return 'Have no images';
+        }
+        else
+        {
+            $session->set('img_ga_data',$ss_arr);
+            $maxlen = count($ss_arr);
+            $last_idx = $offset > $maxlen ? $maxlen : $offset;
+            for($i=0; $i<$last_idx; $i++)
+            {
+                $img_name = $ss_arr[$i];    
+                $exif = exif_read_data("patient/$uid/$img_name");
+                $taken_date = $exif['DateTimeOriginal'];
+                $imgh = $exif['COMPUTED']['Height'];
+                $imgw = $exif['COMPUTED']['Width'];                   
+                               
+                $taken_date = $exif['DateTimeOriginal'];
+
+                $attach .= '<div class="img-ga-contaner">';
+                $attach .= "<a class='jmodal' rel=\"{size:{x:400,y:400}}\" href='/patient/$uid/$img_name' >";
+                
+                if($imgh >= $imgw)
+                {
+                    $attach .= "<img img-idx='$i' max-length='$maxlen' src='/patient/$uid/$img_name' style='height:200px; width:auto' class='img-item'>";
+                }
+                else
+                {
+                    $attach .= "<img img-idx='$i' max-length='$maxlen' src='/patient/$uid/$img_name' style='height:auto; width:200px' class='img-item'>";
+                }
+
+                $attach .= "</a>";
+                $attach .= "<p><strong>$img_name</strong></p>";
+                $attach .= "<p>Date Taken: $taken_date </p>";
+                $attach .= '</div>';
+            }
+
+        }
+        return $attach;
+    }
+
+    function getImgAjax()
+    {
+        $session = JFactory::getSession();
+        $uid = $this->getUserID();
+        $offset = 3;
+        $images = $session->get('img_ga_data');
+        $idx = JRequest::getInt('idx');
+        if( !$idx )
+        {
+            return;
+        }
+        
+        $img_ss_len = count($images);   
+        $attach = '';
+
+        if($idx < $img_ss_len-1)
+        {
+            $last_idx = ($img_ss_len - 1) > ($idx + $offset) ? ($idx + $offset) : ($img_ss_len - 1);
+            $return = '';
+            for($i = $idx+1; $i <= $last_idx; $i++)
+            {
+                $img_name = $images[$i];    
+                $exif = exif_read_data("patient/$uid/$img_name");
+                $taken_date = $exif['DateTimeOriginal'];
+                $imgh = $exif['COMPUTED']['Height'];
+                $imgw = $exif['COMPUTED']['Width'];                   
+                               
+                $taken_date = $exif['DateTimeOriginal'];
+
+                $attach .= '<div class="img-ga-contaner">';
+                $attach .= "<a class='jmodal' rel=\"{size:{x:400,y:400}}\" href='/patient/$uid/$img_name' >";
+                
+                if($imgh >= $imgw)
+                {
+                    $attach .= "<img img-idx='$i' max-length='$img_ss_len' src='/patient/$uid/$img_name' height='200' class='img-item'>";
+                }
+                else
+                {
+                    $attach .= "<img img-idx='$i' max-length='$img_ss_len' src='/patient/$uid/$img_name' width='200' class='img-item'>";
+                }
+
+                $attach .= "</a>";
+                $attach .= "<p><strong>$img_name</strong></p>";
+                $attach .= "<p>Date Taken: $taken_date </p>";
+                $attach .= '</div>';
+                
+            }
+            echo $attach;
+        }
+        else
+        {
+            return;
+        }
+
     }
 
 }//end class

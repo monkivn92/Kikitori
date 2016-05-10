@@ -80,3 +80,25 @@ div[id ^= "cbfr"] input.required{
 	background-color: #ddd;
 
 }
+.clearfix{
+	clear: both;
+}
+.img-ga-contaner{
+	width: 250px;
+	height: 200px;
+	border: 1px solid #ccc;
+	padding: 10px;
+	text-align: center;
+	margin: 5px;
+	display: inline-block;
+	float: left;
+
+}
+.img-ga-contaner a.jmodal
+{
+	display: block;
+	overflow: hidden;
+	height: 150px;
+	width: 150px;
+	margin: auto;
+}

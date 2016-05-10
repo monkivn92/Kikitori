@@ -41,13 +41,26 @@ JHTML::_('behavior.modal','a.jmodal');
 			<button id="upload_attach">Upload</button>
 		</p>
 
-		<blockquote id="attachment-items">
+		<blockquote id="attachment-items" style="display:none;">
 			<?php
 				echo $this->attachment;
 			?>
 		</blockquote>
 	</div>
 	<hr><!-- Attachment end -->
+
+	<div id="img-manager">
+		<h3>Image Manager</h3>
+		<div id="img-list">
+			<?php
+				echo $this->img_ga;
+			?>
+		</div>
+		<div class="clearfix"></div>
+		<p><a href="" id="loadmore">More...</a></p>
+	</div>
+
+	<hr><!-- IMG Manage -->
 	<h3>Edit Patient</h3>
 	<p>
 		<?php
@@ -66,6 +79,54 @@ JHTML::_('behavior.modal','a.jmodal');
 	</p>	
 	
 </blockquote>
+
+<script>
+
+	$(document).ready(function(){
+		
+		var images = $('#img-list img');
+		if(images.length <= 0)
+		{
+			$('#loadmore').remove();
+		}
+		$('#loadmore').click(function(e){			
+			var idx = $('#img-list img').last().attr('img-idx');
+
+			$.ajax({
+						url: '<?php echo 'index.php?option=com_benhan&view=user&task=getimgajax&userid='.$this->userInfo->_cbuser->id ?>',
+						method:'GET',	
+						dataType: 'text',  // what to expect back from the PHP script, if anything
+		                cache: false,
+		                contentType: false,		                		
+					   	data: 
+					   	{
+					      	idx:idx
+					   	}, 
+					   	success: function(data) {
+					   		
+					      	$('#img-list').append(data);
+
+					      	SqueezeBox.assign($$('a.jmodal'), {
+								parse: 'rel'
+							});	
+					      
+					      	var all_img = $('#img-list img');
+
+					      	var	len_img = all_img.length;
+					  
+					      	var	img_max = $(all_img[0]).attr('max-length');	
+					      				      
+					      	if(len_img >= img_max)
+					      	{
+					      		$('#loadmore').remove();
+					      	}
+				      	}
+			});
+			return false;
+			e.preventDefault();
+		});
+	});
+</script>
 <script>
 	
 jQuery(document).ready(function($){
