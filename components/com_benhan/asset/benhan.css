@@ -84,14 +84,17 @@ div[id ^= "cbfr"] input.required{
 	clear: both;
 }
 .img-ga-contaner{
-	width: 250px;
-	height: 200px;
+	width: 150px;
+	height: 240px;
 	border: 1px solid #ccc;
+	border-radius: 5px;
 	padding: 10px;
 	text-align: center;
-	margin: 5px;
+	margin: 7px;
 	display: inline-block;
 	float: left;
+	overflow: hidden;
+
 
 }
 .img-ga-contaner a.jmodal
@@ -101,4 +104,58 @@ div[id ^= "cbfr"] input.required{
 	height: 150px;
 	width: 150px;
 	margin: auto;
+}
+#avatar_upload_area{
+	
+	padding: 20px;	
+	border: 3px dashed #ccc;
+}
+#progress-bar,#attach-progress-bar{
+	margin: auto;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding: 0px;
+	width: 300px;
+	height: 10px;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+}
+#progress-bar-inner,#attach-progress-bar-inner{
+	padding: 0px;
+	background-color: #1ba1e2;	
+	height: 100%;
+	width: 0px;
+	border-radius: 2px;
+}
+#avatar_fileName,#avatar_tool_box{
+	padding: 10px;
+}
+#avatar-edit-zone{
+	margin-top: 50px;
+}
+.noRotate{
+    transform: rotate(0deg);
+}
+.rotatel90{
+    transform: rotate(90deg);
+}
+.rotatel180{
+    transform: rotate(180deg);
+}
+.rotatel270{
+    transform: rotate(270deg);
+}
+
+@media (max-width: 480px) {
+	.img-ga-contaner{
+		margin-left: 22px;
+	}
+	
+}
+
+@media (max-width: 320px) {
+	.img-ga-contaner{
+		margin-left: 15%;
+	}
+	
 }

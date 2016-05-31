@@ -130,6 +130,12 @@ class BenhanControllerUser extends JController
         $result = $model->saveAvatar();     
       
     }
+    function rotateavatar()
+    {
+        
+        $model = & $this->getModel('user');        
+        $result = $model->rotateAvatar();
+    }
     function saveattachment()
     {
                

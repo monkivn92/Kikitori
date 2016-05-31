@@ -40,22 +40,20 @@ class BenhanViewUser extends JView
 	}
 	function showProfile($message)
 	{
-
-		$userInfo = $this->get('UserInfo');  
-		$avatar = $this->get('Avatar');  
-		$attachment = $this->get('Attachment');  
-		$img_ga = $this->get('ImgGallery');  
+		
+		$userid = $this->get('UserID');  
+		$attachments = $this->get('Attachment');		
+		$imgGallery = $this->get('ImgGallery');		
 
        	$db = JFactory::getDbo();
-       	$sql = "SELECT name FROM #__users WHERE id=".$userInfo->_cbuser->id;    
-
+       	$sql = "SELECT name FROM #__users WHERE id=".$userid;    
         $db->setQuery($sql);
         $name = $db->loadResult(); 			
-		$this->assignRef( 'userInfo', $userInfo );
-		$this->assignRef( 'name', $name );
-		$this->assignRef( 'avatar', $avatar );
-		$this->assignRef( 'attachment', $attachment );
-		$this->assignRef( 'img_ga', $img_ga );
+		
+		$this->assignRef( 'name', $name );	
+		$this->assignRef( 'userid', $userid );
+		$this->assignRef( 'attachments', $attachments );
+		$this->assignRef( 'imgGallery', $imgGallery );
 
 		parent::display('profile');
 	}

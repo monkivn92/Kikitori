@@ -60,34 +60,8 @@ class BenhanModelUser extends JModel
     }
     function getUserInfo()
     {
-        $userid = JRequest::getInt('userid');
-        $user = JFactory::getUser();
-        $this_user = 0;
         
-        if(!$userid) 
-        { 
-            $this_user = $user->id;
-        }
-        else
-        {
-            if($userid == $user->id)
-            {
-                $this_user = $user->id;
-
-            }
-            else
-            {
-                if(!$this->isAdmin($user->id))
-                {
-                    die('You are not authorized !');
-                }                    
-                else
-                {
-                    $this_user = $userid;
-                }
-                    
-            }
-        }
+        $this_user = $this->getUserID();   
         
         global $_CB_framework,$_CB_database, $ueConfig, $_PLUGINS;
         $cbUser =& CBuser::getInstance( $this_user );
@@ -444,39 +418,6 @@ class BenhanModelUser extends JModel
         return $return; 
     }
 
-    function getAvatar()
-    {
-        $uid = $this->getUserID();
-        $ava_time = array();
-        if ( $dir = opendir("patient/$uid") ) 
-        {
-
-            while (false !== ( $item = readdir($dir) ) ) 
-            {
-
-                if ($item != "." && $item != "..") 
-                {
-                    if(strpos($item, 'avatar') !== false)
-                    {
-                        preg_match('/(?<=avatar_).+?(?=\.)/', $item, $m);
-                        $ava_time[] = (int)$m[0];
-                    }
-                }
-            }
-
-            closedir($handle);
-        }
-        if(count($ava_time)>0)
-        {
-            $max = max($ava_time);
-            return "patient/$uid/avatar_".$max.'.png';
-        }
-        else
-        {
-            return 'components/com_benhan/img/no_avatar.png';
-        }
-        
-    }
     function saveAvatar()
     {
         $app = JFactory::getApplication();
@@ -486,9 +427,17 @@ class BenhanModelUser extends JModel
         {
             mkdir("patient/$uid");
         }
+        if( !is_dir("patient/$uid/resized") )
+        {
+            mkdir("patient/$uid/resized");
+        }
+        
         $path_parts = pathinfo($_FILES["file"]["name"]);
         $extension = $path_parts['extension'];
-        $filepath = "patient/$uid/avatar_".time().'.png';
+        $filepath = "patient/$uid/avatar.".$extension;
+        $filepath_resized = "patient/$uid/resized/avatar.".$extension;
+        unlink($filepath);
+        unlink($filepath_resized);
 
         if( 0 < $_FILES['file']['error'] ) 
         {
@@ -497,12 +446,101 @@ class BenhanModelUser extends JModel
         else 
         {
             move_uploaded_file($_FILES['file']['tmp_name'], $filepath);
+            $this->imgEditorResizeImg($filepath, $filepath_resized, 0.1);
         }
 
-        $img = "<img src='/$filepath' class='pro5-avatar' style='height:100px'/>";
+        $img = "<img src='/$filepath_resized' class='pro5-avatar' style='height:100px'/>";
         echo $img;
         $app->close();
     }
+    function rotateAvatar()
+    {
+        $app = JFactory::getApplication();
+        $uid = $this->getUserID();
+        $degrees = JRequest::getInt('deg');
+        $img_path = '';
+        $invert = 0;
+        switch (true) 
+        {
+            case (is_file("patient/$uid/resized/avatar.png")):
+                $img_path = "patient/$uid/resized/avatar.png";
+                break;
+            case (is_file("patient/$uid/resized/avatar.PNG")):
+                $img_path = "patient/$uid/resized/avatar.PNG";
+                break;
+            case (is_file("patient/$uid/resized/avatar.jpg")):
+                $img_path = "patient/$uid/resized/avatar.jpg";
+                break;
+            case (is_file("patient/$uid/resized/avatar.JPG")):
+                $img_path = "patient/$uid/resized/avatar.JPG";
+                break;           
+           
+        }
+        
+        if($degrees == 270)
+        {
+            $invert = 0;
+        }
+        $this->imgEditorRotateImg($img_path,-$degrees,$invert);
+        
+        $app->close();
+    }
+    function imgEditorRotateImg($img_path,$degrees,$invert)
+    {
+        $filename = $img_path;
+          
+        // Load
+        $ext = strrchr($img_path, '.');
+        if($ext === '.jpg' || $ext === '.JPG')
+        {
+            $source = imagecreatefromjpeg($img_path);
+            $rotate = imagerotate($source, $degrees, $invert);
+            unlink($img_path);
+            imagejpeg($rotate,$img_path);
+        }
+        elseif ($ext === '.png' || $ext === '.PNG') 
+        {
+            $source = imagecreatefrompng($img_path);
+            $rotate = imagerotate($source, $degrees, $invert);
+            unlink($img_path);
+            imagepng($rotate,$img_path);
+        }
+        
+        // Free the memory
+        imagedestroy($source);
+        imagedestroy($rotate);
+    }
+
+    /**
+    * @percentage : From 0.0 To 1.0
+    */
+    function imgEditorResizeImg($img_path, $save_path, $percentage)
+    {
+        // Get new sizes
+        list($width, $height) = getimagesize($img_path);
+        $newwidth = $width * $percentage;
+        $newheight = $height * $percentage;
+
+        // Load
+        $thumb = imagecreatetruecolor($newwidth, $newheight);
+
+        $ext = strrchr($img_path, '.');
+        if($ext === '.jpg' || $ext === '.JPG')
+        {
+            $source = imagecreatefromjpeg($img_path);
+            imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+            imagejpeg($thumb,$save_path);
+        }
+        elseif ($ext === '.png' || $ext === '.PNG') 
+        {
+            $source = imagecreatefrompng($img_path);
+            imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+            imagepng($thumb,$save_path);
+        }   
+
+        imagedestroy($thumb);
+    }
+
     function saveAttachment()
     {
         $app = JFactory::getApplication();
@@ -512,13 +550,36 @@ class BenhanModelUser extends JModel
         {
             mkdir("patient/$uid");
         }
+        if( !is_dir("patient/$uid/resized") )
+        {
+            mkdir("patient/$uid/resized");
+        } 
+
         $cnt = 0;
         $cnt = count($_FILES["attach"]["name"]);
-        if($cnt == 0){die('No files chosen');}
+        
+
+        if($cnt == 0)
+        {
+            die('No files chosen');
+        }
+
         for($i=0; $i<$cnt; $i++)
         {
-            $filepath = "patient/$uid/".$_FILES["attach"]["name"]["$i"];
+            $file_path = $_FILES["attach"]["name"]["$i"];
+            $path_parts = pathinfo($file_path);            
+            $file_name = str_replace(' ', '-', $path_parts['basename']);
+            $extension = $path_parts['extension'];
+            $time = time();
+            $filepath = "patient/$uid/$time".'_'.$file_name;
+            $save_path = "patient/$uid/resized/$time".'_'.$file_name;
 
+            $isImg = true;
+            if($extension !== 'jpg' && $extension !== 'JPG' &&$extension !== 'png' &&$extension !== 'PNG')
+            {
+                $isImg = false;
+            }
+            
             if( 0 < $_FILES['attach']['error']["$i"] ) 
             {
                 die('Error: ' . $_FILES['attach']['error']["$i"] . '<br>');
@@ -526,7 +587,11 @@ class BenhanModelUser extends JModel
             else 
             {
                 move_uploaded_file($_FILES['attach']['tmp_name']["$i"], $filepath);
-                
+                if($isImg)
+                {
+                    $this->imgEditorResizeImg($filepath, $save_path, 0.1); 
+                }
+                            
             }  
         }
         $items = $this->getAttachment();
@@ -569,20 +634,20 @@ class BenhanModelUser extends JModel
         $session = JFactory::getSession();
         $session->clear('img_ga_data');
         $uid = $this->getUserID();
-        $offset = 3;
+        $offset = 5;
         $attach = '';   
         $ss_arr = array();
-        if ( $dir = opendir("patient/$uid") ) 
+        if ( $dir = opendir("patient/$uid/resized") ) 
         {
 
             while (false !== ( $item = readdir($dir) ) ) 
             {
-                if($item !== '.' && $item !== '..' && is_file("patient/$uid/$item"))
+                if($item !== '.' && $item !== '..' && is_file("patient/$uid/resized/$item"))
                 {
-                    if(strpos($item, '.png')!==false ||
+                    if( strpos($item, '.png')!==false ||
                         strpos($item, '.jpg')!==false ||
                         strpos($item, '.JPG')!==false ||
-                        strpos($item, '.PNG')!==false 
+                        strpos($item, '.PNG')!==false                        
                     )
                     {
                         $ss_arr[] =  $item;                        
@@ -619,11 +684,11 @@ class BenhanModelUser extends JModel
                 
                 if($imgh >= $imgw)
                 {
-                    $attach .= "<img img-idx='$i' max-length='$maxlen' src='/patient/$uid/$img_name' style='height:200px; width:auto' class='img-item'>";
+                    $attach .= "<img img-idx='$i' max-length='$maxlen' src='/patient/$uid/resized/$img_name' style='height:200px; width:auto' class='img-item'>";
                 }
                 else
                 {
-                    $attach .= "<img img-idx='$i' max-length='$maxlen' src='/patient/$uid/$img_name' style='height:auto; width:200px' class='img-item'>";
+                    $attach .= "<img img-idx='$i' max-length='$maxlen' src='/patient/$uid/resized/$img_name' style='height:auto; width:200px' class='img-item'>";
                 }
 
                 $attach .= "</a>";
@@ -640,7 +705,7 @@ class BenhanModelUser extends JModel
     {
         $session = JFactory::getSession();
         $uid = $this->getUserID();
-        $offset = 3;
+        $offset = 5;
         $images = $session->get('img_ga_data');
         $idx = JRequest::getInt('idx');
         if( !$idx )
@@ -670,11 +735,11 @@ class BenhanModelUser extends JModel
                 
                 if($imgh >= $imgw)
                 {
-                    $attach .= "<img img-idx='$i' max-length='$img_ss_len' src='/patient/$uid/$img_name' height='200' class='img-item'>";
+                    $attach .= "<img img-idx='$i' max-length='$img_ss_len' src='/patient/$uid/resized/$img_name' height='200' class='img-item'>";
                 }
                 else
                 {
-                    $attach .= "<img img-idx='$i' max-length='$img_ss_len' src='/patient/$uid/$img_name' width='200' class='img-item'>";
+                    $attach .= "<img img-idx='$i' max-length='$img_ss_len' src='/patient/$uid/resized/$img_name' width='200' class='img-item'>";
                 }
 
                 $attach .= "</a>";
