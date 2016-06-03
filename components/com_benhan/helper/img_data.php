@@ -1,10 +1,10 @@
 <?php
 ?>
 <blockquote id="img-gallery" class="rounded" align="center">
-	<h3>Image Data</h3>
+	<h3><img src="/components/com_photoeditor/img/photo.jpg" width="30px" alt=""> Image Data</h3>
 	<p>
 		<a href="<?php echo '/component/photoeditor/?view=edit&userid='.$userid ?>">
-			<img src="/components/com_photoeditor/img/photo.jpg" width="18px" alt="">
+			<i class="fa fa-wrench" aria-hidden="true"></i>
 			Photo Editor
 		</a>
 	</p>

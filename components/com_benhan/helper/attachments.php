@@ -1,6 +1,6 @@
 <blockquote id="pro5-attachments" class="rounded"  align="center">
 	
-		<h3>Download/Upload Attachments</h3>
+		<h3><img src="/components/com_benhan/img/Downloads.ico" width="30px" alt=""> Download/Upload Attachments</h3>
 		<p id="attachment_upload_area">
 			<span id="add_attach" class="btn btn-danger">            
 	            <i class="fa fa-plus" aria-hidden="true"></i>
