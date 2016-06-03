@@ -7,7 +7,7 @@ $uid = $this->uid;
 $userid = $this->uid;
 
 ?>
-
+<script type="text/javascript" src="/components/com_photoeditor/asset/base64.js"></script>
 <h2 id="photo-tool-title">
 	<img src="/components/com_photoeditor/img/image-editing.png" width="50px" alt="">
 	&nbsp;
@@ -158,6 +158,8 @@ $userid = $this->uid;
         $("#photo_edit_save").click(function(){
             
             var clss = $("#photo-container img").attr('class');
+            var image_name = $("#photo-container img").attr('alt');
+            var img_name_enc = Base64.encode(image_name);
             var deg = 0;
 
             switch (clss.trim()) 
@@ -181,17 +183,67 @@ $userid = $this->uid;
 
             $.ajax({
                 type:'POST',
-                url: '<?php echo 'index.php?option=com_benhan&view=user&task=rotateavatar&userid='.$userid ?>',
+                url: '<?php echo 'index.php?option=com_photoeditor&view=edit&task=saveedited&userid='.$userid ?>',
+                cache: false,
+                data:{
 
-                data:{deg:deg},                
+                    deg:deg,
+                    img:img_name_enc
+                },                
                 
                 success:function(data){
-
-                    window.location.reload();
+                    
+                    return true;
                 }
 
             });
-            return false;
+            
+
+        });
+
+        $("#photo_edit_save_set").click(function(){
+            
+            var clss = $("#photo-container img").attr('class');
+            var image_name = $("#photo-container img").attr('alt');
+            var img_name_enc = Base64.encode(image_name);
+            var deg = 0;
+
+            switch (clss.trim()) 
+            {
+                case '':
+                    deg = 0;
+                    break;
+                case 'rotatel90':
+                    deg = 90;
+                    break;
+                case 'rotatel180':
+                    deg = 180;
+                    break;
+                case 'rotatel270':
+                    deg = 270;
+                    break;
+                default:
+                    // statements_def
+                    break;
+            }
+
+            $.ajax({
+                type:'POST',
+                url: '<?php echo 'index.php?option=com_photoeditor&view=edit&task=saveeditedavatar&userid='.$userid ?>',
+                cache: false,
+                data:{
+
+                    deg:deg,
+                    img:img_name_enc
+                },                
+                
+                success:function(data){
+                    
+                    return true;
+                }
+
+            });
+            return true;
 
         });
 

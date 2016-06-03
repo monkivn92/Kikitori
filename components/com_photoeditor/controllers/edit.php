@@ -24,7 +24,21 @@ class PhotoeditorControllerEdit extends JController
         $list = $model->getPhotoList();
         echo $list;
         $app->close();
-    }  
+    } 
+    function saveedited()
+    {
+        
+        $model = & $this->getModel('edit');
+        $list = $model->saveEdited();
+        
+    }
+    function saveeditedavatar()
+    {
+        
+        $model = & $this->getModel('edit');
+        $model->saveEditedAvatar();
+        
+    }
 }
 
 ?>

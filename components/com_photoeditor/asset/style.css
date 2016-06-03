@@ -33,11 +33,16 @@
 	margin-top: 20px;
 	padding: 30px;
 	background-color: #ccc;
-	height: 400px;
+	height: auto;
+	width: auto;
+	
 	text-align: center;
 	overflow: scroll; 
 }
-
+#photo-container img{
+	max-width: none;
+	max-height: none;
+}
 .rotatel90{
     transform: rotate(90deg);
 }

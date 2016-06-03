@@ -109,6 +109,100 @@ class PhotoeditorModelEdit extends JModel
         }
         return $attach;
     }
+
+    function saveEditedAvatar()
+    {
+        $app = JFactory::getApplication();
+        $uid = $this->getUserID(); 
+
+        $degrees = JRequest::getInt('deg');
+        $img_name = JRequest::getVar('img');
+        $img_name = base64_decode($img_name);
+        $ext = strrchr($img_name, '.');
+
+        if(trim($img_name)==='')
+        {
+            return;
+        }
+
+              
+       //Delete old avatars
+        if( strpos($img_name, 'avatar.') === false ) //new avatar
+        {
+            $oldAvatar = scandir("patient/$uid");
+            foreach ($oldAvatar as  $avatar) 
+            {
+                if( strpos($avatar, 'avatar.') !== false ) 
+                {
+                    unlink("patient/$uid/$avatar");
+                    unlink("patient/$uid/resized/$avatar");
+                    
+                }
+            }
+        }        
+
+        if( $degrees === 0 )
+        {
+            return;
+        }  
+
+        $new_img_path = "patient/$uid/resized/$img_name";
+        $new_img_path_full = "patient/$uid/$img_name";
+
+        $this->imgEditorRotateImg($new_img_path,-$degrees,$invert);
+
+        rename($new_img_path, "patient/$uid/resized/avatar".$ext);
+        rename($new_img_path_full, "patient/$uid/avatar".$ext);
+        
+        $app->close();
+    }
+    function saveEdited()
+    {
+        $app = JFactory::getApplication();
+        $uid = $this->getUserID();
+
+        $degrees = JRequest::getInt('deg');
+        $img_name = JRequest::getVar('img');
+        $img_name = base64_decode($img_name);
+        $img_path = "patient/$uid/resized/$img_name";
+        $invert = 0;
+
+        if( trim($img_name)==='' || $degrees===0)
+        {
+            return;
+        }        
+      
+        $this->imgEditorRotateImg($img_path,-$degrees,$invert);
+        echo $img_path.$degrees.$invert;
+        
+        $app->close();
+    }
+
+    function imgEditorRotateImg($img_path,$degrees,$invert)
+    {
+        $filename = $img_path;
+       
+        // Load
+        $ext = strrchr($img_path, '.');
+        if($ext === '.jpg' || $ext === '.JPG')
+        {
+            $source = imagecreatefromjpeg($img_path);
+            $rotate = imagerotate($source, $degrees, $invert);
+            unlink($img_path);
+            imagejpeg($rotate,$img_path);
+        }
+        elseif ($ext === '.png' || $ext === '.PNG') 
+        {
+            $source = imagecreatefrompng($img_path);
+            $rotate = imagerotate($source, $degrees, $invert);
+            unlink($img_path);
+            imagepng($rotate,$img_path);
+        }
+        
+        // Free the memory
+        imagedestroy($source);
+        imagedestroy($rotate);
+    }
 	
 }//end class
 
