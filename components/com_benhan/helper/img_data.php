@@ -2,6 +2,12 @@
 ?>
 <blockquote id="img-gallery" class="rounded" align="center">
 	<h3>Image Data</h3>
+	<p>
+		<a href="<?php echo '/component/photoeditor/?view=edit&userid='.$userid ?>">
+			<img src="/components/com_photoeditor/img/photo.jpg" width="18px" alt="">
+			Photo Editor
+		</a>
+	</p>
 	<div id="img-list">
 		<?php
 			echo $imgGallery;

@@ -95,9 +95,7 @@
                         },
                         success: function(res)
                         {
-                            $('#attachment-items').empty();                   
-
-                            $('#attachment-items').append(res);
+                            window.location.reload();
                         }
             });
        

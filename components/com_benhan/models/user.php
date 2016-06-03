@@ -436,9 +436,18 @@ class BenhanModelUser extends JModel
         $extension = $path_parts['extension'];
         $filepath = "patient/$uid/avatar.".$extension;
         $filepath_resized = "patient/$uid/resized/avatar.".$extension;
-        unlink($filepath);
-        unlink($filepath_resized);
 
+        //Delete old avatars
+        $oldAvatar = scandir("patient/$uid");
+        foreach ($oldAvatar as  $avatar) 
+        {
+            if( strpos($avatar, 'avatar.') !== false ) 
+            {
+                unlink("patient/$uid/$avatar");
+                unlink("patient/$uid/resized/$avatar");
+            }
+        }
+        
         if( 0 < $_FILES['file']['error'] ) 
         {
             echo 'Error: ' . $_FILES['file']['error'] . '<br>';
@@ -682,14 +691,9 @@ class BenhanModelUser extends JModel
                 $attach .= '<div class="img-ga-contaner">';
                 $attach .= "<a class='jmodal' rel=\"{size:{x:400,y:400}}\" href='/patient/$uid/$img_name' >";
                 
-                if($imgh >= $imgw)
-                {
-                    $attach .= "<img img-idx='$i' max-length='$maxlen' src='/patient/$uid/resized/$img_name' style='height:200px; width:auto' class='img-item'>";
-                }
-                else
-                {
-                    $attach .= "<img img-idx='$i' max-length='$maxlen' src='/patient/$uid/resized/$img_name' style='height:auto; width:200px' class='img-item'>";
-                }
+                
+                $attach .= "<img img-idx='$i' max-length='$maxlen' src='/patient/$uid/resized/$img_name' style='height:150px; width:150px' class='img-item'>";
+                
 
                 $attach .= "</a>";
                 $attach .= "<p><strong>$img_name</strong></p>";

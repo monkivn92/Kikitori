@@ -40,7 +40,7 @@ switch (true)
 	</div>
 	<p id="change_avatar" style="font-size:12px;">
 
-		<a  style="color:blue !important; " href=""><i class="fa fa-wrench" aria-hidden="true"></i></i> Change/Edit Avatar</a>
+		<a  style="color:blue !important; " href=""><i class="fa fa-wrench" aria-hidden="true"></i></i> Change Avatar</a>
 	</p>	
     <div id="avatar_upload_area" class="default_hide" >
         <input hidden="true" id="avatar_input" type="file" name="avatar" />
@@ -61,34 +61,7 @@ switch (true)
                 
             </div>
         </div>
-        <div id="avatar_tool_box" >
-            <span id="r90deg" class="btn btn-default">
-                <i class="fa fa-repeat" aria-hidden="true"></i>
-                90deg
-            </span> 
-            <span id="r180deg" class="btn btn-default">
-                <i class="fa fa-repeat" aria-hidden="true"></i>
-                180deg
-            </span>
-            <span id="r270deg" class="btn btn-default">
-                <i class="fa fa-undo" aria-hidden="true"></i>
-                90deg
-            </span>
-            <span id="avatar_edit_reset" class="btn btn-default">                
-                Reset
-            </span>
-            <span id="avatar_edit_done" class="btn btn-warning">
-                <i class="fa fa-floppy-o" aria-hidden="true"></i>
-                Save
-            </span>
-
-        </div>
-        <div id="avatar-edit-zone">
-            <?php
-                echo "<img style='height:100px' class='pro5-avatar' src='/".$avatar."'  />";
-            ?>
-            
-        </div>
+        
     </div>
 
 	<p>
@@ -150,10 +123,7 @@ switch (true)
                         },
                         success: function(res)
                         {
-                            $('#avatar-edit-zone').empty(); 
-                            $('#avatar_tool_box').show(); 
-
-                            $('#avatar-edit-zone').append(res);
+                            window.location.reload();
                         }
             });
        
@@ -187,71 +157,6 @@ switch (true)
             }  
         }
 
-        //////Rotate IMG
-
-        $("#avatar_edit_reset").click(function(){
-            $("#avatar-edit-zone img").removeClass();    
-            return false;        
-
-        });
-
-        $("#r90deg").click(function(){
-            $("#avatar-edit-zone img").removeClass();
-            $("#avatar-edit-zone img").addClass('rotatel90');            
-            return false;
-        });
-
-        $("#r180deg").click(function(){
-            $("#avatar-edit-zone img").removeClass();
-            $("#avatar-edit-zone img").addClass('rotatel180');
-            return false;
-        });
-
-        $("#r270deg").click(function(){
-            $("#avatar-edit-zone img").removeClass();
-            $("#avatar-edit-zone img").addClass('rotatel270');
-            return false;
-        });
-
-        $("#avatar_edit_done").click(function(){
-            
-            var clss = $("#avatar-edit-zone img").attr('class');
-            var deg = 0;
-
-            switch (clss.trim()) 
-            {
-                case '':
-                    deg = 0;
-                    break;
-                case 'rotatel90':
-                    deg = 90;
-                    break;
-                case 'rotatel180':
-                    deg = 180;
-                    break;
-                case 'rotatel270':
-                    deg = 270;
-                    break;
-                default:
-                    // statements_def
-                    break;
-            }
-
-            $.ajax({
-                type:'POST',
-                url: '<?php echo 'index.php?option=com_benhan&view=user&task=rotateavatar&userid='.$userid ?>',
-
-                data:{deg:deg},                
-                
-                success:function(data){
-
-                    window.location.reload();
-                }
-
-            });
-            return false;
-
-        });
 
 
         
