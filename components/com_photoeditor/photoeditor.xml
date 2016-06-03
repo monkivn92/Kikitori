@@ -1,0 +1,31 @@
+<?xml version = "1.0" encoding="utf-8"?>
+<extension type = "component" version="2.5" method = "upgrade">
+    <name>Photo Editor</name>
+    <author>VUONGPV</author>
+	<creationDate>June 2016</creationDate>
+	<copyright>VUONGPV</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<authorEmail>VUONGPV</authorEmail>
+	<authorUrl>VUONGPV</authorUrl>
+    <description>
+        View and Edit photos
+    </description>   
+
+    <files folder="site">
+        <folder>controllers</folder>
+        <folder>img</folder>
+        <folder>asset</folder>        
+        <folder>views</folder>       
+        <folder>models</folder>       
+        <filename>index.html</filename>
+        <filename>photoeditor.php</filename>
+        <filename>photoeditor.xml</filename>
+    </files>
+
+    <administration>      
+        <files folder="admin">    
+            <filename>index.html</filename>           
+            <filename>photoeditor.php</filename>       
+        </files>       
+    </administration>   
+</extension>
