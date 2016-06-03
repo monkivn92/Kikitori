@@ -1,0 +1,49 @@
+#photo-tool-title{
+	border-bottom:2px solid #353535;
+	width:280px;
+	color:#1ba1e2;
+	margin-bottom: 20px;
+}
+
+.default-hide{
+	display: none !important;
+}
+#photo-toolbox{
+	margin-top: 10px;
+}
+#photo-toolbox .btn{ 
+	margin: 5px;
+}
+#photo-list{
+	padding: 10px;
+	border: 2px solid #ccc;
+	border-radius: 3px;
+	margin-top: 20px;
+}
+#photo-list img{
+	margin: 5px;
+	border: 3px solid #FFF;
+	cursor: pointer;
+}
+#photo-list img:focus,#photo-list img:hover{
+
+	border-color:  red;
+}
+#photo-container{
+	margin-top: 20px;
+	padding: 30px;
+	background-color: #ccc;
+	height: 400px;
+	text-align: center;
+	overflow: scroll; 
+}
+
+.rotatel90{
+    transform: rotate(90deg);
+}
+.rotatel180{
+    transform: rotate(180deg);
+}
+.rotatel270{
+    transform: rotate(270deg);
+}
