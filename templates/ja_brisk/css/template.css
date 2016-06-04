@@ -250,7 +250,7 @@ a:hover {
   text-decoration: underline;
 }
 img {
-  max-width: 100% !important;
+  max-width: 100%;
 }
 .img-rounded {
   -webkit-border-radius: 3px;

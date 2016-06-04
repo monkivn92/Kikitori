@@ -14,6 +14,7 @@
 	margin-left: 10px;
 	margin-top: 20px;
 	font-size: 40px;
+
 }
 
 .logo-text a:hover
@@ -40,6 +41,10 @@
 #home-page .row
 {
 	margin-bottom: 30px;
+}
+#home-page .home-img{
+	text-align: center;
+	padding: auto;
 }
 #home-page .home-img em
 {
@@ -69,4 +74,49 @@
 	text-transform: none;
 	color:#000;
 	font-size: 14px;
+}
+
+span#recaptcha_privacy {
+    display: none;
+}
+div#captcha_wrap {
+    margin-bottom: 30px;
+}
+div#captcha_wrap:before {
+    content: 'Please enter the code in the image below to the text box for completing registration';
+    font-size: 14px;
+    font-weight: bold;
+}
+
+blockquote.rounded{
+	padding: 10px;
+	margin:10px 0px;
+}
+
+@media (max-width: 979px) {
+	.logo-text a
+	
+}
+@media (max-width: 767px) {
+	
+}
+
+@media (max-width: 480px) {
+	
+	#home-page .span4{
+	width: 98%;
+	}
+	#home-page .span8{
+		width: 98%;
+	}
+	.logo-text{
+		margin-top: 20px;
+	}
+	.logo-text a{
+		font-size: 30px;
+	}
+	
+}
+.page-header{
+	display: none;
 }
