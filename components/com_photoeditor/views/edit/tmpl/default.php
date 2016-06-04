@@ -54,6 +54,11 @@ $userid = $this->uid;
         <i class="fa fa-floppy-o" aria-hidden="true"></i>
         Save and Set as avatar
     </a>
+    <p style="font-size:12px; color:red">
+        <i>  
+            *Note: Use 'Save and Set as avatar' function will cause deleting the old avatar. Be careful!      
+        </i>
+    </p>
 </div>
 
 <div id="photo-container" class="default-hide">
