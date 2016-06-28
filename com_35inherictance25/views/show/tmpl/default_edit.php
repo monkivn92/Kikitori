@@ -3,6 +3,7 @@
 defined('_JEXEC') or die;
 
 $data = $this->data;
+$ref = JRequest::getCmd('ref');
 
 ?>
 
@@ -67,8 +68,9 @@ $data = $this->data;
 				
 				echo "<img src='$logo_path' width='200px' /><br/>";
 			}	
-			else{
-				echo "No logos";
+			else
+			{
+				echo '<i>No logos</i>';
 			}		
 		?>
 	
@@ -99,5 +101,19 @@ $data = $this->data;
 	}
 </style>
 <script>
+	jQuery('#adminForm').submit(function(){
 
+		var name = jQuery('input[name="name"]'),
+			name_val = name.val();
+		if(jQuery.trim(name_val)==='')
+		{
+			jQuery('html, body').animate({
+			        scrollTop: name.offset().top - 150
+			    }, 250);
+			name.focus();
+			return false;
+		}
+		return true;
+
+	});
 </script>

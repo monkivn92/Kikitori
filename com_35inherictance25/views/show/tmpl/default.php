@@ -10,45 +10,33 @@ $records = $this->data->records;
 $search = $this->data->search;
 $pageNav = $this->data->pagenav;
 $search = $this->data->search;
+$pagination = $this->pagination;
 
 ?>
 
 <form action="" method="post" name="adminForm" id="adminForm">
-<?php if (!empty( $this->sidebar)) : ?>
-	<div id="j-sidebar-container" class="span2">
-		<?php echo $this->sidebar; ?>
-	</div>
-	<div id="j-main-container" class="span10">
-<?php else : ?>
-	<div id="j-main-container">
-<?php endif;?>	
-
 	<table>
 		  	<tr>
 			    <td align="left" width="100%">
 			    Search: 
-			    <input type="text" name="search" id="search" 
-		             value="<?php echo $search;?>" 
-		             class="text_area"  
-		             onchange="document.adminForm.submit();" 
-		             style="margin:0px"/>
-
+			    
+				<input type="text" name="filter[search]" id="filter_search" value="<?php echo $search;?>" style="margin:0px;"  placeholder="Search">
 			    <button onclick="this.form.submit();" class="btn btn-primary">
 				      
 			   		<span class="icon-search"></span> Go 
 		   		</button>
 		   		
 			    <button 
-					onclick="document.getElementById('search').value='';
+					onclick="document.getElementById('filter_search').value='';
 					this.form.submit();" class="btn btn-primary">
 		     		Reset
 		   		</button>
 		   		&nbsp;
 		   		&nbsp;
-		   		<select name="limit" id="limit" onchange="document.adminForm.submit();" class="input-mini" >
+		   		<select name="limit" onchange="document.adminForm.submit();" class="input-mini" id="list_limit">
 		   			<?php
 		   				$config = JFactory::getConfig();		   				
-		   				$numchecked = JRequest::getInt('limit');
+		   				$numchecked = $this->data->limit;
 		   				if(!$numchecked)
 		   				{
 		   					$numchecked = $config->get('list_limit');
@@ -104,7 +92,7 @@ $search = $this->data->search;
 			<tr>
 				<td colspan="10" align="center">
 					<?php 					
-					echo $pageNav->getListFooter(); 
+					echo $pageNav->getListFooter(); 					
 					?>
 				</td>
 			</tr>
@@ -167,13 +155,14 @@ $search = $this->data->search;
 							if($rec->logo !== '')
 							{
 								$logo = '/components/com_pxrdshealthbox/images/logos/'.$rec->logo;
+								echo "<img src='$logo' width='150px' >";
 							}
 							else
 							{
-								$logo = 'No logo';
+								echo '<i>No logos</i>';
 							}
 						?>
-						<img src="<?php echo $logo ?>" width="150px" alt="">
+						
 					</td>
 					<td align="center" width="2%">
 						<?php echo $published ?>

@@ -8,10 +8,12 @@ class PxrdshealthboxViewShow extends JViewLegacy
 		
 		$data = $this->get('Data');			
 		$this->addToolbar();
+		
 		$sidebar = JHtmlSidebar::render();
 
 		$this->assignRef('data',$data);
 		$this->assignRef('sidebar',$sidebar);
+	
 		parent::display();
 		
 	}
@@ -24,8 +26,7 @@ class PxrdshealthboxViewShow extends JViewLegacy
 		JToolbarHelper::publishList();
 		JToolbarHelper::unpublishList();
 		JToolbarHelper::deleteList();
-		// De nhung toolbar nay hoat dong duoc thi
-		// layout phai chua day du cac truong hidden input cua option, task, controller
+		
 		
 	}
 	function edit($msg)

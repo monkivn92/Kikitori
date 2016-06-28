@@ -21,15 +21,24 @@ class PxrdshealthboxModelShow extends JModelList
     {
        	$app = JFactory::getApplication();	
 		$db = $this->_db;
+		// Adjust the context to support modal layouts.
+		if ($layout = $app->input->get('layout'))
+		{
+			$this->context .= '.' . $layout;
+		}
 
 		// Pagination	
-		$limit = JRequest::getVar('limit',$app->getCfg('list_limit'));
-		$limitstart = JRequest::getVar('limitstart', 0);
+		$limit = $app->getUserStateFromRequest( "limit", 'limit', $app->getCfg('list_limit') );
+		$limitstart = $app->getUserStateFromRequest( "com_pxrdshealthbox.show.limitstart", 'limitstart', 0 );
+		$this->setState('limit', $limit);
+		$this->setState('limitstart', $limitstart);
+
 		
 		$order = $app->getUserStateFromRequest( "com_pxrdshealthbox.show.filter_order", 'filter_order', 'ordering','string' );
 		$order_dir = $app->getUserStateFromRequest( "com_pxrdshealthbox.show.filter_order_Dir", 'filter_order_Dir', 'ASC','string' );	
-		//Search
-		$search = JRequest::getVar('search');	
+		//Search			
+		$search = $this->getUserStateFromRequest($this->context . '.filter.search', 'filter_search');
+		$this->setState('filter.search', $search);
 		
 		$where = "WHERE name LIKE '%".$db->escape($search)."%'";
 		
@@ -83,6 +92,7 @@ class PxrdshealthboxModelShow extends JModelList
         $id = JRequest::getInt('id');
         $task = JRequest::getVar('task');
         $row = JTable::getInstance('show', 'Table');
+
         if (!$row->bind(JRequest::get('post'))) 
         {
             echo "<script> alert('".$row->getError()."'); 
@@ -98,32 +108,50 @@ class PxrdshealthboxModelShow extends JModelList
 		$row->description = JRequest::getVar( 'description', '', 'post', 'string', JREQUEST_ALLOWRAW );
 		$row->address = JRequest::getVar( 'address', '', 'post', 'string', JREQUEST_ALLOWRAW );		
 		$row->published= JRequest::getVar( 'published', '', 'post', 'interger', JREQUEST_ALLOWRAW );
-		$logo = $this->getLogoUpload();
+		
+		$session->set('ORG_FORM_DATA', (object)$row);
 
+		if(trim($row->name) ==='')
+		{
+			$app->enqueueMessage('Please enter the name of organization and upload logo again!','warning');        
+        	$link = 'index.php?option=com_pxrdshealthbox&view=show&task=edit&ref=error&cid[]='.$row->id;
+        	$app->redirect($link,false);
+        
+		}
+
+		//get Logo
+		$logo = $this->getLogoUpload();
 		if(!$logo)
 		{
-			$row->logo='';
+			if(!$id)
+			{
+				$row->logo = '';
+			}
+			else
+			{
+				$table = JTable::getInstance('show', 'Table');
+				$one_row = $table->load($id);
+				if($one_row->logo !== '')
+				{
+					$row->logo = $one_row->logo;
+				}
+				else
+				{
+					$row->logo = '';
+				}
+			}
 		}
 		else
 		{
 			$row->logo = $logo;
 		}
 
-
+		// move new row to the top
 		if(!$id)
 		{
 			$row->ordering = 0;			
 		}
-
-		$session->set('ORG_FORM_DATA', (object)$row);
-
-		if(trim($row->name) ==='')
-		{
-			$app->enqueueMessage('Please enter the name of organization!','warning');        
-        	$link = 'index.php?option=com_pxrdshealthbox&view=show&task=edit&ref=error&cid[]='.$row->id;
-        	$app->redirect($link,false);
-        
-		}
+		
 
         if (!$row->store()) {
             echo "<script> alert('".$row->getError()."'); window.history.
