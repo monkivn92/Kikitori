@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="3.1" method="upgrade">
+	<name>com_pxrdshealthbox</name>
+	<author>NextG</author>
+	<creationDate>June 23 2016</creationDate>
+	<copyright></copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail></authorEmail>
+	<authorUrl></authorUrl>
+	<version>3.3.0</version>
+	<description>
+		Manage Organizations' Infomation
+	</description>
+
+	<install> <!-- Runs on install -->
+		<sql>
+			<file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+		</sql>
+	</install>
+
+	<uninstall> <!-- Runs on install -->
+		<sql>
+			<file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+		</sql>
+	</uninstall>
+
+	<files folder="site">
+		<folder>images</folder>
+	</files>
+
+	<administration>
+		<menu>COM_PXRDSHEALTHBOX_NAME</menu>
+		
+		<files folder="admin">	
+			<filename>pxrdshealthbox.php</filename>
+			<filename>controller.php</filename>
+			<folder>controllers</folder>
+			<folder>language</folder>
+			<folder>models</folder>			
+			<folder>views</folder>
+			<folder>tables</folder>
+			<folder>sql</folder>
+		</files>
+
+	</administration>
+</extension>
+
