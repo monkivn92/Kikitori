@@ -11,52 +11,55 @@ $doc->addScript('/components/com_benhan/asset/benhan.js');
 
 ?>
 
+<h2>Search Patient</h2>
+<form action="" id="patient_search">
+	<p>
+		<label for="search_name">Patien Name:</label>
+		<input type="text" id="search_name"/>
+	</p>
+	<p>
+		<label for="search_mrid">Patien's Medical Report ID:</label>
+		<input type="text" id="search_mrid"/>
+	</p>
+	<p>
+		<label for="search_ktphth">Kỹ thuật phẫu thuật:</label>
+		<select name="cb_iv_ppdtr_kt_phau_thuat" id="search_ktphth" class="form-control">
+			<option value=""></option>
+			<option value="1" id="cbf228">1 bó Isometric</option>
+			<option value="2" id="cbf229">1 bó tăng cường</option>
+			<option value="3" id="cbf230">2 bó</option>
+		</select>
+	</p>
 
-<div class="row">
-	<div class="span6">
-		<h2>Search Patient</h2>
-		<form action="" id="patient_search">
-			<p>
-				<label for="search_name">Patien Name:</label>
-				<input type="text" id="search_name"/>
-			</p>
-			<p>
-				<label for="search_mrid">Patien's Medical Report ID:</label>
-				<input type="text" id="search_mrid"/>
-			</p>
-			<p>
-				<label for="search_ktphth">Kỹ thuật phẫu thuật:</label>
-				<select name="cb_iv_ppdtr_kt_phau_thuat" id="search_ktphth" class="form-control">
-					<option value=""></option>
-					<option value="1" id="cbf228">1 bó Isometric</option>
-					<option value="2" id="cbf229">1 bó tăng cường</option>
-					<option value="3" id="cbf230">2 bó</option>
-				</select>
-			</p>
+	<input type="submit" value="Search" class="btn btn-primary" />
+	
+</form>
 
-			<input type="submit" value="Search" class="btn btn-primary" />
-			
-		</form>
-
-		<div id="loading" style="display:none">
-		<img src="/components/com_benhan/img/hourglass.svg" alt="">
-		Loading...
-		</div>
-		<div id="search_result">
-			
-		</div>
-	</div>
-	<div class="span6">
-		<div id="recent-add">
-			<h4>Recently Added Patients</h4>
-			<?php
-				echo $this->UserRecentlyAdd;
-			?>
-		</div>
-	</div>
+<div id="loading" style="display:none">
+	<img src="/components/com_benhan/img/hourglass.svg" alt="">
+	Loading...
 </div>
 
+<div id="search_result">
+	<div id="recent-add">
+		<h4>Recently Added Patients</h4>
+		<?php
+			echo $this->UserRecentlyAdd;
+		?>
+	</div>
+	
+</div>
 
+<style>
+	td{
+		border: 1px solid #ccc;
+		text-align: center !important;
+
+	}
+	table{
+		width: 100%;
+	}
+</style>
 
 <script>
 jQuery(document).ready(function($){

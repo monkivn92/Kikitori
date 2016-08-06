@@ -368,7 +368,8 @@ class BenhanModelUser extends JModel
             
         }
 
-        $sql = "SELECT u.id,u.name, c.cb_so_benh_an_vao_vien 
+        $sql = "SELECT u.id,u.name, c.cb_so_benh_an_vao_vien, c.cb_ma_luu_tru,
+                        c.cb_ngay_thang_nam_sinh, c.cb_ii_ngay_vao_vien
                 FROM #__users AS u, #__comprofiler AS c 
                 WHERE u.id=c.user_id AND $where";
         //die($sql);
@@ -376,45 +377,137 @@ class BenhanModelUser extends JModel
         $names = $db->loadObjectList(); 
         if(!$names) { return '<p><b>No results found.</b></p>';}
         $return='';
+         $return .= '<table id="results_list"> ';        
+            $return .= '<thead> ';
+                $return .= '<tr> ';
+
+                    $return .= '<td align="center"> ';
+                        $return .= '<strong>Tên</strong>'  ;  
+                    $return .= '</td> ';    
+
+                    $return .= '<td align="center"> ';
+                        $return .= '<strong>Năm Sinh</strong>';    
+                    $return .= '</td> '; 
+
+                    $return .= '<td align="center"> ';
+                        $return .= '<strong>Ngày Vào Viện</strong>'  ;  
+                    $return .= '</td> ';   
+
+                    $return .= '<td align="center"> ';
+                        $return .= '<strong>Số bệnh án</strong>' ;   
+                    $return .= '</td> ';
+
+                    $return .= '<td align="center"> ';
+                        $return .= '<strong>Mã Lưu Trữ</strong>';    
+                    $return .= '</td> ';
+
+                $return .= '</tr> ';
+            $return .= '<tbody> ';        
+
         foreach ($names as $n) 
         {
                 $link = '/component/benhan/?view=user&task=showprofile&userid='.$n->id;
-                $return .= '<blockquote>';
-                $return .= '<p>';
-                $return .= "<a href='$link' target='_blank'>$n->name</a>";
-                $return .= '</p>';
-                $return .= '<p>';
-                $return .= "Số bệnh án: $n->cb_so_benh_an_vao_vien";
-                $return .= '</p>';
-                $return .= '</blockquote>';
+                $return .= '<tr>';
+
+                    $return .= '<td align="center"> ';
+                        $return .=  "<a href='$link' target='_blank'>" . $n->name . '</a>'; 
+                    $return .= '</td> ';
+
+                    $return .= '<td align="center"> ';
+                        $dt_obj = new DateTime($n->cb_ngay_thang_nam_sinh);
+                        $return .= $dt_obj->format('d-m-Y');    
+                    $return .= '</td> ';
+
+                    $return .= '<td align="center"> ';
+                        $dt_obj = new DateTime($n->cb_ii_ngay_vao_vien);
+                        $return .= $dt_obj->format('d-m-Y');    
+                    $return .= '</td> ';
+
+                    $return .= '<td align="center"> ';
+                        $return .= $n->cb_so_benh_an_vao_vien;    
+                    $return .= '</td> ';
+
+                   $return .= '<td align="center"> ';
+                        $return .= $n->cb_ma_luu_tru;    
+                    $return .= '</td> ';
+
+                $return .= '</tr>';
         }  
+            $return .= '</tbody> ';
+        $return .= '</table> ';
 
         return $return; 
     }
     function getUserRecentlyAdd()
     {
         $db = JFactory::getDbo();
-        $sql = "SELECT u.id,u.name, c.cb_so_benh_an_vao_vien 
+        $sql = "SELECT u.id,u.name, c.cb_so_benh_an_vao_vien, c.cb_ma_luu_tru,
+                        c.cb_ngay_thang_nam_sinh, c.cb_ii_ngay_vao_vien
                 FROM #__users AS u, #__comprofiler AS c 
-                WHERE u.id=c.user_id ORDER BY registerDate DESC LIMIT 3";
+                WHERE u.id=c.user_id ORDER BY registerDate DESC LIMIT 5";
         //die($sql);
         $db->setQuery($sql);
         $names = $db->loadObjectList(); 
         if(!$names) { return '<p><b>No results found.</b></p>';}
-        $return='';
+        $return = '';
+        $return .= '<table id="results_list"> ';        
+            $return .= '<thead> ';
+                $return .= '<tr> ';
+
+                    $return .= '<td align="center"> ';
+                        $return .= "<strong>Tên</strong>"  ;  
+                    $return .= '</td> ';    
+
+                    $return .= '<td align="center"> ';
+                        $return .= '<strong>Năm Sinh</strong>';    
+                    $return .= '</td> '; 
+
+                    $return .= '<td align="center"> ';
+                        $return .= '<strong>Ngày Vào Viện</strong>'  ;  
+                    $return .= '</td> ';   
+
+                    $return .= '<td align="center"> ';
+                        $return .= '<strong>Số bệnh án</strong>' ;   
+                    $return .= '</td> ';
+
+                    $return .= '<td align="center"> ';
+                        $return .= '<strong>Mã Lưu Trữ</strong>';    
+                    $return .= '</td> ';
+
+                $return .= '</tr> ';
+            $return .= '<tbody> ';        
+
         foreach ($names as $n) 
         {
                 $link = '/component/benhan/?view=user&task=showprofile&userid='.$n->id;
-                $return .= '<blockquote>';
-                $return .= '<p>';
-                $return .= "<a href='$link' target='_blank'>$n->name</a>";
-                $return .= '</p>';
-                $return .= '<p>';
-                $return .= "Số bệnh án: $n->cb_so_benh_an_vao_vien";
-                $return .= '</p>';
-                $return .= '</blockquote>';
-        }  
+                $return .= '<tr>';
 
+                    $return .= '<td align="center"> ';
+                        $return .= "<a href='$link' target='_blank'>" . $n->name . '</a>';    
+                    $return .= '</td> ';
+
+                    $return .= '<td align="center"> ';
+                        $dt_obj = new DateTime($n->cb_ngay_thang_nam_sinh);
+                        $return .= $dt_obj->format('d-m-Y');    
+                    $return .= '</td> ';
+
+                    $return .= '<td align="center"> ';
+                        $dt_obj = new DateTime($n->cb_ii_ngay_vao_vien);
+                        $return .= $dt_obj->format('d-m-Y');    
+                    $return .= '</td> ';
+
+                    $return .= '<td align="center"> ';
+                        $return .= $n->cb_so_benh_an_vao_vien;    
+                    $return .= '</td> ';
+
+                   $return .= '<td align="center"> ';
+                        $return .= $n->cb_ma_luu_tru;    
+                    $return .= '</td> ';
+
+                $return .= '</tr>';
+        }  
+            $return .= '</tbody> ';
+        $return .= '</table> ';
         return $return; 
     }
 
